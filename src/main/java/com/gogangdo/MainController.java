@@ -22,4 +22,23 @@ public class MainController {
 	public String startPage() {
 		return "main";
 	}
+	
+	@RequestMapping("/main.do")
+	public String main() {
+		return "redirect:/";
+	}
+	@RequestMapping("/loginView.do")
+	public String loginView() {
+		return "login";
+	}
+	@RequestMapping("/registerView.do")
+	public String registerView() {
+		return "register";
+	}
+	
+	@RequestMapping("/productList.do")
+	public String productList() {
+		return "product_list";
+	}
+	
 }

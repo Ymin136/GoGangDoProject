@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:include page="include/header.jsp"></jsp:include>
-TEST
+	상품목록 페이지
 <jsp:include page="include/footer.jsp"></jsp:include>
 </body>
 </html>

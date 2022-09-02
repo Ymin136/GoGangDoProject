@@ -7,6 +7,6 @@
 <title>로그인</title>
 </head>
 <body>
-TEST
+	로그인페이지
 </body>
 </html>

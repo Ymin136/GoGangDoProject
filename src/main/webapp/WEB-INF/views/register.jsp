@@ -7,6 +7,6 @@
 <title>회원가입</title>
 </head>
 <body>
-TEST
+	회원가입페이지
 </body>
 </html>
