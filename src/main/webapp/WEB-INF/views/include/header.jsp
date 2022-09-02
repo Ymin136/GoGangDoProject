@@ -21,13 +21,13 @@
 <nav id = "header_menu_bar">
 	<ul>
 		<li> <img alt="menubar" src="resources/img/menubar.PNG" width = "40px" height="40px"> </li>
-		<a href="#"><li>사료/분유</li></a>
-		<a href="#"><li>간식</li></a>	
-		<a href="#"><li>영양제</li></a>
-		<a href="#"><li>위생/배변</li></a>
-		<a href="#"><li>미용/목욕</li></a>
-		<a href="#"><li>장난감</li></a>
-		<a href="#"><li>고양이</li></a>
+		<a href=""><li>사료/분유</li></a>
+		<a href=""><li>간식</li></a>	
+		<a href=""><li>영양제</li></a>
+		<a href=""><li>위생/배변</li></a>
+		<a href=""><li>미용/목욕</li></a>
+		<a href=""><li>장난감</li></a>
+		<a href=""><li>고양이</li></a>
 	</ul>
 </nav>
 </div>
