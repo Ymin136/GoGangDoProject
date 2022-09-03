@@ -32,9 +32,6 @@
 	#header_menu_bar ul li{
 		vertical-align: middle;
 	}
-	#header_container img{
-		padding-right : 10px;
-	}
 	#header_non_login a:link,#header_non_login a:visited {
 		color:black;
 		text-decoration: none;
@@ -51,9 +48,17 @@
 		margin : 0px 20px;
 	}
 	#header_main{
-		width:1200px;
-		margin:0 auto;
-		padding : 50px 0px;
+	width:1200px;
+	margin:0 auto;
+	padding : 50px 0px;
 	}
-
+	#header_main table td{
+		width: 33%; 
+		box-sizing: border-box;
+	}
+	#header_main input{
+		height : 28px;
+		position: relative;
+		bottom:11.5px;
+	}
 	

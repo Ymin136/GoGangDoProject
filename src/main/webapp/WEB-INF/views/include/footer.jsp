@@ -3,31 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style type="text/css">
-	#footer_container{
-		width:1200px;
-		margin:0 auto;
-	}
-	#footer_support{		
-		border-top:1px solid black;
-		border-bottom:1px solid black;
-		padding : 20px 0px; 
-	}
-	
-	#footer_support ul {
-		display : inline;
-		}	
-	#footer_support ul li{
-		text-decoration: none;
-		list-style-type: none;
-	}
-	#footer_support h2, #footer_support h3{
-		margin-top : 0px;
-		margin-bottom : 10px;
-	}
-</style>
+<link href="resources/css/footer.css" rel="stylesheet">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
 <div id="footer_container">	
@@ -43,6 +21,14 @@
 		<ul>
 			<li><h3>반품배송지<h3></li>
 			<li>서강로 136 아이비타워 2층, 3층 마포구 서울특별시</li>
+		</ul>
+	</div>
+	<div id="footer_copyright">
+		<ul>
+			<li>법인명:고강도&nbsp 대표:정영민&nbsp 사업자등록번호:122-25-38890</li>
+			<li>개인정보관리자:정영민&nbsp 주소:인천광역시 서구 보석로11번안길 14 1층 고강도</li>
+			<li>대표번호:012-1234-5678&nbsp 팩스번호:012-1234-5678&nbsp 메일:hart1364@naver.com</li>
+			<li>COPYRIGHT (C)고강도 All Rights Reserved.</li>			
 		</ul>
 	</div>
 </div>
