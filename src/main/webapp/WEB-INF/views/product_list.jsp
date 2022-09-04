@@ -9,6 +9,7 @@
 <body>
 <jsp:include page="include/header.jsp"></jsp:include>
 	상품목록 페이지
+	<a href="productDetail.do">상품 상세페이지 이동</a>
 <jsp:include page="include/footer.jsp"></jsp:include>
 </body>
 </html>

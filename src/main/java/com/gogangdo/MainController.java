@@ -41,4 +41,9 @@ public class MainController {
 		return "product_list";
 	}
 	
+	@RequestMapping("/productDetail.do")
+	public String productDetail() {
+		return "product_detail";
+	}
+	
 }

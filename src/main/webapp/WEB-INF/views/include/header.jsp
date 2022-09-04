@@ -13,31 +13,6 @@
 		border: none;
 		background: url("resources/img/search_img.PNG") no-repeat;
 	}
-	#header_nav_menu_bar{
-		border-radius: 10px;
-		background-color: orange;		
-		padding : 20px 0px;
-		padding-right : 50px;
-		position: absolute;
-		top : 310px;
-		left:500px;
-	}
-	#header_nav_menu_bar td{
-		color : white;
-	}
-	#header_nav_menu_bar td:not(#top){		
-	padding-top:10px;
-	width:130px;
-	text-align: left;
-	
-	}
-	#header_nav_menu_bar #top{	
-	font-weight:bold;
-	padding-top:10px;
-	width:100px;
-	vertical-align:top;
-	}
-	
 	#header_nav_menu_bar a:link,#header_nav_menu_bar a:visited {
 		color:white;
 		text-decoration: none;
@@ -116,7 +91,6 @@ $(function(){
 	<td><a href="#">건식사료</a></td></tr>	
 	<tr><td><a href="#">건식사료</a></td></tr>
 	<tr><td><a href="#">건식사료</a></td></tr>
-	
 </table>
 </div>
 </body>
