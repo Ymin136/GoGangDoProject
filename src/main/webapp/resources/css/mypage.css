@@ -1,0 +1,12 @@
+@charset "UTF-8";
+#main_table table{
+	width : 1200px;
+	margin : 0 auto;
+}
+#main_table tr,th{
+	width : 400px;
+	
+}
+#main_table th{
+	padding : 5px;
+}
