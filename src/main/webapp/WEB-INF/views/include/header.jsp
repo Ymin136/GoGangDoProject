@@ -68,7 +68,7 @@ $(function(){
 		<li><a href="productList.do">위생/배변</a></li>
 		<li><a href="productList.do">미용/목욕</a></li>
 		<li><a href="productList.do">장난감</a></li>
-		<li><a href="productList.do">고양이</a></li>
+		<li><a href="myPage.do">고양이</a></li>
 	</ul>
 </nav>
 <table id="header_nav_menu_bar">
