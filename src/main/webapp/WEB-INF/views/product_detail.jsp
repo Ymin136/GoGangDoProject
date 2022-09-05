@@ -26,6 +26,8 @@
 	}
 	#product_detail td:not(#sample_img){
 		padding-right:20px;
+		text-align: left;
+		
 	}
 	#sample_img, #sample_img img{
 		text-align : center;
@@ -33,7 +35,7 @@
 		height: 600px;
 	}
 	#product_detail select{
-		width : 70%;
+		width : 55%;
 	}
 	td button{
 		color: white;
