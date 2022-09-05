@@ -1,0 +1,156 @@
+@charset "UTF-8";
+footer{
+ 	text-align: center;
+ 	margin-bottom: 20px; 
+ }
+/*로그인*/
+.login {
+width: 433px;
+min-height: 364px;
+margin: 120px auto;
+}
+.login.find.id {
+margin: 110px auto;
+}
+.login.find.pw {
+margin: 80px auto;
+}
+.login .tit {
+font-size: 20px;
+font-weight: bold;
+color: #495057;
+text-align: center;
+}
+.login .tit_desc {
+text-align: center;
+font-size: 14px;
+}
+.login form {
+height: 100px;
+margin-top: 40px;
+}
+.login form input {
+display: block;
+width: 100%;
+height: 50px;
+padding-left: 24px;
+font-size: 15px;
+border: 1px solid #ced4da;
+box-sizing: border-box;
+}
+.login form input:focus {
+border: 1px solid #ff8854;
+outline: none;
+}
+.login form input::placeholder {
+color: #adb5bd;
+}
+.login form .name,
+.login form .phone {
+margin-top: 10px;
+}
+.login button {
+display: block;
+width: 100%;
+height: 60px;
+margin-top: 20px;
+border: 0;
+background: rgb(255, 137, 84);
+background: linear-gradient(90deg, rgba(255, 137, 84, 1) 0%, rgba(252, 196, 26, 1) 100%);
+color: #fff;
+font-size: 18px;
+font-weight: 500;
+}
+.login.find .tit {
+font-size: 30px;
+}
+.login .tit_desc {
+margin-top: 14px;
+color: #868e96;
+word-break: keep-all;
+}
+.login .option {
+padding-top: 15px;
+}
+.login .option:after,
+.login:after,
+.login .member:after {
+content: "";
+display: block;
+clear: both;
+}
+.login .autocheck {
+float: left;
+}
+.login .option .find {
+float: right;
+}
+.login .option .find a {
+display: block;
+float: left;
+height: 16px;
+font-size:14px;
+color: #868e96;
+}
+.login .option .find a.first {
+padding-right: 10px;
+margin-right: 5px;
+border-right: 1px solid #868e96;
+}
+.login .member {
+margin-top: 15px;
+padding-top: 15px;
+border-top: 1px solid #dee2e6;
+}
+.login .btn_memjoin {
+float: right;
+display: block;
+width: 110px;
+height: 40px;
+line-height: 37px;
+border: 1px solid #feaa29;
+text-align: center;
+font-size: 14px;
+color: #fd9f27;
+}
+.login .member .text {
+float: left;
+margin-top: 10px;
+font-size: 14px;
+color: #868e96;
+}
+.autocheck input[type="checkbox"] {
+display: none;
+}
+.autocheck label {
+width: 100%;
+height: 25px;
+line-height: 25px;
+color: #495057;
+font-size: 14px;
+}
+.autocheck input[type="checkbox"]+label .chk_img {
+padding: 0 0 0 30px;
+height: 25px;
+background: url("../images/common/ico_check_nor.png")no-repeat;
+cursor: pointer;
+}
+.autocheck input[type="checkbox"]:checked+label .chk_img {
+background: url("../images/common/ico_check_on.png")no-repeat;
+}
+@media all and (max-width: 479px) {
+.login {
+width: 100%;
+margin: 50px 0 100px;
+padding: 0 30px;
+}
+.login.find .tit {
+font-size: 23px;
+}	
+.login .tit_desc {
+  line-height: 1.3
+  }
+footer{
+margin-bottom:20px;
+}
+}
