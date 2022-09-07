@@ -23,7 +23,7 @@
 	}
 	#header_menu_bar ul{
 		margin : 0 auto;
-		padding : 20px;
+		padding : 20px 20px 20px 20px;
 	}
 	#header_non_login ul{
 		padding-left:1050px;
@@ -67,17 +67,17 @@
 		padding : 20px 0px;
 		padding-right : 50px;
 		position: absolute;
-		top : 310px;
-		left:500px;
+		top : 33%;
+		left: 28%;
 	}
 	#header_nav_menu_bar td{
-		color : white;
+	color : white;
+	padding-left : 20px;
+	text-align: left;
 	}
 	#header_nav_menu_bar td:not(#top){		
 	padding-top:10px;
-	width:130px;
-	text-align: left;
-	
+	width:130px;	
 	}
 	#header_nav_menu_bar #top{	
 	font-weight:bold;
