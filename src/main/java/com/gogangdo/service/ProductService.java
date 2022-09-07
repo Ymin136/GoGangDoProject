@@ -15,8 +15,5 @@ public class ProductService {
 		this.mapper = mapper;
 	}
 
-	public List<ProductDTO> selectProductList(int pageNo) {
-		return mapper.selectProductList(pageNo);
-	}
 
 }
