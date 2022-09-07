@@ -7,24 +7,20 @@
 <meta charset="UTF-8">
 <title>상품 페이지</title>
 <style type="text/css">
-	*{
-            margin: 0;
-            padding: 0;
-        }
         .main_container{
-            width: 100%;
+            width: 1200px;
+            text-align: center;
+            margin: 0px auto;
             display: flex;
             flex-direction: column;
+            border-top: solid 1px gray;
         }
         .sub_bar{
             width: 1200px;
-            margin: 20px auto;
+            margin: 0px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-        }
-        #sub_menu p{
-            margin: 0px 5px;
         }
         #product_count{
             font-size: 16px;
@@ -32,9 +28,11 @@
         }
         #sub_menu{
             font-size: 14px;
+            height: 25px;
             display: flex;
             flex-direction: row;
             margin-right: 60px;
+            margin-top: 15px;
         }
         #product_list{
             width: 1200px;
@@ -56,6 +54,13 @@
         }
         #product a{
             text-decoration: none;
+        }
+        .page_bar{
+        	margin-top: 10px;
+        	margin-bottom: 20px;
+        }
+        .page_bar a{
+        	text-decoration: none;
         }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
