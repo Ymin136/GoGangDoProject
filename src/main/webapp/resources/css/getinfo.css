@@ -1,0 +1,40 @@
+@charset "UTF-8";
+#first_header h2{
+	text-align: left
+	
+}
+#first_header table{
+	border-bottom:3px solid black;
+	margin-bottom:30px;
+}
+#second_header h3, h6{
+	display:inline;
+	
+}
+#second_header {
+	text-align: left
+	
+}
+.info_table {
+	width : 100%;
+	text-align: left;
+	border-collapse: collapse;
+	
+	
+}
+.info_table tr, .info_table td{
+	
+}
+.j{
+	border-top:1px solid black;
+	border-bottom:1px solid black;
+	
+	padding: 20px 0px;
+		
+}
+.f{
+	border-bottom:1px solid black;
+}
+
+
+
