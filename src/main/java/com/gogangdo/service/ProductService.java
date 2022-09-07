@@ -19,4 +19,8 @@ public class ProductService {
 		return mapper.selectProductList(pageNo);
 	}
 
+	public int selectProductCount() {
+		return mapper.selectProductCount();
+	}
+
 }
