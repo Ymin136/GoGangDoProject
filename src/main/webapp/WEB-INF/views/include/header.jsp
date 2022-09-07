@@ -12,8 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
-$(function(){3
-	$('#header_top').offset({top:800, left:1800});
+$(function(){
 	$("#header_nav_menu_bar").hide();
 	$('#menubar').mouseenter(function(){
     	var l = $('#menubar').position().left;
@@ -99,7 +98,9 @@ $(function(){3
 	<tr><td></td></tr><tr><td></td></tr>
 </table>
 <div id="header_top">
-	<img alt="top_arrow" src="resources/img/arrow.jpg" width="40px" height="40px">
+
+<a href="#header_container"><img alt="top_arrow" src="resources/img/arrow.jpg" width="50px" height="50px"></a>
+	
 </div>
 
 </div>

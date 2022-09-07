@@ -63,5 +63,9 @@ public class MainController {
 	public String purchase() {
 		return "purchase";
 	}
+	@RequestMapping("/productRegisterView.do")
+	public String productRegisterView() {
+		return "product_register";
+	}
 	
 }
