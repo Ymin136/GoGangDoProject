@@ -67,8 +67,6 @@
 		padding : 20px 0px;
 		padding-right : 50px;
 		position: absolute;
-		top : 33%;
-		left: 28%;
 	}
 	#header_nav_menu_bar td{
 	color : white;
@@ -89,5 +87,22 @@
 	#header_nav_menu_bar a:link,#header_nav_menu_bar a:visited {
 		color:white;
 		text-decoration: none;
+	}
+	#header_search button{
+		width:35px;
+		height:35px;
+		border: none;
+		background: url("/resources/img/search_img.PNG") no-repeat;
+	}
+	#header_nav_menu_bar a:link,#header_nav_menu_bar a:visited {
+		color:white;
+		text-decoration: none;
+	}
+	#header_top{
+		width: 50px;
+		height: 50px;
+		position: fixed;
+		background-color:lime;		
+		border-radius: 25px;
 	}
 	

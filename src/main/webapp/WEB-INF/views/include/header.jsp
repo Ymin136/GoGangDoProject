@@ -7,23 +7,19 @@
 <title></title>
 <link href = "resources/css/header.css" rel="stylesheet">
 <style type="text/css">
-	#header_search button{
-		width:35px;
-		height:35px;
-		border: none;
-		background: url("resources/img/search_img.PNG") no-repeat;
-	}
-	#header_nav_menu_bar a:link,#header_nav_menu_bar a:visited {
-		color:white;
-		text-decoration: none;
-	}
+	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
-$(function(){
+$(function(){3
+	$('#header_top').offset({top:800, left:1800});
 	$("#header_nav_menu_bar").hide();
 	$('#menubar').mouseenter(function(){
+    	var l = $('#menubar').position().left;
+    	var t = $('#menubar').position().top + 40;
+    	$('#header_nav_menu_bar').css("left",l);
+    	$('#header_nav_menu_bar').css("top",t);
     	$("#header_nav_menu_bar").show();
     });
     $('#menubar').mouseleave(function(){
@@ -89,15 +85,23 @@ $(function(){
 	<td><a href="productList.do">배변패드/배변판</a></td></tr>	
 	<tr><td><a href="productList.do">기저귀</a></td></tr>
 	<tr><td><a href="productList.do">탈취/소독</a></td></tr>
+	<tr><td></td></tr><tr><td></td></tr>
+	<tr><td id="top" rowspan="3" ><a href="productList.do">미용/목욕</a></td>
+	<td><a href="productList.do">샴푸/린스</a></td></tr>	
+	<tr><td><a href="productList.do">브러쉬</a></td></tr>
 	<tr><td id="top" rowspan="3" ><a href="productList.do">장난감</a></td>
 	<tr><td></td></tr><tr><td></td></tr>
 	<tr><td></td></tr><tr><td></td></tr>
 	<tr><td id="top" rowspan="3" ><a href="productList.do">고양이</a></td>
 	<td><a href="productList.do">사료/간식/영양제</a></td></tr>	
-	<tr><td><a href="productList.do">위생/미용/목욕</a></td></tr>
-	<tr><td><a href="productList.do">장난감</a></td></tr>
+	<tr><td><a href="productRegisterView.do">위생/미용/목욕</a></td></tr>
+	<tr><td><a href="cartView.do">장난감</a></td></tr>
 	<tr><td></td></tr><tr><td></td></tr>
 </table>
+<div id="header_top">
+	<img alt="top_arrow" src="resources/img/arrow.jpg" width="40px" height="40px">
+</div>
+
 </div>
 </body>
 </html>

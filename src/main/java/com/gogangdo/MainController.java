@@ -2,6 +2,7 @@ package com.gogangdo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
@@ -54,4 +55,21 @@ public class MainController {
 	public String purchaseView() {
 		return "purchase";
 	}
+	@RequestMapping("/cartView.do")
+	public String cartView() {
+		return "cart";
+	}
+	@RequestMapping("/productRegisterView.do")
+	public String productRegisterView() {
+		return "product_register";
+	}
+	
+	@RequestMapping("/productRegister.do")
+	public String productRegister(ProductDTO dto) {
+		//int pno = productService.selectProductNo();
+		//dto.setProductNo(pno);
+		System.out.println(dto);
+		return "main";
+	}
+	
 }
