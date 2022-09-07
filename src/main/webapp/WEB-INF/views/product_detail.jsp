@@ -6,9 +6,6 @@
 <meta charset="UTF-8">
 <title>고강도</title>
 <style type="text/css">
-html{
-	scroll-behavior: smooth;
-}
 #product_detail_container{
 		width:1200px;
 		margin : 20px auto;
