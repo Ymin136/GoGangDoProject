@@ -26,7 +26,6 @@ public class MainController {
 
 	@RequestMapping("/")
 	public String startPage() {
-		
 		return "main";
 	}
 	
