@@ -45,7 +45,7 @@
             width: 50px;
             height: 50px;
         }
-        thead{
+        .cart_list thead{
             background-color: bisque;
         }
         .cart_total{

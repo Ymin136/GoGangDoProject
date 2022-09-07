@@ -34,8 +34,9 @@
             font-size: 14px;
             display: flex;
             flex-direction: row;
+            margin-right: 60px;
         }
-        section{
+        #product_list{
             width: 1200px;
             margin: 0 auto;
         }
@@ -43,7 +44,7 @@
             display: flex;
             flex-direction: row;
         }
-        .product{
+        #product{
             margin: 20px;
         }
         .main_container img{
@@ -53,13 +54,31 @@
         #sub_menu a{
             text-decoration: none;
         }
-        .product a{
+        #product a{
             text-decoration: none;
         }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
-
+$(function(){
+	$("#popular").click(function(){
+		
+	})
+	$("#recent").click(function(){
+		
+	})
+	$("#lowprice").click(function(){
+		var data = ("#product").serialize();
+		$.ajax({
+			url: "",
+			data: data,
+			method: "get", 
+		})
+	})
+	$("#highprice").click(function(){
+		
+	})
+});
 </script>
 </head>
 <body>
@@ -67,45 +86,38 @@
 	<div class="main_container">
         <div class="sub_bar">
             <p id="product_count">전체 상품 000개</p>
-            <div id="sub_menu">
-                <p><a href="#">인기순</a></p>
-                <p>|</p>
-                <p><a href="javascript:recent">최신등록순</a></p>
-                <p>|</p>
-                <p><a href="#">낮은가격순</a></p>
-                <p>|</p>
-                <p><a href="#">높은가격순</a></p>
-                <select name="organize" id="">
-                    <option value="10">10개씩 정렬</option>
-                    <option value="20" selected>20개씩 정렬</option>
-                </select>
-            </div>
+            <select name="sub_menu" id="sub_menu">
+            	<option id="popular">인기순</option>
+            	<option id="recent">최신등록순</option>
+            	<option id="lowprice">낮은가격순</option>
+            	<option id="highprice">높은가격순</option>
+            </select>
         </div>
         <hr>
-        <section>
+        <section id="product_list">
             <article>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
@@ -115,28 +127,28 @@
             </article>
             
             <article>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
@@ -146,59 +158,28 @@
             </article>
             
             <article>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-            </article>
-
-            <article>
-                <div class="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div class="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
@@ -208,28 +189,59 @@
             </article>
 
             <article>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
                         <h4>0000원</h4>
                     </a>
                 </div>
-                <div class="product">
+                <div id="product">
+                    <a href="productDetail.do">
+                        <img alt="" src="img/dog-food.jpg">
+                        <p>상품명 OOO</p>
+                        <h4>0000원</h4>
+                    </a>
+                </div>
+            </article>
+
+            <article>
+                <div id="product">
+                    <a href="productDetail.do">
+                        <img alt="" src="img/dog-food.jpg">
+                        <p>상품명 OOO</p>
+                        <h4>0000원</h4>
+                    </a>
+                </div>
+                <div id="product">
+                    <a href="productDetail.do">
+                        <img alt="" src="img/dog-food.jpg">
+                        <p>상품명 OOO</p>
+                        <h4>0000원</h4>
+                    </a>
+                </div>
+                <div id="product">
+                    <a href="productDetail.do">
+                        <img alt="" src="img/dog-food.jpg">
+                        <p>상품명 OOO</p>
+                        <h4>0000원</h4>
+                    </a>
+                </div>
+                <div id="product">
                     <a href="productDetail.do">
                         <img alt="" src="img/dog-food.jpg">
                         <p>상품명 OOO</p>
