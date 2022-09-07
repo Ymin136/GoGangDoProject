@@ -124,7 +124,7 @@
 			<td colspan="3"><button>관심상품</button><button>장바구니</button></td>
 		</tr>
 		<tr>
-			<td colspan ="3"><button style="width: 95%;">구매하기</button></td>
+			<td colspan ="3"><a href="purchaseView.do"><button style="width: 95%;">구매하기</button></a></td>
 		</tr>
 		<tr><td></td></tr>
 	</table>

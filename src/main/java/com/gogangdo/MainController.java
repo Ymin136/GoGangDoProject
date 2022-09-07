@@ -45,9 +45,13 @@ public class MainController {
 	public String productDetail() {
 		return "product_detail";
 	}
+	
 	@RequestMapping("/myPage.do")
 	public String myPage() {
 		return "mypage";
+	}    
+	@RequestMapping("/purchaseView.do")
+	public String purchaseView() {
+		return "purchase";
 	}
-	
 }
