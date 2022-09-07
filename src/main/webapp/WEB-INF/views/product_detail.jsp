@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>고강도</title>
-<style>
-	#product_detail_container{
+<style type="text/css">
+html{
+	scroll-behavior: smooth;
+}
+#product_detail_container{
 		width:1200px;
 		margin : 20px auto;
 		text-align: center;
@@ -81,13 +84,23 @@
 	}
 	#introduce_container{
 		width:1200px;
-		margin : 20px auto;
-		height: 300px; 
-		border: 1px solid black;
+		margin : 40px auto;
+		border-top : 1px solid black;
 	}
-}
-	
+	#introduce_container h3{
+		color:black;
+	}
+	#introduce_container ul li{
+		list-style-type: none;
+		color : gray;
+		text-align: left;
+		margin-bottom: 10px;
+	}
 </style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
 <jsp:include page="include/header.jsp"></jsp:include>
@@ -145,7 +158,20 @@
 		상품문의 테스트
 	</div>
 	<div id="introduce_container">
-		배송/교환/반품 안내 테스트
+		<ul>
+			<li><h3>배송안내</h3></li>
+			<li>- 배송비 : 기본배송료는 3,000원입니다. (도서, 산간, 오지 일부지역은 배송비가 추가될 수 있습니다.)			
+			<li>- 기본적으로 평일오후 4시이전 주문건은 당일출고를 원칙으로 배송준비하고 있습니다.(재고가 부족하거나 창고/수입사에서 바로 발송되시는 제품은 1-2일<br>정보 배송일이 더 소요될 수 있습니다.)</li>
+			<li>- 상품의 평균 배송일은 1-3일입니다.(입금 확인 후) 배송사의 사정에 따라 유동적일 수 있으며 배송일 지정은 불가능합니다.</li>
+			<li>- 배송예정일은 주문시점(주문순서)에 따른 유동성이 발생하므로 평균 배송일과는 차이가 발생할 수 있습니다.</li>
+		</ul><br>
+		<ul>
+			<li><h3>교환 및 반품안내</h3></li>
+			<li>- 상품 택(tag)제거 또는 개봉으로 상품 가치 훼손 시에는 상품 수령후 7일 이내라도 교환 및 반품이 불가능합니다.</li>
+			<li>- 저단가 상품, 일부 특가 상품은 고객 변심에 의한 교환, 반품은 고객께서 배송비를 부담하셔야 합니다.</li>
+			<li>- 일부 상품은 신모델 출시, 원재료 가격 변동 등 제조사 사정으로 가격이 변동될 수 있습니다.</li>
+			<li>- 공장에서 박스 자체가 상품으로 출고되는 제품에 대하여서는 박스 개봉 후 중고 상품으로 간주되어 교환이나 반품이 불가능합니다.</li>
+		</ul>
 	</div>
 </div>
 <jsp:include page="include/footer.jsp"></jsp:include>
