@@ -14,9 +14,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="resources/css/register.css" rel="stylesheet">
-	<link href="resources/css/reset.css" rel="stylesheet"/>
-	<link href="resources/css/global.css" rel="stylesheet"/>
+  	<link href="resources/css/register2.css" rel="stylesheet">
+  	<link href="resources/css/subpage.css" rel="stylesheet">
+	<link href="resources/css/register.css" rel="stylesheet"/>
+	<link href="resources/css/login.css" rel="stylesheet">
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <script>
       $(document).ready(function () {
@@ -31,7 +32,7 @@
   <jsp:include page="include/header.jsp"></jsp:include>
     <section class="sub-contents">
       <div class="inner memberjoin">
-        <h3>약관 동의</h3>
+        <h3>이용 약관 동의</h3>
         <div class="agreement">
           <input type="checkbox" id="agreement_all"><label for="agreement_all">전체 이용 약관에 동의합니다.</label>
         </div>

@@ -4,9 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="resources/css/register.css" rel="stylesheet">
-<link href="resources/css/reset.css" rel="stylesheet"/>
-<link href="resources/css/global.css" rel="stylesheet"/> 
+	<link href="resources/css/login.css" rel="stylesheet"> 
 <meta charset="UTF-8">
 <title>아이디 찾기</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -22,7 +20,6 @@
       <form>
         <input type="text" class="id" placeholder="아이디"/>
         <input type="text" class="phone" placeholder="휴대폰 번호"/>
-       	 <a href="loginView1.do" class="first">아이디 찾기</a>
         <div class="option">
           <div class="find">
             <a href="#">비밀번호 찾기</a>
