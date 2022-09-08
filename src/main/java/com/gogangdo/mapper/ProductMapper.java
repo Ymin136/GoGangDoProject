@@ -19,4 +19,13 @@ public interface ProductMapper {
 	FileDTO selectThumbnailDTO(int product_no);
 	FileDTO selectimagelDTO(int product_no);
 
+
+	List<ProductDTO> selectProductList(int pageNo);
+
+
+	int selectProductCount();
+
+
+	List<ProductDTO> selectProductLowPrice(int product_price);
+
 }

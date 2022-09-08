@@ -16,6 +16,7 @@ import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
+import com.gogangdo.vo.PaggingVO;
 
 @Controller
 public class MainController {
@@ -53,12 +54,13 @@ public class MainController {
 	
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model) {
-//		List<ProductDTO> list = productService.selectProductList(pageNo);
-//		model.addAttribute("list", list);
-//		
-//		int count = productService.selectProductCount();
-//		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
-//		model.addAttribute("pagging", vo);
+		List<ProductDTO> list = productService.selectProductList(pageNo);
+		model.addAttribute("list", list);
+		
+		int count = productService.selectProductCount();
+		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+		model.addAttribute("pagging", vo);
+		model.addAttribute("count",count);
 		return "product_list";
 	}
 	
@@ -129,6 +131,13 @@ public class MainController {
 		} catch (IOException e) {			
 			response.getWriter().write("<script>alert('데이터입력이 잘못됐습니다.');history.bakc();</script>");
 		}
+	}
+	
+	@RequestMapping("/lowPrice.do")
+	public void lowPrice(int product_price, Model model) {
+		List<ProductDTO> list = productService.selectProductLowPrice(product_price);
+		model.addAttribute("list", list);
+		System.out.println("price");
 	}
 	
 }

@@ -24,12 +24,19 @@ public class ProductService {
 		mapper.registerProduct(dto);
 		
 	}
+	public List<ProductDTO> selectProductList(int pageNo) {
+		return mapper.selectProductList(pageNo);
+	}
+	public int selectProductCount() {
+		return mapper.selectProductCount();
+	}
+	public List<ProductDTO> selectProductLowPrice(int product_price) {
+		return mapper.selectProductLowPrice(product_price);
 	public void insertthumbnail(FileDTO fileDTO) {
 		mapper.insertthumbnail(fileDTO);
 	}
 	public void insertproduct_img(FileDTO fileDTO) {
 		mapper.insertproduct_img(fileDTO);
-		
 	}
 	public int selectImageNo() {
 		return mapper.selectImageNo();
