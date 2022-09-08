@@ -14,12 +14,14 @@ public class ProductService {
 	public ProductService(ProductMapper mapper) {
 		this.mapper = mapper;
 	}
+	public int selectProductNo() {
+		return mapper.selectProductNo();
+		
+	}
 
-//	public List<ProductDTO> selectProductList(int pageNo) {
-//		return mapper.selectProductList(pageNo);
-//	}
-//
-//	public int selectProductCount() {
-//		return mapper.selectProductCount();
-//	}
+	public void registerProduct(ProductDTO dto) {
+		mapper.registerProduct(dto);
+		
+	}
+
 }

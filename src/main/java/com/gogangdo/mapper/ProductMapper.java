@@ -10,8 +10,8 @@ import com.gogangdo.dto.ProductDTO;
 public interface ProductMapper {
 
 	int selectProductNo();
-	
-//	List<ProductDTO> selectProductList(int pageNo);
-//
-//	int selectProductCount();
+
+
+	void registerProduct(ProductDTO dto);
+
 }
