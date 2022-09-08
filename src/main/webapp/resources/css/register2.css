@@ -2,7 +2,7 @@
 
 
 /* 회원가입 */
-.memberjoin h3{font-size: 36px;font-weight: 700;text-align: center;}
+.memberjoin h3{font-size: 36px;font-weight: 700; margin-top: 30px;text-align: center;}
 .memberjoin .agreement{margin-top: 60px;padding:17px;border:1px solid #e9ecef;font-size: 14px;color:#343a40;}
 .memberjoin h4{line-height: 15px;margin-top: 40px; padding-left: 10px; color:#343a40;border-left: 3px solid #fd9f27;font-weight: 700;}
 .memberjoin input{vertical-align: bottom;margin:0 10px 0 0;}
@@ -38,7 +38,7 @@
 .agree_box .desc p:first-child{margin-top: 0;}
 .agree_chk {margin-top: 10px;font-size: 14px;}
 .agree_chk input {margin:0 10px 0 0;}
-.text_warning {margin-top: 30px; font-size: 13px;color:#ff6b6b;}
+.text_warning {margin-top: 30px; text-align: center;font-size: 13px;color:#ff6b6b;}
 h3 + .text_warning {margin-top: 60px}
 .memberjoin .btn_set{margin-top: 60px}
 

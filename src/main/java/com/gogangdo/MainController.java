@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
@@ -38,15 +39,25 @@ public class MainController {
 	public String loginView() {
 		return "login";
 	}
+	@RequestMapping("/loginView1.do")
+	public String loginView1() {
+		return "findid";
+	}
 	@RequestMapping("/registerView.do")
 	public String registerView() {
 		return "register";
 	}
 	@RequestMapping("/registerView2.do")
-	public String registerView2() {
+	public String insertregisterView2() {
 		return "register2";
 	}
-	
+	@RequestMapping("/registerView3.do")
+	public String insertgisterView3(MemberDTO dto) {
+		System.out.println(dto);
+		memberService.insertmember(dto);
+		
+		return "register3";
+	}
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model) {
 //		List<ProductDTO> list = productService.selectProductList(pageNo);

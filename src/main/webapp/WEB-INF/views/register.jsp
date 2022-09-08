@@ -14,9 +14,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  	<link href="resources/css/register2.css" rel="stylesheet">
-  	<link href="resources/css/subpage.css" rel="stylesheet">
 	<link href="resources/css/register.css" rel="stylesheet"/>
+	<link href="resources/css/global.css" rel="stylesheet"/>  	
+  	<link href="resources/css/subpage.css" rel="stylesheet">
 	<link href="resources/css/login.css" rel="stylesheet">
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <script>

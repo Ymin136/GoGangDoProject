@@ -7,10 +7,12 @@
 <title></title>
 <link href = "resources/css/header.css" rel="stylesheet">
 <style type="text/css">
-	
+	#header_nav_menu_bar{
+		z-index: 100;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+	
 <script type="text/javascript">
 $(function(){
 	$("#header_nav_menu_bar").hide();

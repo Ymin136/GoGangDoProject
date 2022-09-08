@@ -6,6 +6,11 @@
 <link href="resources/css/login.css" rel="stylesheet">
 <meta charset="UTF-8">
 <title>로그인</title>
+<style type="text/css">
+	check{
+		width:15px;
+	}
+</style>
 </head>
 <body>
 	<jsp:include page="include/header.jsp"></jsp:include>
@@ -18,15 +23,14 @@
       <form>
         <input type="text" class="id" placeholder="아이디"/>
         <input type="password" class="phone" placeholder="비밀번호"/>
+            <a href="#" class="first">아이디 저장</a>  
         <button>로그인</button>
         <div class="option">
           <div class="autocheck">
               <input type="checkbox" id="check_test">
-           
           </div>
           <div class="find">
-            <a href="loginView1.do" class="first">아이디 찾기</a>
-            
+            <a href="loginView1.do" class="first">아이디 찾기</a>  
             <a href="#">비밀번호 찾기</a>
           </div>
         </div>

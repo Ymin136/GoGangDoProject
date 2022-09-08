@@ -20,6 +20,7 @@
       <form>
         <input type="text" class="id" placeholder="아이디"/>
         <input type="text" class="phone" placeholder="휴대폰 번호"/>
+        <button>확인</button>
         <div class="option">
           <div class="find">
             <a href="#">비밀번호 찾기</a>
@@ -27,7 +28,7 @@
         </div>
         <div class="member">
           <div class="text">아직 회원이 아니신가요?</div>
-          <a class="btn_memjoin" href="#">회원가입</a>
+          <a class="btn_memjoin" href="registerView.do">회원가입</a>
         </div>
       </form>
     </div>
