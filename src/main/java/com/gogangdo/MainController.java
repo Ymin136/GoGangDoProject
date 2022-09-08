@@ -1,16 +1,20 @@
 package com.gogangdo;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
-import com.gogangdo.vo.PaggingVO;
 
 @Controller
 public class MainController {
@@ -66,6 +70,20 @@ public class MainController {
 	@RequestMapping("/productRegisterView.do")
 	public String productRegisterView() {
 		return "product_register";
+	}
+	
+	@RequestMapping("/productRegister.do")
+	public void productRegister(ProductDTO dto, HttpServletResponse response) {		
+		int pno = productService.selectProductNo();
+		dto.setProduct_no(pno);
+		System.out.println(dto.toString());
+		productService.registerProduct(dto);
+		
+		try {
+			response.getWriter().write("1");
+		} catch (IOException e) {			
+			e.printStackTrace();
+		}
 	}
 	
 }

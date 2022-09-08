@@ -12,6 +12,22 @@
 
 <script>
 $(function(){
+	$('#register').click(function(){
+		var d = $('#register_frm').serialize();	
+		console.log(d);
+		$.ajax({
+			url:"productRegister.do",
+			data : d,
+			dataType : "json",
+			success:function(r){
+				alert("상품등록 성공");
+				location.href = "productList.do"
+			},
+			error:function(error){
+				alert("데이터 입력이 잘못됐습니다.");
+			}
+		});
+	});		
 	$('#main_cat').change(function(){
 		var main = $('#main_cat').val();
 		$("#sub_cat").find("option").remove();
@@ -32,7 +48,7 @@ $(function(){
 			$("#sub_cat").append("<option value = '9'>샴푸/린스</option>");
 			$("#sub_cat").append("<option value = '10'>브러쉬</option>");
 		}else if(main == 5){
-			$("#sub_cat").append("<option value = 'none'>장난감</option>");	
+			$("#sub_cat").append("<option value = '14'>장난감</option>");	
 		}else if(main == 6){
 			$("#sub_cat").append("<option value = '11'>사료/간식/영양제</option>");
 			$("#sub_cat").append("<option value = '12'>위생/미용/목욕</option>");
@@ -46,19 +62,19 @@ $(function(){
 <jsp:include page="include/header.jsp"></jsp:include>
 <div id="container">
 	<h1>상품등록</h1>
-	<form action="productRegister.do">
+	<form id="register_frm">
 		<table>
 			<tr>
 				<td id="left"><h2>상품명</h2></td>
-				<td><input type="text" width="300px" name="productName"></td>
+				<td><input type="text" width="300px" name="product_name"></td>
 			</tr>
 			<tr>
 				<td id="left"><h2>상품설명</h2></td>
-				<td><textarea name="productContent"></textarea></td>
+				<td><textarea name="product_desc"></textarea></td>
 			</tr>
 			<tr>
 				<td id="left"><h2>카테고리</h2></td>
-				<td><select id="main_cat" name="categoryNo">
+				<td><select id="main_cat" name="category_no">
 					<option value="none">카테고리</option>
 					<option value="0">사료/분유</option>
 					<option value="1">간식</option>
@@ -68,30 +84,30 @@ $(function(){
 					<option value="5">장난감</option>
 					<option value="6">고양이</option>
 				</select>
-				<select id ="sub_cat" name="subcategoryNo">
+				<select id ="sub_cat" name="sub_category_no">
 					<option value="none">하위카테고리</option>
 				</select></td>
 			</tr>
 			<tr>
 				<td id="left"><h2>가격</h2></td>
-				<td><input type="number" name="productPrice"></td>
+				<td><input type="number" name="product_price"></td>
 			</tr>
 			<tr>
 				<td id="left"><h2>재고</h2></td>
-				<td><input type="number" name="productStock"></td>
+				<td><input type="number" name="product_stock"></td>
 			</tr>
 			<tr>
 				<td id="left"><h2>상품이미지(썸네일)</h2></td>
-				<td> <input type="file"> </td>
+				<td> <input type="file" name="product_thumnail"> </td>
 			</tr>
 			<tr>
 				<td id="left"><h2>상품이미지(상품설명)</h2></td>
-				<td> <input type="file"> </td>
+				<td> <input type="file" name="product_img"> </td>
 			</tr>
 			<tr>
 				<td colspan="2" id="btn_td">
 				<a href="javascript:history.back();"><button type="button">취소</button></a>
-				<button>등록하기</button></td>				
+				<button type ="button" id="register">등록하기</button></td>				
 			</tr>
 		</table>
 	</form>
