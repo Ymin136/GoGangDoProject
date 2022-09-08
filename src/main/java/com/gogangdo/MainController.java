@@ -7,7 +7,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -15,6 +17,7 @@ import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
+import com.gogangdo.vo.PaggingVO;
 
 @Controller
 public class MainController {
@@ -48,12 +51,13 @@ public class MainController {
 	
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model) {
-//		List<ProductDTO> list = productService.selectProductList(pageNo);
-//		model.addAttribute("list", list);
-//		
-//		int count = productService.selectProductCount();
-//		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
-//		model.addAttribute("pagging", vo);
+		List<ProductDTO> list = productService.selectProductList(pageNo);
+		model.addAttribute("list", list);
+		
+		int count = productService.selectProductCount();
+		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+		model.addAttribute("pagging", vo);
+		model.addAttribute("count",count);
 		return "product_list";
 	}
 	
@@ -90,6 +94,13 @@ public class MainController {
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("/lowPrice.do")
+	public void lowPrice(int product_price, Model model) {
+		List<ProductDTO> list = productService.selectProductLowPrice(product_price);
+		model.addAttribute("list", list);
+		System.out.println("price");
 	}
 	
 }

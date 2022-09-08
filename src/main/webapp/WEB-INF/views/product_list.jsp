@@ -38,12 +38,14 @@
             width: 1200px;
             margin: 0 auto;
         }
-        #product_list a > p,h4{
+        #product_list a{
         	color: black;
+        	text-decoration: none;
         }
         article{
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
         }
         #product{
             margin: 20px;
@@ -54,6 +56,7 @@
         }
         #sub_menu a{
             text-decoration: none;
+            margin: 0px 10px;
         }
         #product a{
             text-decoration: none;
@@ -69,20 +72,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#recent").click(function(){
-		
-	})
 	$("#lowprice").click(function(){
-		var data = ("#product").serialize();
+		var d = $("#product").serialize();
 		$.ajax({
-			url: "",
-			data: data,
-			method: "get", 
-		})
-	})
-	$("#highprice").click(function(){
-		
-	})
+			url:"lowPrice.do",
+			data : d,
+			type: "get",
+			success: function(r){
+				$("#product_list").html(r);
+				console.log(asdf);
+			}
+		});
+	});
 });
 </script>
 </head>
@@ -90,170 +91,25 @@ $(function(){
 <jsp:include page="include/header.jsp"></jsp:include>
 	<div class="main_container">
         <div class="sub_bar">
-            <p id="product_count">전체 상품 000개</p>
-            <select name="sub_menu" id="sub_menu">
-            	<option id="recent">최신등록순</option>
-            	<option id="lowprice" selected>낮은가격순</option>
-            	<option id="highprice">높은가격순</option>
-            </select>
+            <p id="product_count">전체 상품 ${requestScope.count }개</p>
+            <div id="sub_menu">
+            	<a href="recent">최신등록순</a>
+            	<a href="lowPrice.do"  id="lowprice">낮은가격순</a>
+            	<a href="highprice">높은가격순</a>
+            </div>
         </div>
         <hr>
         <section id="product_list">
             <article>
-                <div id="product">
-                    <a href="productDetail.do">
-                    	<c:forEach var="dto" items="${requestScope.list }">
+            	<c:forEach var="dto" items="${requestScope.list }">
+                	<a href="productDetail.do">
+                    	<div id="product">
                         	<img alt="" src="img/dog-food.jpg">
-                        	<p>상품명 ${dto.productName}</p>
-                        	<h4>${dto.productPrice }원</h4>	
-                    	</c:forEach>
+                        	<p>상품명 ${dto.product_name}</p>
+                        	<h4>${dto.product_price }원</h4>	
+                 		</div>
                     </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-            </article>
-            
-            <article>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-            </article>
-            
-            <article>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-            </article>
-
-            <article>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-            </article>
-
-            <article>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
-                <div id="product">
-                    <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
-                    </a>
-                </div>
+            	</c:forEach>
             </article>
         </section>
         <div class="page_bar">

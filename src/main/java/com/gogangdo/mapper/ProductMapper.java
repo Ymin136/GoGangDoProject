@@ -14,4 +14,13 @@ public interface ProductMapper {
 
 	void registerProduct(ProductDTO dto);
 
+
+	List<ProductDTO> selectProductList(int pageNo);
+
+
+	int selectProductCount();
+
+
+	List<ProductDTO> selectProductLowPrice(int product_price);
+
 }
