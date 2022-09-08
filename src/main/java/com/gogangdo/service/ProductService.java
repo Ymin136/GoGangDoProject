@@ -15,5 +15,15 @@ public class ProductService {
 		this.mapper = mapper;
 	}
 
+	public int selectProductNo() {
+		return mapper.selectProductNo();
+		
+	}
+
+	public void registerProduct(ProductDTO dto) {
+		mapper.registerProduct(dto);
+		
+	}
+
 
 }
