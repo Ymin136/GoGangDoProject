@@ -47,7 +47,13 @@ public class MainController {
 	}
 	
 	@RequestMapping("/productList.do")
-	public String productList() {
+	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model) {
+//		List<ProductDTO> list = productService.selectProductList(pageNo);
+//		model.addAttribute("list", list);
+//		
+//		int count = productService.selectProductCount();
+//		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+//		model.addAttribute("pagging", vo);
 		return "product_list";
 	}
 	

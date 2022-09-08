@@ -43,20 +43,24 @@
             width: 40px;
             height: 40px;
         }
-        thead{
+        /*thead{
             background-color: bisque;
-        }
+        }*/
         #cart{
-            width: 130px;
-            height: 25px;
-            font-size: 12px;
-            background-color: #f7d794;
+            width: 170px;
+            height: 30px;
+            font-size: 14px;
+            background-color: white;
             border: none;
+        }
+        #cart a{
+        	text-decoration: none;
+        	color: black;
         }
         .total{
             width: 1200px;
             margin: 20px auto;
-            background-color: #f3a683;
+            background-color: #e9e9e9;
         }
         .total td{
             width: 20%;
@@ -94,8 +98,9 @@
             font-size: 20px;
             margin-left: 40%;
             margin-top: 20px;
+            margin-bottom: 50px;
             border: none;
-            background-color: #f19066;
+            background-color: black;
             color: white;
         }
 </style>
@@ -156,7 +161,7 @@ $(function(){
                 <!--<td>3,000원</td>-->
             </tr>
         </table>
-        <button id="cart">장바구니로 돌아가기</button>
+        <button id="cart"><a href="cartView.do">장바구니로 돌아가기</a></button>
         <table class="total">
             <tr>
                 <td></td>

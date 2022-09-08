@@ -14,7 +14,6 @@ public class ProductService {
 	public ProductService(ProductMapper mapper) {
 		this.mapper = mapper;
 	}
-
 	public int selectProductNo() {
 		return mapper.selectProductNo();
 		
@@ -24,6 +23,5 @@ public class ProductService {
 		mapper.registerProduct(dto);
 		
 	}
-
 
 }
