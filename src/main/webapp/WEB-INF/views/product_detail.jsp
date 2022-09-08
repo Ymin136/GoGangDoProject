@@ -104,27 +104,18 @@
 <div id = "product_detail_container">
 	<table id = product_detail>
 		<tr>
-			<td id = "sample_img" rowspan="10"> <img alt="sample" src="resources/img/product_sample.PNG"> </td>
-			<td id ="title" colspan="3" style="font-size: 30px;"><b>후르타 레즐 하네스</b></td>			
+			<td id = "sample_img" rowspan="9"> <img alt="sample" src="c:fileUpload\product_sample.PNG"/></td>
+			<td id ="title" colspan="3" style="font-size: 30px;"><b>${requestScope.product.product_name }</b></td>			
 		</tr>
-		<tr><td id ="title" colspan="3">비트루트 / 헷지 / 블랙베리 / 빌베리<br>재미있고, 컬러풀한 레즐의 새로운 컬렉션<br>친환경, 30%이상 조절가능, 리플렉터</td></tr>
-		<tr><td id ="title">브랜드</td>
+		<tr><td id ="title" colspan="3">${requestScope.product.product_desc }</td></tr>
+		<tr><td id ="title">카테고리</td>
 			<td colspan="2">레즐</td>			
 		</tr>
 		<tr><td id ="title">가격</td>
 			<td colspan="2">41,000원</td>		
 		</tr>
-		<tr><td id ="title">컬러-사이즈</td>			
-			<td colspan="2"><select>
-			<option>비트-15-25</option>
-			<option>비트-25-35</option>
-			<option>비트-35-45</option>
-			</select></td>
-		</tr>
-		<tr>
-			<td id ="title">비트-35-45</td>
-			<td><input type="number" value="0"></td>
-			<td>41,000원</td>
+		<tr><td id ="title">개수</td>			
+			<td> <input type="number" value ="1"> </td>
 		</tr>
 		<tr>
 			<td colspan="3" style="text-align: right; font-size: 20px;">
@@ -147,7 +138,7 @@
 			<td><a href="#introduce_container">배송/교환/반품 안내</a></td>
 		</tr>
 	</table>
-	<img id="Detail"alt="product_sample" src="resources/img/product_detail.jpg">
+	<img id="Detail"alt="product_sample" src="c:\fileUpload\product_detail.jpg">
 	<div id="review_container">
 		상품평 테스트
 	</div>

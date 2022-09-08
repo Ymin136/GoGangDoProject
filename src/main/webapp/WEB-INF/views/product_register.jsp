@@ -12,22 +12,6 @@
 
 <script>
 $(function(){
-	$('#register').click(function(){
-		var d = $('#register_frm').serialize();	
-		console.log(d);
-		$.ajax({
-			url:"productRegister.do",
-			data : d,
-			dataType : "json",
-			success:function(r){
-				alert("상품등록 성공");
-				location.href = "productList.do"
-			},
-			error:function(error){
-				alert("데이터 입력이 잘못됐습니다.");
-			}
-		});
-	});		
 	$('#main_cat').change(function(){
 		var main = $('#main_cat').val();
 		$("#sub_cat").find("option").remove();
@@ -62,7 +46,7 @@ $(function(){
 <jsp:include page="include/header.jsp"></jsp:include>
 <div id="container">
 	<h1>상품등록</h1>
-	<form id="register_frm">
+	<form action ="productRegister.do"id="register_frm" enctype="multipart/form-data" method="post">
 		<table>
 			<tr>
 				<td id="left"><h2>상품명</h2></td>
@@ -98,7 +82,7 @@ $(function(){
 			</tr>
 			<tr>
 				<td id="left"><h2>상품이미지(썸네일)</h2></td>
-				<td> <input type="file" name="product_thumnail"> </td>
+				<td> <input type="file" name="product_thumbnail"> </td>
 			</tr>
 			<tr>
 				<td id="left"><h2>상품이미지(상품설명)</h2></td>
@@ -106,8 +90,8 @@ $(function(){
 			</tr>
 			<tr>
 				<td colspan="2" id="btn_td">
-				<a href="javascript:history.back();"><button type="button">취소</button></a>
-				<button type ="button" id="register">등록하기</button></td>				
+				<a href="javascript:histoy.back();"><button type="button">취소</button></a>				
+				<button>등록하기</button></td>				
 			</tr>
 		</table>
 	</form>
