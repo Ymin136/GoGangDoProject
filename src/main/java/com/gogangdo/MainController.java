@@ -92,5 +92,9 @@ public class MainController {
 			e.printStackTrace();
 		}
 	}
+	@RequestMapping("/getinfo.do")
+	public String getinfo() {
+		return "getinfo";
+	}
 	
 }

@@ -3,9 +3,25 @@
 	text-align: left
 	
 }
-#first_header table{
+
+#first_header2 {
+	width : 158px;
 	border-bottom:3px solid black;
+	margin-bottom:45px;
+	margin-top:53px;
+}
+
+#first_header3 {
+	
+	margin-top : 110px;
+	margin-bottom:12px;
+	
+}
+
+#first_header table{
+	border-bottom:1px solid black;
 	margin-bottom:30px;
+	margin-top : 14px;
 }
 #second_header h3, h6{
 	display:inline;
@@ -22,19 +38,65 @@
 	
 	
 }
-.info_table tr, .info_table td{
-	
+.plustable{
+	width : 100%;
+	text-align: left;
+	border-collapse: collapse;
+}
+
+.plus{
+	width : 100%;
+	border-top:1px solid black;
+	border-bottom:1px solid black;
+	text-align: left;
+	border-collapse: collapse;
+	margin-bottom : 200px;
+}
+.plus tr, .plus td{
+	border-bottom : 1px solid black;
+	padding : 30px 0px;
+}
+
+.plus #right{
+	width:27%;
+}
+
+.plus select{
+	width:80%;
 }
 .j{
 	border-top:1px solid black;
 	border-bottom:1px solid black;
 	
-	padding: 20px 0px;
+	padding: 35px 0px;
 		
 }
 .f{
 	border-bottom:1px solid black;
 }
 
+.mail{
+	padding-bottom : -80px;
+}
+.adress tr, .adress td{
+	padding: 30px 0px;
+}
+.adress2 tr, .adress2 td{
+	padding-bottom : 50px;
+}
 
-
+#yearselect{
+	padding : 5px 5px;
+}
+#monthselect{
+	padding : 5px 5px;
+}
+#dayselect{
+	padding : 5px 5px;
+}
+#pname{
+	padding : 5px 5px;
+}
+#bu{
+	padding-left : 10px;
+}

@@ -12,8 +12,8 @@
 <jsp:include page="include/header.jsp"></jsp:include>
 	<div id="main_container">
 		
-		<div id="first_header">
-		<table>
+		<div id="first_header2">
+		<table class="first_t">
 			<tr>
 				<th><h2>회원정보 변경</h2></th>
 			</tr>
@@ -49,66 +49,170 @@
 			<div id="first_header">
 			<table class="info_table">
 			<tr>
-				<td class="j">아이디</td>
+				<td class="j">*아이디</td>
 				<td class="j">jun</td>
 				<td class="j">&nbsp</td>
 			</tr>
 			<tr>
-				<td class="j">비밀번호</td>
+				<td class="j">*비밀번호</td>
 				<td class="j">
-					<button></button>
-					<button></button>
+					<input type="text" id="pname" name="비밀번호" placeholder="password">
 				</td>
 				<td class="j"></td>
 			</tr>
 			<tr>
-				<td class="j">이름</td>
+				<td class="j">*이름</td>
 				<td class="j">이준택</td>
 				<td class="j"></td>
 			</tr>
 			<tr>
-				<td rowspan='2' class="j">이메일</td>
-				<td >jun@naver.com</td>
-				<td>직접입력</td>
-			</tr>
-			<tr>
-				
-				<td class="f">정보/이벤트 메일 수신에 동의합니다.</td>
-				<td class="f"></td>
-			</tr>
-			<tr>
-				<td rowspan='2' class="j">휴대폰 번호</td>
-				<td >01012345678</td>
+				<td rowspan='2' class="j">*이메일</td>
+				<td >
+					<form>
+  						<input type="text" id="pname" class="mail" value="jun@naver.com">
+					<select id="pname" mutiple>
+					<option value="naver.com">naver.com</option>
+					<option value="naver.com">nate.com</option>
+					<option value="naver.com">gmail.com</option>
+					<option value="naver.com">hanmail.com</option>
+					<option value="naver.com">outlook.com</option>
+					<option value="">직접입력</option>
+					</select>
+					</form>
+				</td>
 				<td></td>
 			</tr>
 			<tr>
 				
-				<td class="f">정보/이벤트 메일 수신에 동의합니다.</td>
+				<td class="f"><input type="checkbox" id="pname" name="항목" value="메일 수신">정보/이벤트 메일 수신에 동의합니다.</td>
+				<td class="f"></td>
+			</tr>
+			<tr>
+				<td rowspan='2' class="j">*휴대폰 번호</td>
+				<td >
+					<form>
+  						<input type="text" id="pname" value="01077479832">
+					</form>
+					
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				
+				<td class="f"><input type="checkbox" id="pname" name="항목" value="메일 수신">정보/이벤트 메일 수신에 동의합니다.</td>
 				<td class="f"> </td>
 			</tr>
 			<tr>
 				<td class="j">전화번호</td>
-				<td class="f">-없이 입력하세요</td>
+				<td class="f"><input type="text" id="pname" name="전화번호" placeholder="-없이 입력하세요"></td>
 				<td class="f"></td>
 			</tr>
-			<tr>
-				<td rowspan='3' class="j">주소</td>
-				<td><input type="text" name="우편번호"><button>우편번호검색</button></td>
+			<tr class="adress">
+				<td rowspan='3' class="j">*주소</td>
+				<td><input type="text" id="pname" name="우편번호"><button id="bu">우편번호검색</button></td>
 				<td></td>
 			</tr>
 			<tr>
 				
-				<td><input type="text" name="우편번호"><input type="text" name="우편번호"></td>
+				<td><input type="text" id="pname" name="우편번호" placeholder="도/시"><input type="text" id="pname" name="우편번호" placeholder="도시"></td>
 				<td></td>
 			</tr>
-			<tr>
+			<tr class="adress2">
 				
-				<td><input type="text" name="우편번호"><input type="text" name="우편번호"><input type="text" name="우편번호"></td>
+				<td><input type="text" id="pname" name="우편번호" size="46.4px" placeholder="상세주소"></td>
 				<td></td>
 			</tr>
 			
 			</table>
 			</div>
+			
+			<div id="first_header3">
+		<table class="first_t2">
+			<tr>
+				<th ><h3>부가정보</h3></th>
+			</tr>
+		</table>
+		</div>
+		
+		<div id="plustable">
+		<table class="plus" >
+		<tr>
+			<td id="left"	>반려동물 이름</td>
+			<td><input type="text" id="pname" name="이름" placeholder="이름을 입력해주세요"></td>
+		</tr>
+		<tr>
+		<td id="left">생일</td>
+			<td id="right">	
+					<select id="yearselect" mutiple >
+					<option value="2022">년</option>
+					<option value="2022">2022</option>
+					<option value="2021">2021</option>
+					<option value="2020">2020</option>
+					<option value="2019">2019</option>
+					<option value="2018">2018</option>
+					<option value="2017">2017</option>
+					</select>
+			</td>
+			<td id="right">	
+					<select id="monthselect" mutiple>
+					<option value="12">월</option>
+					<option value="12">12</option>
+					<option value="11">11</option>
+					<option value="10">10</option>
+					<option value="9">9</option>
+					<option value="8">8</option>
+					<option value="7">7</option>
+					<option value="6">6</option>
+					<option value="5">5</option>
+					<option value="4">4</option>
+					<option value="3">3</option>
+					<option value="2">2</option>
+					<option value="1">1</option>
+					</select>
+			</td>
+			<td id="right">	
+					<select id="dayselect" mutiple>
+					<option value="31">일</option>
+					<option value="31">31</option>
+					<option value="30">30</option>
+					<option value="29">29</option>
+					<option value="28">28</option>
+					<option value="27">27</option>
+					<option value="26">26</option>
+					<option value="25">25</option>
+					<option value="24">24</option>
+					<option value="23">23</option>
+					<option value="22">22</option>
+					<option value="21">21</option>
+					<option value="20">20</option>
+					<option value="19">19</option>
+					<option value="18">18</option>
+					<option value="17">17</option>
+					<option value="16">16</option>
+					<option value="15">15</option>
+					<option value="14">14</option>
+					<option value="13">13</option>
+					<option value="12">12</option>
+					<option value="11">11</option>
+					<option value="10">10</option>
+					<option value="9">9</option>
+					<option value="8">8</option>
+					<option value="7">7</option>
+					<option value="6">6</option>
+					<option value="5">5</option>
+					<option value="4">4</option>
+					<option value="3">3</option>
+					<option value="2">2</option>
+					<option value="1">1</option>
+					</select>
+			</td>
+		</tr>
+		<tr>
+			<td>남기는 말씀</td>
+			<td><input type="text" name="이름" height="200" style="width:300px;height:200px;" autofocus></td>
+		</tr>
+		</table>
+		</div>
 	
 	</div>
 <jsp:include page="include/footer.jsp"></jsp:include>
