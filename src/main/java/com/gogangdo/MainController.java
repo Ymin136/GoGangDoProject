@@ -1,15 +1,12 @@
 package com.gogangdo;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
@@ -44,6 +41,10 @@ public class MainController {
 	@RequestMapping("/registerView.do")
 	public String registerView() {
 		return "register";
+	}
+	@RequestMapping("/registerView2.do")
+	public String registerView2() {
+		return "register2";
 	}
 	
 	@RequestMapping("/productList.do")
