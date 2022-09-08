@@ -35,9 +35,9 @@
             width: 1200px;
             border-collapse: collapse;
         }
-        .cart_list thead{
-            background-color: bisque;
-        }
+        /*.cart_list thead{
+            background-color: lightgray;
+        }*/
         .cart_list tr{
             border-bottom: solid 1px lightgray;
         }
@@ -55,7 +55,7 @@
         .total{
             width: 1200px;
             margin: 10px auto;
-            background-color: #f3a683;
+            background-color: #e9e9e9;
         }
         .total img{
             width: 25px;
@@ -77,7 +77,8 @@
             width: 150px;
             height: 30px;
             font-size: 14px;
-            background-color: #f7d794;
+            background-color: gray;
+            color: white;
             border: none;
         }
         #continue{
@@ -89,7 +90,7 @@
             height: 50px;
             font-size: 20px;
             border: none;
-            background-color: #f19066;
+            background-color: black;
         }
         #continue button a{
         	text-decoration: none;
@@ -112,6 +113,10 @@ $(function() {
     });
     $("#choose_all").click(function(){
     	$("input[type=checkbox]").prop("checked",true);
+    });
+    
+    $("#delete_choose").click(function(){
+    	
     });
  });
 </script>

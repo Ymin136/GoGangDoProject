@@ -38,6 +38,9 @@
             width: 1200px;
             margin: 0 auto;
         }
+        #product_list a > p,h4{
+        	color: black;
+        }
         article{
             display: flex;
             flex-direction: row;
@@ -66,9 +69,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#popular").click(function(){
-		
-	})
 	$("#recent").click(function(){
 		
 	})
@@ -92,9 +92,8 @@ $(function(){
         <div class="sub_bar">
             <p id="product_count">전체 상품 000개</p>
             <select name="sub_menu" id="sub_menu">
-            	<option id="popular">인기순</option>
             	<option id="recent">최신등록순</option>
-            	<option id="lowprice">낮은가격순</option>
+            	<option id="lowprice" selected>낮은가격순</option>
             	<option id="highprice">높은가격순</option>
             </select>
         </div>
@@ -103,9 +102,11 @@ $(function(){
             <article>
                 <div id="product">
                     <a href="productDetail.do">
-                        <img alt="" src="img/dog-food.jpg">
-                        <p>상품명 OOO</p>
-                        <h4>0000원</h4>
+                    	<c:forEach var="dto" items="${requestScope.list }">
+                        	<img alt="" src="img/dog-food.jpg">
+                        	<p>상품명 ${dto.productName}</p>
+                        	<h4>${dto.productPrice }원</h4>	
+                    	</c:forEach>
                     </a>
                 </div>
                 <div id="product">
