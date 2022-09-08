@@ -12,7 +12,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script type="text/javascript">
-$(function(){
+$(function(){3
+	$('#header_top').offset({top:800, left:1800});
 	$("#header_nav_menu_bar").hide();
 	$('#menubar').mouseenter(function(){
     	var l = $('#menubar').position().left;
@@ -62,7 +63,7 @@ $(function(){
 		<li><a href="productList.do">영양제</a></li>
 		<li><a href="productList.do">위생/배변</a></li>
 		<li><a href="productList.do">미용/목욕</a></li>
-		<li><a href="productList.do">장난감</a></li>
+		<li><a href="getinfo.do">장난감</a></li>
 		<li><a href="myPage.do">고양이</a></li>
 	</ul>
 </nav>
@@ -98,9 +99,7 @@ $(function(){
 	<tr><td></td></tr><tr><td></td></tr>
 </table>
 <div id="header_top">
-
-<a href="#header_container"><img alt="top_arrow" src="resources/img/arrow.jpg" width="50px" height="50px"></a>
-	
+	<img alt="top_arrow" src="resources/img/arrow.jpg" width="40px" height="40px">
 </div>
 
 </div>

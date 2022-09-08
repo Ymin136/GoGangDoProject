@@ -139,5 +139,9 @@ public class MainController {
 		model.addAttribute("list", list);
 		System.out.println("price");
 	}
+	@RequestMapping("/getinfo.do")
+	public String getinfo() {
+		return "getinfo";
+	}
 	
 }

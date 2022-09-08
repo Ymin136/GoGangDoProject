@@ -25,7 +25,7 @@
 					<th>마일리지</th>
 				</tr>
 				<tr>
-					<th><button type="button"><img src="resources/img/MembershipBenefits.png" alt="">등급혜택보기</button></th>
+					<th><button type="button" style='cursor:pointer;'><img src="resources/img/MembershipBenefits.png" alt="">등급혜택보기</button></th>
 					<th>3장</th>
 					<th>0원</th>	
 				</tr>
@@ -43,35 +43,35 @@
 				<th>주문번호</th>
 				<th>상품명</th>
 				<th>결제금액</th>
-				<th>주문상세</th>
+				<th>배송현황</th>
 			</tr>
 			<tr>
 				<td>2022.09.05</td>
 				<td>10</td>
 				<td>샴푸</td>
-				<td>20.000원</td>
-				<td><button>조회</button></td>
+				<td>20,000원</td>
+				<td><button type="button" onclick="location.href='https://www.cjlogistics.com//ko/tool/parcel/tracking' " style='cursor:pointer;'>조회</button></td>
 			</tr>
 			<tr>
 				<td>2022.09.06</td>
 				<td>9</td>
 				<td>장난감</td>
-				<td>40.000원</td>
-				<td><button>조회</button></td>
+				<td>40,000원</td>
+				<td><button type="button" onclick="location.href='https://www.cjlogistics.com//ko/tool/parcel/tracking' " style='cursor:pointer;'>조회</button></td>
 			</tr>
 			<tr>
 				<td>2022.09.07</td>
 				<td>8</td>
 				<td>사료</td>
-				<td>50.000원</td>
-				<td><button>조회</button></td>
+				<td>50,000원</td>
+				<td><button type="button" onclick="location.href='https://www.cjlogistics.com//ko/tool/parcel/tracking' " style='cursor:pointer;'>조회</button></td>
 			</tr>
 			<tr>
 				<td>2022.09.08</td>
 				<td>7</td>
 				<td>하네스</td>
-				<td>25.000원</td>
-				<td><button>조회</button></td>
+				<td>25,000원</td>
+				<td><button type="button" onclick="location.href='https://www.cjlogistics.com//ko/tool/parcel/tracking' " style='cursor:pointer;'>조회</button></td>
 			</tr>
 			
 			</table>
@@ -96,29 +96,29 @@
 				<td>2022.09.05</td>
 				<td>10</td>
 				<td>샴푸</td>
-				<td>20.000원</td>
-				<td><button>조회</button></td>
+				<td>20,000원</td>
+				<td><a href="productDetail.do$$"><button type="button"style='cursor:pointer;'>후기작성</button></td>
 			</tr>
 			<tr>
 				<td>2022.09.06</td>
 				<td>9</td>
 				<td>장난감</td>
-				<td>40.000원</td>
-				<td><button>조회</button></td>
+				<td>40,000원</td>
+				<td><a href="productDetail.do$$"><button type="button"style='cursor:pointer;'>후기작성</button></td>
 			</tr>
 			<tr>
 				<td>2022.09.07</td>
 				<td>8</td>
 				<td>사료</td>
-				<td>50.000원</td>
-				<td><button>조회</button></td>
+				<td>50,000원</td>
+				<td><a href="productDetail.do$$"><button type="button"style='cursor:pointer'>후기작성</button></td>
 			</tr>
 			<tr>
 				<td>2022.09.08</td>
 				<td>7</td>
 				<td>하네스</td>
-				<td>25.000원</td>
-				<td><button>조회</button></td>
+				<td>25,000원</td>
+				<td><a href="productDetail.do$$"><button type="button"style='cursor:pointer'>후기작성</button></a></td>
 			</tr>
 			
 			</table>
