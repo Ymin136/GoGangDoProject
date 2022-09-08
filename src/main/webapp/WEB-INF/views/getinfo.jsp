@@ -56,7 +56,7 @@
 			<tr>
 				<td class="j">*비밀번호</td>
 				<td class="j">
-					<input type="text" id="pname" name="비밀번호" placeholder="password">
+					<input type="text" id="pname" name="비밀번호" placeholder="8자리 이상입력">
 				</td>
 				<td class="j"></td>
 			</tr>
@@ -109,17 +109,17 @@
 			</tr>
 			<tr class="adress">
 				<td rowspan='3' class="j">*주소</td>
-				<td><input type="text" id="pname" name="우편번호"><button id="bu">우편번호검색</button></td>
+				<td><input type="text" id="pname" name="우편번호"><button id="bu" style='cursor:pointer;'>우편번호검색</button></td>
 				<td></td>
 			</tr>
 			<tr>
 				
-				<td><input type="text" id="pname" name="우편번호" placeholder="도/시"><input type="text" id="pname" name="우편번호" placeholder="도시"></td>
+				<td><input type="text" id="pname" name="도/시" placeholder="도/시"><input type="text" id="pname" name="우편번호" placeholder="도시"></td>
 				<td></td>
 			</tr>
 			<tr class="adress2">
 				
-				<td><input type="text" id="pname" name="우편번호" size="46.4px" placeholder="상세주소"></td>
+				<td><input type="text" id="pname" name="상세주소" size="80px" placeholder="상세주소"></td>
 				<td></td>
 			</tr>
 			
@@ -209,9 +209,23 @@
 		</tr>
 		<tr>
 			<td>남기는 말씀</td>
-			<td><input type="text" name="이름" height="200" style="width:300px;height:200px;" autofocus></td>
+			<td>
+				<textarea id="story" name="story"
+          		rows="5" cols="33">
+				
+				</textarea>
+			</td>
 		</tr>
 		</table>
+		</div>
+		
+		<div id="infofix">
+		<a href="main.do"><button class="info" style='cursor:pointer;'>취소</button>
+		<button class="fix" style='cursor:pointer;'>정보수정</button>
+		</div>
+		
+		<div id="exit">
+		<a href="url">회원탈퇴<a>
 		</div>
 	
 	</div>

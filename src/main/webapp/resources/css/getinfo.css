@@ -7,8 +7,9 @@
 #first_header2 {
 	width : 158px;
 	border-bottom:3px solid black;
-	margin-bottom:45px;
+	margin-bottom:75px;
 	margin-top:53px;
+	padding-bottom:-20px;
 }
 
 #first_header3 {
@@ -50,7 +51,7 @@
 	border-bottom:1px solid black;
 	text-align: left;
 	border-collapse: collapse;
-	margin-bottom : 200px;
+	margin-bottom : 150px;
 }
 .plus tr, .plus td{
 	border-bottom : 1px solid black;
@@ -96,7 +97,47 @@
 }
 #pname{
 	padding : 5px 5px;
+	margin : 0px 3px;
 }
 #bu{
 	padding-left : 10px;
 }
+
+#infofix{
+	padding-bottom : 100px;
+}
+
+#infofix button{
+	width : 200px;
+	height : 50px;
+	
+}
+.fix{
+	background-color : black;
+	color: white;
+	margin-left : 2px;
+}
+.info{
+	background-color : white;
+	color : black;
+	margin-right : 2px;
+}
+#exit {
+	text-align: right;
+	
+}
+#exit a:link{
+	text-decoration: none;
+	color : black;
+}
+#exit a:hover {
+  color : red;
+  text-decoration: underline;
+}
+textarea {
+    width: 100%;
+    height: 6.25em;
+    border: none;
+    resize: none;
+    border : 1px solid black
+  }
