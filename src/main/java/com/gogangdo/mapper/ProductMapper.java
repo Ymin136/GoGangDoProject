@@ -11,10 +11,6 @@ import com.gogangdo.dto.ProductDTO;
 @Mapper
 public interface ProductMapper {
 
-	int selectProductNo();
-
-
-	void registerProduct(ProductDTO dto);
 
 
 	List<ProductDTO> selectProductList(int pageNo);
@@ -31,13 +27,16 @@ public interface ProductMapper {
 
 	List<ProductDTO> selectProductList(int pageNo, int category_no);
 
-	
+	//JYM
+	int selectProductNo();
+	void registerProduct(ProductDTO dto);
 	void insertthumbnail(FileDTO fileDTO);
 	void insertproduct_img(FileDTO fileDTO);
 	int selectImageNo();
 	ProductDTO selectproductDTO(int product_no);
 	FileDTO selectThumbnailDTO(int product_no);
 	FileDTO selectimageDTO(int product_no);
+	List<ProductDTO> selectReviewList(int pageNo, int product_no);
 
 
 	List<ProductDTO> selectProductSubList(Map<Object, Object> map);

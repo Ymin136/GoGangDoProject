@@ -17,13 +17,6 @@ public class ProductService {
 	public ProductService(ProductMapper mapper) {
 		this.mapper = mapper;
 	}
-	public int selectProductNo() {
-		return mapper.selectProductNo();
-	}
-
-	public void registerProduct(ProductDTO dto) {
-		mapper.registerProduct(dto);		
-	}
 	
 	public List<ProductDTO> selectProductList(int pageNo, int category_no) {
 		return mapper.selectProductList(pageNo, category_no);
@@ -31,13 +24,22 @@ public class ProductService {
 	public int selectProductCount() {
 		return mapper.selectProductCount();
 	}
+	
+	
+	
+	//jym
 	public List<ProductDTO> selectProductLowPrice(int product_price) {
 		return mapper.selectProductLowPrice(product_price);
+	}
+	public int selectProductNo() {
+		return mapper.selectProductNo();
+	}
+	public void registerProduct(ProductDTO dto) {
+		mapper.registerProduct(dto);		
 	}
 	public FileDTO selectImageFile(int fno) {
 		return mapper.selectImageFile(fno);
 	}
-	
 	public void insertthumbnail(FileDTO fileDTO) {
 		mapper.insertthumbnail(fileDTO);
 	}
@@ -61,5 +63,8 @@ public class ProductService {
 		map.put("pageNo", pageNo);
 		map.put("sub_category_no", sub_category_no);
 		return mapper.selectProductSubList(map);
+   }
+	public List<ProductDTO> selectReviewList(int pageNo, int product_no) {
+		return mapper.selectReviewList(pageNo, product_no);
 	}
 }

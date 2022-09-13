@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +49,21 @@ public class MainController {
 	public String loginView() {
 		return "login";
 	}
-	
+	@RequestMapping("/getInfo.do")
+	public String getInfo() {
+		return "getinfo";
+	}
+	@RequestMapping("/userUpdate.do")
+	public String userUpdate(MemberDTO dto) {
+		System.out.println(dto.toString());
+		int result = memberService.userUpdate(dto);
+		if(result == 1)
+		System.out.println("회원정보 수정 완료");
+		else 
+		System.out.println("실패");
+		
+		return "redirect:/";
+	}
 	@RequestMapping("/loginView2.do")
 	public String loginView(String id,String pw, HttpSession session) {
 		MemberDTO dto = memberService.login(id, pw);
@@ -115,6 +130,18 @@ public class MainController {
 		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
 		model.addAttribute("pagging", vo);
 		return "product_list";
+    }
+    
+	@RequestMapping("/userDelete.do")
+	public String userDelete(String id, HttpSession session) {
+		System.out.println(id);
+		int result = memberService.userDelete(id);
+		if(result == 1)
+			System.out.println("회원정보 삭제 완료");
+			else 
+			System.out.println("실패");
+		session.invalidate();
+		return "redirect:/main.do";
 	}
 	@RequestMapping("/imageLoad.do")
 	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
@@ -138,19 +165,21 @@ public class MainController {
 		fis.close();
 		bos.close();
 	}
-		@RequestMapping("/productDetail.do")
-		public String productDetail(int product_no, Model model) {
-			ProductDTO dto = productService.selectproductDTO(product_no);
-			FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
-			FileDTO image = productService.selectimageDTO(product_no);
-			System.out.println(dto.toString());
-			System.out.println(thumbnail.toString());
-			System.out.println(image.toString());
-			model.addAttribute("product", dto);
-			model.addAttribute("thumbnail", thumbnail);
-			model.addAttribute("image", image);
-			return "product_detail";
-		}
+	@RequestMapping("/productDetail.do")
+	public String productDetail(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,int product_no, Model model) {
+//		List<ProductDTO> list = productService.selectReviewList(pageNo,product_no);
+		ProductDTO dto = productService.selectproductDTO(product_no);
+		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
+		FileDTO image = productService.selectimageDTO(product_no);
+		//PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+		System.out.println(dto.toString());
+		System.out.println(thumbnail.toString());
+		System.out.println(image.toString());
+		model.addAttribute("product", dto);
+		model.addAttribute("thumbnail", thumbnail);			
+		model.addAttribute("image", image);
+		return "product_detail";
+	}
 	
 	@RequestMapping("/myPage.do")
 	public String myPage() {
