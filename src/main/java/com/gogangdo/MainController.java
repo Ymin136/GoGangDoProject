@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +49,21 @@ public class MainController {
 	public String loginView() {
 		return "login";
 	}
-	
+	@RequestMapping("/getInfo.do")
+	public String getInfo() {
+		return "getinfo";
+	}
+	@RequestMapping("/userUpdate.do")
+	public String userUpdate(MemberDTO dto) {
+		System.out.println(dto.toString());
+		int result = memberService.userUpdate(dto);
+		if(result == 1)
+		System.out.println("회원정보 수정 완료");
+		else 
+		System.out.println("실패");
+		
+		return "redirect:/";
+	}
 	@RequestMapping("/loginView2.do")
 	public String loginView(String id,String pw, HttpSession session) {
 		MemberDTO dto = memberService.login(id, pw);
@@ -96,6 +111,17 @@ public class MainController {
 		model.addAttribute("pagging", vo);
 		model.addAttribute("count",count);
 		return "product_list";
+	}
+	@RequestMapping("/userDelete.do")
+	public String userDelete(String id, HttpSession session) {
+		System.out.println(id);
+		int result = memberService.userDelete(id);
+		if(result == 1)
+			System.out.println("회원정보 삭제 완료");
+			else 
+			System.out.println("실패");
+		session.invalidate();
+		return "redirect:/main.do";
 	}
 	@RequestMapping("/imageLoad.do")
 	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
