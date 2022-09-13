@@ -36,5 +36,12 @@ public interface ProductMapper {
 
 	List<ProductDTO> selectProductListHigh(int pageNo);
 
+	
+	void insertthumbnail(FileDTO fileDTO);
+	void insertproduct_img(FileDTO fileDTO);
+	int selectImageNo();
+	ProductDTO selectproductDTO(int product_no);
+	FileDTO selectThumbnailDTO(int product_no);
+	FileDTO selectimageDTO(int product_no);
 
 }
