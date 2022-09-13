@@ -11,4 +11,11 @@
 	<select id="login" parameterType="map" resultType="member">
 		select * from shop_user where id = #{id} and pw = #{pw}
 	</select>
+	<update id="userUpdate" parameterType="member">
+		update shop_user set pw = #{pw}, user_name=#{user_name}, tel=#{tel}, address=#{address}, email=#{email}
+		where id = #{id}
+	</update>
+	<delete id="userDelete" parameterType="String">
+		delete from shop_user where id = #{id}
+	</delete>
 </mapper>

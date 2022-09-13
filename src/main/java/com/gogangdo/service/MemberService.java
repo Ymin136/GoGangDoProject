@@ -28,6 +28,15 @@ public class MemberService {
 		return memberMapper.login(membermap);
 	}
 
+	public int userUpdate(MemberDTO dto) {
+		return memberMapper.userUpdate(dto);
+	}
+
+	public int userDelete(String id) {
+		
+		return memberMapper.userDelete(id);
+	}
+
 	
 
 	

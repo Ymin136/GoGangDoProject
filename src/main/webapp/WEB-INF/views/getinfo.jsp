@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,12 @@
 <link href="resources/css/getinfo.css" rel="stylesheet">
 </head>
 <body>
+<c:if test="${sessionScope.login == null || sessionScope.login == false  }">
+		<script>
+			alert("로그인을 하셔야 이용할수 있습니다.");
+			location.href="loginView.do";
+		</script>
+	</c:if>
 <jsp:include page="include/header.jsp"></jsp:include>
 	<div id="main_container">
 		
@@ -46,37 +53,40 @@
 			<h6>*표시는 반드시 입력하셔야 하는 항목 입니다.</h6>
 			</div>
 			
+			<form action="userUpdate.do">
 			<div id="first_header">
 			<table class="info_table">
 			<tr>
 				<td class="j">*아이디</td>
-				<td class="j">jun</td>
+				<td class="j"><input type="text" id="pname" name="id" value="dadd"></td>
 				<td class="j">&nbsp</td>
 			</tr>
 			<tr>
 				<td class="j">*비밀번호</td>
 				<td class="j">
-					<input type="text" id="pname" name="비밀번호" placeholder="8자리 이상입력">
+					<input type="password" id="pname" name="pw" placeholder="8자리 이상입력">
 				</td>
 				<td class="j"></td>
 			</tr>
 			<tr>
 				<td class="j">*이름</td>
-				<td class="j">이준택</td>
+				<td class="j">
+					<input type="text" id="pname" name="user_name" value="이준택">
+				</td>
 				<td class="j"></td>
 			</tr>
 			<tr>
 				<td rowspan='2' class="j">*이메일</td>
 				<td >
 					<form>
-  						<input type="text" id="pname" class="mail" value="jun@naver.com">
+  						<input type="text" id="pname" class="mail" name="email" value="jun@naver.com">
 					<select id="pname" mutiple>
+					<option value="">직접입력</option>
 					<option value="naver.com">naver.com</option>
 					<option value="naver.com">nate.com</option>
 					<option value="naver.com">gmail.com</option>
 					<option value="naver.com">hanmail.com</option>
-					<option value="naver.com">outlook.com</option>
-					<option value="">직접입력</option>
+					<option value="naver.com" >outlook.com</option>
 					</select>
 					</form>
 				</td>
@@ -84,15 +94,14 @@
 			</tr>
 			<tr>
 				
-				<td class="f"><input type="checkbox" id="pname" name="항목" value="메일 수신">정보/이벤트 메일 수신에 동의합니다.</td>
+				<td class="f"><input type="checkbox" id="pname" value="메일 수신">정보/이벤트 메일 수신에 동의합니다.</td>
 				<td class="f"></td>
 			</tr>
 			<tr>
 				<td rowspan='2' class="j">*휴대폰 번호</td>
 				<td >
-					<form>
-  						<input type="text" id="pname" value="01077479832">
-					</form>
+  						<input type="text" id="pname" name="tel" value="01077479832">
+
 					
 				</td>
 				<td></td>
@@ -102,39 +111,34 @@
 				<td class="f"><input type="checkbox" id="pname" name="항목" value="메일 수신">정보/이벤트 메일 수신에 동의합니다.</td>
 				<td class="f"> </td>
 			</tr>
-			<tr>
-				<td class="j">전화번호</td>
-				<td class="f"><input type="text" id="pname" name="전화번호" placeholder="-없이 입력하세요"></td>
-				<td class="f"></td>
-			</tr>
 			<tr class="adress">
 				<td rowspan='3' class="j">*주소</td>
-				<td><input type="text" id="pname" name="우편번호"><button id="bu" style='cursor:pointer;'>우편번호검색</button></td>
+				<td><input type="text" id="pname" name="address"><button id="bu" style='cursor:pointer;'>우편번호검색</button></td>
 				<td></td>
 			</tr>
 			<tr>
 				
-				<td><input type="text" id="pname" name="도/시" placeholder="도/시"><input type="text" id="pname" name="우편번호" placeholder="도시"></td>
+				<td><input type="text" id="pname" placeholder="도/시"><input type="text" id="pname" placeholder="도시"></td>
 				<td></td>
 			</tr>
 			<tr class="adress2">
 				
-				<td><input type="text" id="pname" name="상세주소" size="80px" placeholder="상세주소"></td>
+				<td><input type="text" id="pname" size="80px" placeholder="상세주소"></td>
 				<td></td>
 			</tr>
 			
 			</table>
 			</div>
 			
-			<div id="first_header3">
+			<!-- <div id="first_header3">
 		<table class="first_t2">
 			<tr>
 				<th ><h3>부가정보</h3></th>
 			</tr>
 		</table>
-		</div>
+		</div> -->
 		
-		<div id="plustable">
+		<!-- <div id="plustable">
 		<table class="plus" >
 		<tr>
 			<td id="left"	>반려동물 이름</td>
@@ -217,15 +221,16 @@
 			</td>
 		</tr>
 		</table>
-		</div>
+		</div> -->
 		
 		<div id="infofix">
-		<a href="main.do"><button class="info" style='cursor:pointer;'>취소</button>
-		<button class="fix" style='cursor:pointer;'>정보수정</button>
+		<a href="javascript:window.history.back();">
+		<button type="button" class="info" style='cursor:pointer;'>정보수정</button></a>
+		<button class="fix" style='cursor:pointer;'>취소</button>
 		</div>
-		
+		</form>
 		<div id="exit">
-		<a href="url">회원탈퇴<a>
+		<a href="userDelete.do?id=${sessionScope.id }">회원탈퇴</a>
 		</div>
 	
 	</div>

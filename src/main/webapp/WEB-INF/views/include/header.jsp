@@ -73,7 +73,7 @@ $(function(){3
 		<li><a href="productList.do">영양제</a></li>
 		<li><a href="productList.do">위생/배변</a></li>
 		<li><a href="productList.do">미용/목욕</a></li>
-		<li><a href="getinfo.do">장난감</a></li>
+		<li><a href="getInfo.do">장난감</a></li>
 		<li><a href="myPage.do">고양이</a></li>
 	</ul>
 </nav>

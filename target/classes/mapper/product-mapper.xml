@@ -5,10 +5,30 @@
 <mapper namespace="com.gogangdo.mapper.ProductMapper">
 	<select id="selectProductNo" resultType="int">
 		select productno_seq.nextval from dual
-
-</select>
-<insert id="registerProduct" parameterType="product">
+	</select>
+	<insert id="registerProduct" parameterType="product">
 		insert into shop_product 
 		values(#{product_no},#{category_no},#{product_name},#{product_price},#{product_stock},0,#{product_desc},#{sub_category_no})	
-</insert>
+	</insert>
+	<select id="selectProductListRecent" resultType="product" parameterType="int">
+		select * from (select ceil(rownum / 20) as pageNo, pv.*
+			from productlist_view pv)
+			where pageNo = #{pageNo}
+	</select>
+	<select id="selectProductListLow" resultType="product" parameterType="int">
+		select * from (select ceil(rownum / 20) as pageNo, pv.*
+			from productlist_view pv)
+			where pageNo = #{pageNo} order by product_price
+	</select>
+	<select id="selectProductListHigh" resultType="product" parameterType="int">
+		select * from (select ceil(rownum / 20) as pageNo, pv.*
+			from productlist_view pv)
+			where pageNo = #{pageNo} order by product_price desc
+	</select>
+	<select id="selectProductCount" resultType="int">
+		select count(*) from shop_product 
+	</select>
+	<select id="selectImageFile" parameterType = "int" resultType="file">
+	select * from shop_img where img_no = #{fno}
+</select>
 </mapper>

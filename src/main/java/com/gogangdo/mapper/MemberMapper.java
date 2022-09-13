@@ -13,4 +13,8 @@ public interface MemberMapper {
 
 	MemberDTO login(Map<String, Object> membermap);
 
+	int userUpdate(MemberDTO dto);
+
+	int userDelete(String id);
+
 }
