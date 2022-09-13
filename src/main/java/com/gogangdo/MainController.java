@@ -27,12 +27,12 @@ import com.gogangdo.vo.PaggingVO;
 public class MainController {
 	private ProductService productService;
 	private MemberService memberService;
-	private OrderService orderService;
+	//private OrderService orderService;
 	
-	public MainController(ProductService productService, MemberService memberService, OrderService orderservice) {
+	public MainController(ProductService productService, MemberService memberService) {
 		this.productService = productService;
 		this.memberService = memberService;
-		this.orderService = orderservice;
+		//this.orderService = orderservice;
 	}
 
 	@RequestMapping("/")
@@ -50,17 +50,21 @@ public class MainController {
 	}
 	
 	@RequestMapping("/loginView2.do")
-	public String loginView(String id,String pw, HttpSession session) {
+	public String loginView2(String id,String pw, HttpSession session) {
 		MemberDTO dto = memberService.login(id, pw);
- 		
 		if(dto != null) {
 			session.setAttribute("login", true);
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("pw", dto.getPw());
+			session.setAttribute("user_no", dto.getUser_grade());
+			session.setAttribute("user_name", dto.getUser_name());
+			session.setAttribute("tel", dto.getTel());
+			session.setAttribute("address", dto.getAddress());
+			session.setAttribute("email", dto.getEmail());
 			return "redirect:/";
 		}else {
 			session.setAttribute("login", false);
-			return "login";
+			return "redirect:/loginView.do";
 		}		
 	}
 	@RequestMapping("/loginoutView.do")
@@ -81,10 +85,26 @@ public class MainController {
 		return "register2";
 	}
 	@RequestMapping("/registerView3.do")
-	public String insertgisterView3(MemberDTO dto) {
+	public String insertgisterView3(MemberDTO dto, HttpSession session) {
 		System.out.println(dto);
-		memberService.insertmember(dto);
-		return "register3";
+		int registerView3=memberService.insertmember(dto);
+		if(registerView3 != 0) {
+			System.out.println("회원가입 성공");
+			return "redirect:/";
+		}else {
+			System.out.println("회원가입 실패");
+			return "redirect:/";
+		}		
+	}
+	@RequestMapping("/idCheck.do")
+	public void idCheck(String id, HttpServletResponse response) throws IOException {
+		String id_cmp = memberService.selectId(id);
+		System.out.println(id_cmp);
+		if(id.equals(id_cmp)) {
+			response.getWriter().write(String.valueOf(0));
+		} else {
+			response.getWriter().write(String.valueOf(1));
+		}
 	}
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int a) {

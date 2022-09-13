@@ -28,6 +28,10 @@ public class MemberService {
 		return memberMapper.login(membermap);
 	}
 
+	public String selectId(String id) {
+		return memberMapper.selectid(id);
+	}
+
 	
 	
 

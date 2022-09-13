@@ -13,4 +13,6 @@ public interface MemberMapper {
 
 	MemberDTO login(Map<String, Object> membermap);
 
+	String selectid(String id);
+
 }
