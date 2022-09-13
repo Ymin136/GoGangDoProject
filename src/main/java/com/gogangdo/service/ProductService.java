@@ -1,6 +1,8 @@
 package com.gogangdo.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -23,13 +25,8 @@ public class ProductService {
 		mapper.registerProduct(dto);		
 	}
 	
-	public List<ProductDTO> selectProductList(int pageNo, int a) {
-		if(a==0)
-			return mapper.selectProductListRecent(pageNo);
-		else if(a==1)
-			return mapper.selectProductListLow(pageNo);
-		else
-			return mapper.selectProductListHigh(pageNo);
+	public List<ProductDTO> selectProductList(int pageNo, int category_no) {
+		return mapper.selectProductList(pageNo, category_no);
 	}
 	public int selectProductCount() {
 		return mapper.selectProductCount();
@@ -58,5 +55,11 @@ public class ProductService {
 	}
 	public FileDTO selectimageDTO(int product_no) {
 		return mapper.selectimageDTO(product_no);
+	}
+	public List<ProductDTO> selectProductSubList(int pageNo, int sub_category_no) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("pageNo", pageNo);
+		map.put("sub_category_no", sub_category_no);
+		return mapper.selectProductSubList(map);
 	}
 }

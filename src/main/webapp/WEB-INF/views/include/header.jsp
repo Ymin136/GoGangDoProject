@@ -68,9 +68,9 @@ $(function(){3
 <nav id = "header_menu_bar">
 	<ul>
 		<li><img id="menubar" alt="menubar" src="resources/img/menubar.PNG" width = "40px" height="40px"></li>
-		<li><a href="productList.do">사료/분유</a></li>
-		<li><a href="productList.do">간식</a></li>	
-		<li><a href="productList.do">영양제</a></li>
+		<li><a href="productList.do?category_no=0">사료/분유</a></li>
+		<li><a href="productList.do?category_no=1">간식</a></li>	
+		<li><a href="productList.do?category_no=2">영양제</a></li>
 		<li><a href="productList.do">위생/배변</a></li>
 		<li><a href="productList.do">미용/목욕</a></li>
 		<li><a href="getinfo.do">장난감</a></li>
@@ -79,8 +79,8 @@ $(function(){3
 </nav>
 <table id="header_nav_menu_bar">
 	<tr><td id="top" rowspan="3" ><a href="productList.do">사료/분유</a></td>
-	<td><a href="productList.do">건식사료</a></td></tr>	
-	<tr><td><a href="productList.do">습식사료</a></td></tr>
+	<td><a href="productSubList.do?sub_category_no=0">건식사료</a></td></tr>	
+	<tr><td><a href="productSubList.do?sub_category_no=4">습식사료</a></td></tr>
 	<tr><td></td></tr><tr><td></td></tr>
 	<tr><td id="top" rowspan="3" ><a href="productList.do">간식</a></td>
 	<td><a href="productList.do">간식</a></td></tr>	

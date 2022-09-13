@@ -10,11 +10,17 @@
 		insert into shop_product 
 		values(#{product_no},#{category_no},#{product_name},#{product_price},#{product_stock},0,#{product_desc},#{sub_category_no})	
 	</insert>
-	<select id="selectProductListRecent" resultType="product" parameterType="int">
+	<select id="selectProductList" resultType="product" parameterType="int">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
-			where pageNo = #{pageNo}
+			where pageNo = #{pageNo} and category_no = #{category_no}
 	</select>
+	<select id="selectProductSubList" resultType="product" parameterType="Map">
+		select * from (select ceil(rownum / 20) as pageNo, pv.*
+			from productlist_view pv)
+			where pageNo = #{pageNo} and sub_category_no = #{sub_category_no}
+	</select>
+	
 	<select id="selectProductListLow" resultType="product" parameterType="int">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
@@ -25,6 +31,7 @@
 			from productlist_view pv)
 			where pageNo = #{pageNo} order by product_price desc
 	</select>
+	
 	<select id="selectProductCount" resultType="int">
 		select count(*) from shop_product 
 	</select>
