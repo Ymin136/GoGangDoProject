@@ -11,10 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.gogangdo.dto.FileDTO;
+import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
@@ -50,14 +48,10 @@ public class MainController {
 	public String registerView() {
 		return "register";
 	}
-	@RequestMapping("/registerView2.do")
-	public String registerView2() {
-		return "register2";
-	}
 	
 	@RequestMapping("/productList.do")
-	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model) {
-		List<ProductDTO> list = productService.selectProductList(pageNo);
+	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int a) {
+		List<ProductDTO> list = productService.selectProductList(pageNo,a);
 		model.addAttribute("list", list);
 		
 		int count = productService.selectProductCount();
@@ -65,20 +59,6 @@ public class MainController {
 		model.addAttribute("pagging", vo);
 		model.addAttribute("count",count);
 		return "product_list";
-	}
-	
-	@RequestMapping("/productDetail.do")
-	public String productDetail(int product_no, Model model) {
-		ProductDTO dto = productService.selectproductDTO(product_no);
-		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
-		FileDTO image = productService.selectimageDTO(product_no);
-		System.out.println(dto.toString());
-		System.out.println(thumbnail.toString());
-		System.out.println(image.toString());
-		model.addAttribute("product", dto);
-		model.addAttribute("thumbnail", thumbnail);
-		model.addAttribute("image", image);
-		return "product_detail";
 	}
 	@RequestMapping("/imageLoad.do")
 	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
@@ -102,12 +82,18 @@ public class MainController {
 		fis.close();
 		bos.close();
 	}
+	
+	@RequestMapping("/productDetail.do")
+	public String productDetail() {
+		return "product_detail";
+	}
 	@RequestMapping("/myPage.do")
 	public String myPage() {
 		return "mypage";
 	}
 	@RequestMapping("/cartView.do")
-	public String cartView() {
+	public String cartView(Model model) {
+		//List<ProductDTO> list = productService.selectProductBuy();
 		return "cart";
 	}
 	@RequestMapping("/purchase.do")
@@ -120,53 +106,17 @@ public class MainController {
 	}
 	
 	@RequestMapping("/productRegister.do")
-	public void productRegister(ProductDTO dto, HttpServletResponse response, MultipartHttpServletRequest request) throws IOException {
-		try {
+	public void productRegister(ProductDTO dto, HttpServletResponse response) {		
 		int pno = productService.selectProductNo();
 		dto.setProduct_no(pno);
 		System.out.println(dto.toString());
-		dto.setProduct_desc(dto.getProduct_desc().replaceAll("\\n", "<br>"));
 		productService.registerProduct(dto);
 		
-		
-		String root ="c:\\fileUpload\\";
-		File userRoot = new File(root);
-		if(userRoot.exists())
-			userRoot.mkdirs();
-		
-		MultipartFile thumbnail = request.getFile("product_thumbnail");
-		MultipartFile product_img = request.getFile("product_img");
-		
-		String originalFileName1 = thumbnail.getOriginalFilename();
-		String originalFileName2 = product_img.getOriginalFilename();
-		File uploadFile1 = new File(root + "\\"+originalFileName1);
-		File uploadFile2 = new File(root + "\\"+originalFileName2);
-		int img_no = productService.selectImageNo();
-		productService.insertthumbnail(new FileDTO(uploadFile1, pno, img_no));
-		img_no = productService.selectImageNo();
-		productService.insertproduct_img(new FileDTO(uploadFile2, pno, img_no));		
 		try {
-			thumbnail.transferTo(uploadFile1);
-			product_img.transferTo(uploadFile2);
-		} catch (IllegalStateException | IOException e) {
+			response.getWriter().write("1");
+		} catch (IOException e) {			
 			e.printStackTrace();
 		}
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write("<script>alert('상품 등록 성공');location.href='productList.do';</script>");
-		} catch (IOException e) {			
-			response.getWriter().write("<script>alert('데이터입력이 잘못됐습니다.');history.bakc();</script>");
-		}
-	}
-	
-	@RequestMapping("/lowPrice.do")
-	public void lowPrice(int product_price, Model model) {
-		List<ProductDTO> list = productService.selectProductLowPrice(product_price);
-		model.addAttribute("list", list);
-		System.out.println("price");
-	}
-	@RequestMapping("/getinfo.do")
-	public String getinfo() {
-		return "getinfo";
 	}
 	
 }
