@@ -119,19 +119,21 @@ public class MainController {
 		fis.close();
 		bos.close();
 	}
-		@RequestMapping("/productDetail.do")
-		public String productDetail(int product_no, Model model) {
-			ProductDTO dto = productService.selectproductDTO(product_no);
-			FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
-			FileDTO image = productService.selectimageDTO(product_no);
-			System.out.println(dto.toString());
-			System.out.println(thumbnail.toString());
-			System.out.println(image.toString());
-			model.addAttribute("product", dto);
-			model.addAttribute("thumbnail", thumbnail);
-			model.addAttribute("image", image);
-			return "product_detail";
-		}
+	@RequestMapping("/productDetail.do")
+	public String productDetail(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,int product_no, Model model) {
+//		List<ProductDTO> list = productService.selectReviewList(pageNo,product_no);
+		ProductDTO dto = productService.selectproductDTO(product_no);
+		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
+		FileDTO image = productService.selectimageDTO(product_no);
+		//PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+		System.out.println(dto.toString());
+		System.out.println(thumbnail.toString());
+		System.out.println(image.toString());
+		model.addAttribute("product", dto);
+		model.addAttribute("thumbnail", thumbnail);			
+		model.addAttribute("image", image);
+		return "product_detail";
+	}
 	
 	@RequestMapping("/myPage.do")
 	public String myPage() {
