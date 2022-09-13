@@ -97,6 +97,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
+$(function(){
+	$('#ea').change(function(){
+		var ea = $('#ea').val();
+		var price = ${requestScope.product.product_price };
+		var total_price = ea*price;
+		$('#total').text(total_price+" 원");
+	});
+});
 </script>
 </head>
 <body>
@@ -104,28 +112,25 @@
 <div id = "product_detail_container">
 	<table id = product_detail>
 		<tr>
-			<td id = "sample_img" rowspan="9"> <img alt="sample" src="c:fileUpload\product_sample.PNG"/></td>
+			<td id = "sample_img" rowspan="8"> <img alt="sample" src="imageLoad.do?fno=${requestScope.thumbnail.img_no}"></td>
 			<td id ="title" colspan="3" style="font-size: 30px;"><b>${requestScope.product.product_name }</b></td>			
 		</tr>
 		<tr><td id ="title" colspan="3">${requestScope.product.product_desc }</td></tr>
 		<tr><td id ="title">카테고리</td>
-			<td colspan="2">레즐</td>			
+			<td colspan="2">${requestScope.product.category_name} &nbsp | &nbsp ${requestScope.product.sub_category_name}</td>			
 		</tr>
 		<tr><td id ="title">가격</td>
-			<td colspan="2">41,000원</td>		
+			<td colspan="2">${requestScope.product.product_price }원</td>		
 		</tr>
 		<tr><td id ="title">개수</td>			
-			<td> <input type="number" value ="1"> </td>
+			<td> <input id = "ea" type="number" value ="1"> </td>
 		</tr>
 		<tr>
 			<td colspan="3" style="text-align: right; font-size: 20px;">
-			<b>41,000원</b></td>
+			<span id = "total">${requestScope.product.product_price } 원</span></td>
 		</tr>
 		<tr>
-			<td colspan="3"><button>관심상품</button><button>장바구니</button></td>
-		</tr>
-		<tr>
-			<td colspan ="3"><a href="purchaseView.do"><button style="width: 95%;">구매하기</button></a></td>
+			<td colspan="3"><button>장바구니</button><a href="purchaseView.do"><button>구매하기</button></a></td>
 		</tr>
 		<tr><td></td></tr>
 	</table>
@@ -138,7 +143,8 @@
 			<td><a href="#introduce_container">배송/교환/반품 안내</a></td>
 		</tr>
 	</table>
-	<img id="Detail"alt="product_sample" src="c:\fileUpload\product_detail.jpg">
+	
+	<img id="Detail"alt="product_sample" src="imageLoad.do?fno=${requestScope.image.img_no}">
 	<div id="review_container">
 		상품평 테스트
 	</div>

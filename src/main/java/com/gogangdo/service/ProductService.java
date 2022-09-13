@@ -32,6 +32,7 @@ public class ProductService {
 	}
 	public List<ProductDTO> selectProductLowPrice(int product_price) {
 		return mapper.selectProductLowPrice(product_price);
+	}
 	public void insertthumbnail(FileDTO fileDTO) {
 		mapper.insertthumbnail(fileDTO);
 	}
@@ -47,8 +48,11 @@ public class ProductService {
 	public FileDTO selectThumbnailDTO(int product_no) {
 		return mapper.selectThumbnailDTO(product_no);
 	}
-	public FileDTO selectimagelDTO(int product_no) {
-		return mapper.selectimagelDTO(product_no);
+	public FileDTO selectimageDTO(int product_no) {
+		return mapper.selectimageDTO(product_no);
+	}
+	public FileDTO selectImageFile(int fno) {		
+		return mapper.selectImageFile(fno);
 	}
 
 }

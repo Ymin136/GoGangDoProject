@@ -24,7 +24,7 @@
 		select imageno_seq.nextval from dual
 </select>
 <select id="selectproductDTO" resultType="product" parameterType="int">
-	select * from shop_product where product_no = #{product_no}
+	select * from product_view where product_no = #{product_no}
 </select>
 <insert id="insertthumbnail" parameterType="file">
 	insert into shop_img
@@ -37,7 +37,10 @@
 <select id="selectThumbnailDTO" parameterType="int" resultType="file">
 	select * from shop_img where product_no = #{product_no} and thumbnail = 1
 </select>
-<select id="selectimagelDTO" parameterType="int" resultType="file">
+<select id="selectimageDTO" parameterType="int" resultType="file">
 	select * from shop_img where product_no = #{product_no} and thumbnail = 0
+</select>
+<select id="selectImageFile" parameterType = "int" resultType="file">
+	select * from shop_img where img_no = #{fno}
 </select>
 </mapper>
