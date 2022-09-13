@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +8,12 @@
 <title></title>
 <link href = "resources/css/header.css" rel="stylesheet">
 <style type="text/css">
-	
+	#header_nav_menu_bar{
+		z-index: 100;
+	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+	
 <script type="text/javascript">
 $(function(){3
 	$('#header_top').offset({top:800, left:1800});
@@ -38,8 +41,15 @@ $(function(){3
 <div id="header_container"> 
 <div id = "header_non_login">
 	<ul>
+	 	<c:choose>
+	 	<c:when test="${sessionScope.login }">
+	 	<a href="loginoutView.do">로그아웃</a>
+	 	</c:when>
+	 	<c:otherwise>
 		<a href="loginView.do"><li>로그인</li></a>
-		<a href="registerView.do"><li>회원가입</li></a>	
+		<a href="registerView.do"><li>회원가입</li></a>
+		</c:otherwise>
+		</c:choose>	
 	</ul>
 </div>
 <div id="header_main">
