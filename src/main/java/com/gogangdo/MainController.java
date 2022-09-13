@@ -70,8 +70,17 @@ public class MainController {
  		
 		if(dto != null) {
 			session.setAttribute("login", true);
+			//session.setAttribute("id", dto.getId());
+			//session.setAttribute("pw", dto.getPw());
+			
 			session.setAttribute("id", dto.getId());
-			session.setAttribute("pw", dto.getPw());
+	        session.setAttribute("pw", dto.getPw());
+	        session.setAttribute("user_no", dto.getUser_grade());
+	        session.setAttribute("user_name", dto.getUser_name());
+	        session.setAttribute("tel", dto.getTel());
+	        session.setAttribute("address", dto.getAddress());
+	        session.setAttribute("email", dto.getEmail());
+			
 			return "redirect:/";
 		}else {
 			session.setAttribute("login", false);
@@ -102,8 +111,8 @@ public class MainController {
 		return "register3";
 	}
 	@RequestMapping("/productList.do")
-	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int a) {
-		List<ProductDTO> list = productService.selectProductList(pageNo,a);
+	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int category_no) {
+		List<ProductDTO> list = productService.selectProductList(pageNo, category_no);
 		model.addAttribute("list", list);
 		
 		int count = productService.selectProductCount();
@@ -112,6 +121,17 @@ public class MainController {
 		model.addAttribute("count",count);
 		return "product_list";
 	}
+	@RequestMapping("/productSubList.do")
+	public String productSubList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int sub_category_no) {
+		List<ProductDTO> sub_list = productService.selectProductSubList(pageNo, sub_category_no);
+		model.addAttribute("list", sub_list);
+		
+		int count = productService.selectProductCount();
+		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+		model.addAttribute("pagging", vo);
+		return "product_list";
+    }
+    
 	@RequestMapping("/userDelete.do")
 	public String userDelete(String id, HttpSession session) {
 		System.out.println(id);
@@ -172,6 +192,7 @@ public class MainController {
 	}
 	@RequestMapping("/purchase.do")
 	public String purchase() {
+		//ProductDTO dto = int product_no, int ea
 		return "purchase";
 	}
 	@RequestMapping("/productRegisterView.do")

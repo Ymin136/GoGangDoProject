@@ -89,7 +89,7 @@
         <section id="product_list">
             <article>
             	<c:forEach var="dto" items="${requestScope.list }">
-                	<a href="productDetail.do">
+                	<a href="productDetail.do?product_no=${dto.product_no }">
                     	<div id="product">
                         	<img alt="" src="imageLoad.do?fno=${dto.img_no }">
                         	<p>상품명 ${dto.product_name}</p>

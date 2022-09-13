@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,10 +53,11 @@
             font-size: 14px;
             background-color: white;
             border: none;
+            text-decoration: underline;
         }
         #cart a{
         	text-decoration: none;
-        	color: black;
+        	color: gray;
         }
         .total{
             width: 1200px;
@@ -125,6 +127,12 @@ $(function(){
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.login == null || sessionScope.login == false  }">
+	<script>
+		alert("로그인을 하셔야 이용할수 있습니다.");
+		location.href="loginView.do";
+	</script>
+</c:if>
 <jsp:include page="include/header.jsp"></jsp:include>
 	<div class="main_container">
         <div class="sub_header">
@@ -183,15 +191,15 @@ $(function(){
             <table id="buyer_info">
                 <tr style="height:50px">
                     <td>주문하시는 분</td>
-                    <td><input type="text" name="buyer"></td>
+                    <td><input type="text" name="buyer" value="${sessionScope.user_name }"></td>
                 </tr>
                 <tr>
                     <td>전화번호</td>
-                    <td><input type="text" name="tel"></td>
+                    <td><input type="text" name="tel" value="${sessionScope.tel }"></td>
                 </tr>
                 <tr style="height:60px">
                     <td>이메일</td>
-                    <td><input type="text" name="e-mail">              
+                    <td><input type="text" name="e-mail" value="${sessionScope.email }">              
                         <select name="mail" id="email">
                             <option value="naver.com">naver.com</option>
                             <option value="gmail.com">gmail.com</option>
@@ -205,10 +213,8 @@ $(function(){
                 <tr>
                     <td>배송지 확인</td>
                     <td>
-                        <input type="radio" name="address">기본배송지
-                        <input type="radio" name="address">최근배송지
-                        <input type="radio" name="address" checked>직접입력
-                        <input type="radio" name="address">주문자정보와 동일
+                        <input type="radio" name="address" checked>기본배송지
+                        <input type="radio" name="address">직접입력
                     </td>
                 </tr>
                 <tr style="height:70px">
@@ -216,7 +222,7 @@ $(function(){
                     <td>
                         <input type="text" readonly id="road_address" name="road_address">
                         <button id="search_address" name="search_address">우편번호 검색</button><br>
-                        <input type="text" readonly id="detail_address" name="detail_address">
+                        <input type="text" readonly id="detail_address" name="detail_address" value="${sessionScope.address }">
                     </td>
                 </tr>
                 <tr>

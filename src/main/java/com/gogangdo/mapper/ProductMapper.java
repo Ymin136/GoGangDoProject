@@ -1,6 +1,7 @@
 package com.gogangdo.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -24,13 +25,7 @@ public interface ProductMapper {
 	FileDTO selectImageFile(int fno);
 
 
-	List<ProductDTO> selectProductListRecent(int pageNo);
-
-
-	List<ProductDTO> selectProductListLow(int pageNo);
-
-
-	List<ProductDTO> selectProductListHigh(int pageNo);
+	List<ProductDTO> selectProductList(int pageNo, int category_no);
 
 	//JYM
 	int selectProductNo();
@@ -42,5 +37,10 @@ public interface ProductMapper {
 	FileDTO selectThumbnailDTO(int product_no);
 	FileDTO selectimageDTO(int product_no);
 	List<ProductDTO> selectReviewList(int pageNo, int product_no);
+
+
+	List<ProductDTO> selectProductSubList(Map<Object, Object> map);
+
+
 
 }
