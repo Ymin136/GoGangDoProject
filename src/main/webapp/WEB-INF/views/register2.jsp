@@ -55,8 +55,6 @@
             <dd class="input-email">
               <p class="flex-row">
                 <input type="text" name="email">
-                <select>
-                </select>
               </p>
             </dd>
           </dl>
