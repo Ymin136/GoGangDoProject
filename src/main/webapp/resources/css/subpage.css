@@ -1,0 +1,757 @@
+@charset "UTF-8";
+.sub-banner {
+  height: 254px;
+  background: #fab005;
+  background-size: cover;
+}
+
+i .sub-banner-text {
+  display: inline-block;
+  margin-top: 96px;
+}
+
+.process-top-text {
+  margin: 0 24px;
+}
+
+.sub-banner-process {
+  margin: 0 auto;
+  padding-top: 27px;
+  width: 796px;
+  height: 255px;
+  background-color: #fab005;
+}
+
+.sub-banner-process .process-order {
+  margin: 25px 0 0;
+}
+
+.sub-contents {
+  padding-top: 65px;
+  padding-bottom: 120px;
+}
+.sub-contents .inner {
+  display: flex;
+}
+.sub-contents .inner.memberjoin{
+  width:996px;
+  flex-direction: column
+}
+
+.lnb nav {
+  width: 282px;
+}
+.lnb nav h2 {
+  padding-bottom: 25px;
+  border-bottom: 1px solid #eaeaea;
+  font-size: 32px;
+  font-weight: bold;
+  color: #2b2b2b;
+}
+.lnb nav ul li {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.lnb nav ul li a {
+  color: #2b2b2b;
+}
+.lnb nav ul li.active a {
+  color: #fa7905;
+}
+
+.sub-contents-view {
+  width: 100%;
+  margin-left: 23px;
+}
+.sub-contents-view h3 {
+  margin-bottom: 30px;
+  height: 58px;
+  font-size: 24px;
+  color: #2b2b2b;
+  border-bottom: 1px solid #eaeaea;
+}
+.sub-contents-view.sitemap {
+  margin-left: 0;
+}
+.sub-contents-view.sitemap h3 {
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  color: #2b2b2b;
+}
+.sub-contents-view.sitemap .map {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 24px;
+}
+.sub-contents-view.sitemap .map .cnt .tit {
+  padding: 13px 0;
+  border: 1px solid #fab005;
+  text-align: center;
+  font-size: 17px;
+  color: #fd9f27;
+  border-radius: 5px;
+}
+.sub-contents-view.sitemap .map .cnt ul {
+  margin-top: 10px;
+  min-height: 222px;
+  border: 1px solid #eaeaea;
+  padding: 14px;
+  border-radius: 5px;
+}
+.sub-contents-view.sitemap .map .cnt ul li {
+  text-indent: -12px;
+  padding-left: 12px;
+  margin-top: 20px;
+}
+.sub-contents-view.sitemap .map .cnt ul li a {
+  color: #2b2b2b;
+}
+.sub-contents-view.sitemap .map .cnt ul li:first-child {
+  margin-top: 0;
+}
+.sub-contents-view.sitemap .map .cnt ul li:before {
+  content: "· ";
+  color: #fd9f27;
+}
+
+.bt_intro {
+  color: #495057;
+}
+.bt_intro .definition {
+  height: 180px;
+  border-radius: 10px;
+  background: url(../images/subpage/bg_about_braintrainer.jpg) no-repeat center;
+  padding: 55px 0 0 44px;
+  color: #fff;
+}
+.bt_intro .definition .title {
+  font-weight: 600;
+  font-size: 17px;
+}
+.bt_intro .definition .desc {
+  line-height: 1.3;
+  margin-top: 15px;
+  font-size: 15px;
+  color: #d0ebff;
+}
+.bt_intro .description {
+  padding: 30px 0;
+  line-height: 1.3;
+  color: #495057;
+}
+.bt_intro .description p {
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+.bt_intro .description p strong {
+  font-weight: 500;
+}
+.bt_intro .description .bt_intro_img {
+  float: right;
+  margin: 20px 0 0 20px;
+}
+.bt_intro .list-type-01 {
+  color: #495057;
+}
+.bt_intro .list-type-01 li {
+  margin-top: 10px;
+}
+.bt_intro .bt_intro_exception {
+  padding: 20px;
+  border: 1px solid #dee2e6;
+}
+.bt_intro .bt_intro_exception .title {
+  color: #212529;
+  font-weight: bold;
+}
+.bt_intro .bt_intro_exception ul {
+  margin-top: 20px;
+}
+.bt_intro .bt_intro_exception ul li {
+  margin-top: 20px;
+  letter-spacing: -1px;
+}
+.bt_intro .bt_intro_exception ul li .sub {
+  padding-left: 20px;
+  padding-top: 9px;
+  color: #339af0;
+}
+
+.about_bt {padding:0 150px;text-align: center;}
+.about_bt h4 span {position: relative;}
+.about_bt h4 span:after{content: "";position:absolute;left:0;bottom:0; width:100%;height:11px;background-color: #ffd43b;z-index:-1;}
+.about_bt p{margin-top: 15px;font-size: 15px;color:#737373;}
+.exam_standard a {
+  text-decoration: underline;
+}
+.exam_standard .explanation {
+  display: flex;
+  margin-bottom: 20px;
+}
+.exam_standard .explanation > div {
+  width: 50%;
+  height: 160px;
+  padding: 20px;
+  margin-left: 15px;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f2f2f2;
+  color: #495057;
+  background: no-repeat 95% 50%;
+}
+.exam_standard .explanation > div.written {
+  background-image: url(../images/subpage/intro_01.png);
+}
+.exam_standard .explanation > div.performance {
+  background-image: url(../images/subpage/intro_02.png);
+}
+.exam_standard .explanation > div .title {
+  color: #fab005;
+  font-size: 20px;
+  padding-bottom: 25px;
+}
+.exam_standard .explanation > div .desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #495057;
+}
+.exam_standard .explanation > div:first-child {
+  margin-left: 0;
+}
+
+.certificate_order li {
+  position: relative;
+  border-bottom: 1px solid #bdbfc1;
+  display: flex;
+  padding: 30px 0;
+}
+.certificate_order li:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -1px;
+  margin-left: -25px;
+  width: 50px;
+  height: 28px;
+  background: url(../images/subpage/ico_arrow_down.png) no-repeat center;
+}
+.certificate_order li:first-child:after {
+  display: none;
+}
+.certificate_order li .step {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  border-right: 1px solid #f1f3f5;
+  text-align: center;
+}
+.certificate_order li .step .txt {
+  color: #eaeaea;
+}
+.certificate_order li .step .num {
+  color: #fcc519;
+  font-size: 50px;
+  font-weight: 800;
+}
+.certificate_order li .desc {
+  margin-left: 24px;
+}
+.certificate_order li .desc .tit {
+  color: #000;
+}
+.certificate_order li .desc .content {
+  line-height: 1.6;
+  margin-top: 20px;
+  color: #495057;
+  font-size: 15px;
+}
+.certificate_order .btn_cetificate {
+  display: block;
+  margin: 40px auto 0;
+  width: 127px;
+  height: 40px;
+  border: 0;
+  color: #fff;
+  background: linear-gradient(90deg, rgb(255, 137, 84) 0%, rgb(252, 197, 25) 100%);
+  border-radius: 10px;
+}
+
+.rtf .institution {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 25px;
+  background-color: #f8f9fa;
+}
+.rtf .institution .ist_box {
+  position: relative;
+  min-height: 154px;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.rtf .institution .ist_box .onoff {
+  height: 25px;
+}
+.rtf .institution .ist_box .onoff span {
+  float: left;
+  padding: 6px 10px;
+  margin-left: 10px;
+  border-radius: 40px;
+  font-size: 14px;
+  color: #fff;
+}
+.rtf .institution .ist_box .onoff span:first-child {
+  margin-left: 0;
+}
+.rtf .institution .ist_box .onoff span.online {
+  background-color: #fcc419;
+}
+.rtf .institution .ist_box .onoff span.offline {
+  background-color: #74c0fc;
+}
+.rtf .institution .ist_box .title {
+  line-height: 1.3;
+  margin-top: 14px;
+  font-size: 23px;
+  font-weight: bold;
+  color: #2b2b2b;
+  letter-spacing: -1px;
+}
+.rtf .institution img {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+.rtf p {
+  color: #495057;
+}
+.rtf .rft-list li {
+  margin-bottom: 14px;
+  color: #495057;
+}
+.rtf .rtf-contact {
+  padding: 24px 20px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+.rtf .rtf-contact strong {
+  font-weight: 500;
+  color: #000;
+}
+.rtf .rtf-contact li {
+  margin-top: 15px;
+  font-size: 14px;
+  text-indent: -10px;
+  padding-left: 10px;
+  line-height: 1.3;
+  color: #495057;
+}
+.rtf .rtf-contact li:first-child {
+  margin-top: 0;
+}
+.rtf .rtf-contact li .dot {
+  color: #fd9f27;
+}
+
+.pass_announce {
+  padding-bottom: 50px;
+}
+.pass_announce .result_box {
+  height: 155px;
+  border: 1px solid #dee2e6;
+  border-radius: 10px;
+  text-align: center;
+  background: url(../images/subpage/final_pass_ribon_lt.png) no-repeat left top, url(../images/subpage/final_pass_ribon_br.png) no-repeat right bottom, url(../images/subpage/final_pass_stuff_01.png) no-repeat 20px bottom;
+}
+.pass_announce .result_box .result {
+  margin-top: 40px;
+  font-size: 20px;
+  color: #fd9f27;
+}
+.pass_announce .result_box .comment {
+  margin-top: 40px;
+  color: #495057;
+}
+
+/* 회원가입 */
+.memberjoin h3{font-size: 36px;font-weight: 700;text-align: center;}
+.memberjoin .agreement{margin-top: 60px;padding:17px;border:1px solid #e9ecef;font-size: 14px;color:#343a40;}
+.memberjoin h4{line-height: 15px;margin-top: 40px; padding-left: 10px; color:#343a40;border-left: 3px solid #fd9f27;font-weight: 700;}
+.memberjoin input{vertical-align: bottom;margin:0 10px 0 0;}
+.memberjoin .agree_chk label {display: inline-block;line-height: 15px;height: 15px;cursor: pointer}
+.agree_box{min-height: 200px;margin-top: 15px; padding:13px 45px 17px 15px; border:1px solid #e9ecef;font-size: 13px;color:#495057;box-sizing: 20px}
+.memberjoin .desc{margin-top: 10px;font-size: 13px;color:#868e96;}
+.memjoin .birth select{min-width: 100px;margin-left: 10px;}
+.memjoin .birth select:first-of-type{margin-left: 0;}
+
+.table_res {margin-top: 15px;}
+.table_res .gender-radio, .table_res .agree-check {flex-direction: row;justify-content: flex-start;align-items: center;}
+.gender-radio label, .agree-check label {line-height: 20px;margin-right: 30px;cursor: pointer}
+.input-tel input {min-width:auto;width:102px;}
+.input-tel input+span{display: inline-block;width:10px;height:40px;line-height:40px;}
+.input-email input{min-width: auto;width:160px;margin-right: 0}
+.input-email input+span {display: inline-block;padding:0 3px;}
+.input-email select{width:160px;margin-left: 2px}
+.input-addr .addr1 input,
+.input-addr .addr2 input {max-width: 510px;}
+.input-addr .zipcode {min-width:auto;width:160px;}
+.input-addr p input {width:100%;margin-top: 10px;}
+.memberjoin input[type=radio],
+.memberjoin input[type=checkbox] {width: 20px;height:20px;margin-right: 5px;vertical-align: middle;}
+.agree-check label{margin-right: 30px;cursor: pointer}
+
+.agree_box .chapter{}
+.agree_box .article{margin-top: 50px;}
+.agree_box .arti_desc{margin-top: 17px;line-height: 1.3;}
+.agree_box .desc p {line-height: 1;margin-top: 20px;}
+.agree_box .desc p:first-child{margin-top: 0;}
+.agree_chk {margin-top: 10px;font-size: 14px;}
+.agree_chk input {margin:0 10px 0 0;}
+.text_warning {margin-top: 30px; font-size: 13px;color:#ff6b6b;}
+h3 + .text_warning {margin-top: 60px}
+.memberjoin .btn_set{margin-top: 60px}
+
+.table_default.memjoin{
+  margin-top: 15px;
+  border: 1px solid #e9ecef;
+}
+.table_default.memjoin th{
+  padding-left: 40px;
+  text-align: left;
+  color:#343a40;
+}
+.table_default.memjoin td{
+  text-align: left;
+  padding:14px 24px;
+}
+
+/* 모바일 가로, 테블릿 세로 (해상도 480px ~ 767px)*/
+@media all and (min-width: 480px) and (max-width: 1023px) {
+  .sub-contents .inner.memberjoin{
+    width:100%;
+  }
+  .sub-banner-process {
+    width: 100%;
+  }
+
+  .sub-contents {
+    margin-top: 30px;
+  }
+
+  .lnb nav {
+    width: 200px;
+  }
+
+  .process-order {
+    margin: 20px 0 0;
+    padding: 0 15px;
+  }
+
+  .sub-contents-view {
+    padding-right: 10px;
+    padding-bottom: 60px;
+  }
+  .sub-contents-view.sitemap .map {
+    gap: 10px;
+  }
+  .sub-contents-view.sitemap .map .cnt ul {
+    padding: 10px;
+  }
+  .sub-contents-view.sitemap .map .cnt ul li a {
+    font-size: 15px;
+  }
+
+  .lnb nav h2 {
+    font-size: 20px;
+    padding-left: 10px;
+  }
+
+  .lnb nav ul li {
+    font-size: 16px;
+    padding-left: 10px;
+  }
+
+  .sub-contents-view h3 {
+    height: 45px;
+    margin-bottom: 20px;
+  }
+
+  .bt_intro .description {
+    padding: 20px 0;
+  }
+
+  .bt_intro .definition {
+    height: 120px;
+    padding: 35px 0 0 30px;
+    background-size: contain;
+  }
+
+  .bt_intro .definition .title {
+    font-size: 13px;
+  }
+
+  .bt_intro .definition .desc {
+    font-size: 11px;
+  }
+
+  .bt_intro .description p {
+    font-size: 14px;
+  }
+
+  .bt_intro .description .bt_intro_img {
+    width: 250px;
+    margin: 50px 0 10px 10px;
+  }
+
+  .exam_standard .explanation > div {
+    height: 130px;
+    background-size: 80px auto;
+  }
+
+  .exam_standard .explanation > div.written {
+    padding: 10px;
+  }
+
+  .exam_standard .explanation > div .title {
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
+
+  .exam_standard .explanation > div .desc {
+    font-size: 12px;
+    letter-spacing: -1px;
+  }
+
+  .exam_standard a {
+    font-size: 14px;
+  }
+
+  .certificate_order li .desc .content p {
+    text-indent: -10px;
+    padding-left: 10px;
+  }
+
+  .rtf .institution .ist_box .title {
+    font-size: 16px;
+  }
+}
+/* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
+@media all and (max-width: 479px) {
+  .sub-contents .inner.memberjoin{
+    width: 100%;
+  }
+  .sub-banner {
+    height: auto;
+  }
+
+  .sub-contents {
+    margin-top: 20px;
+  }
+  .sub-contents .inner {
+    display: block;
+  }
+
+  .lnb nav {
+    width: auto;
+  }
+  .lnb nav h2 {
+    text-align: center;
+    font-size: 25px;
+  }
+  .lnb nav ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .lnb nav ul li {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 15px;
+  }
+
+  .sub-contents-view {
+    margin-left: 0;
+    margin-top: 30px;
+    padding: 0 10px 50px;
+  }
+  .sub-contents-view.sitemap h3 {
+    padding: 10px 0;
+    font-size: 32px;
+  }
+  .sub-contents-view.sitemap .map {
+    grid-template-columns: 1fr 1fr;
+  }
+  .sub-contents-view.sitemap .map .cnt .tit {
+    font-size: 15px;
+  }
+  .sub-contents-view.sitemap .map .cnt ul {
+    min-height: 150px;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .sub-contents-view.sitemap .map .cnt ul li {
+    margin-top: 10px;
+  }
+  .sub-contents-view h3 {
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+    text-align: center;
+  }
+  
+  /* 반응형 table */
+  input[type=text]{max-width: 100%;}
+  .memberjoin input {margin-right: 0;}
+  .memberjoin .btn.type2 {margin-left: 10px;}
+  .input-tel input+span {text-align: center;margin-left: 2px;}
+  .input-email input {max-width:28%;}
+  .input-email select {max-width:34.9%;}
+  
+  .sub-banner-process {
+    width: auto;
+    height: auto;
+    padding-bottom: 8px;
+  }
+
+  .process-top-text {
+    margin: 0 10px;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .process-top-text strong {
+    margin-top: 10px;
+  }
+
+  .process-order {
+    display: block;
+    text-align: center;
+  }
+
+  .process-order li {
+    display: inline-block;
+    width: 22%;
+    margin-bottom: 5px;
+  }
+
+  .process-order li p {
+    letter-spacing: -1.5px;
+    font-size: 12px;
+  }
+
+  .process-order li:after {
+    right: -12px;
+  }
+
+  .table_default th {
+    letter-spacing: -2px;
+    font-size: 13px;
+    padding: 5px;
+  }
+  .table_default td {
+    letter-spacing: -1px;
+    font-size: 13px;
+    padding: 5px;
+  }
+
+  .bt_intro p {
+    font-size: 14px;
+    letter-spacing: -1px;
+  }
+  .bt_intro .definition {
+    height: 160px;
+    background-size: cover;
+    padding: 20px 20px 0 20px;
+  }
+  .bt_intro .description {
+    padding: 15px 0;
+  }
+  .bt_intro .description p {
+    margin-bottom: 15px;
+    font-size: 15px;
+  }
+  .bt_intro .description .bt_intro_img {
+    float: none;
+    margin: 20px 0 0;
+    width: 100%;
+  }
+  .bt_intro .bt_intro_exception {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 14px;
+  }
+  .bt_intro .bt_intro_exception .title {
+    text-indent: -18px;
+    padding-left: 18px;
+  }
+  .bt_intro .bt_intro_exception li {
+    text-indent: -15px;
+    padding-left: 15px;
+  }
+  .bt_intro .bt_intro_exception li .sub {
+    padding-left: 8px !important;
+    text-indent: -8px;
+  }
+
+  .exam_standard a {
+    font-size: 14px;
+  }
+  .exam_standard p {
+    font-size: 14px;
+  }
+  .exam_standard .explanation > div {
+    height: auto;
+    padding: 10px;
+  }
+  .exam_standard .explanation > div .title {
+    font-size: 18px;
+    padding-bottom: 10px;
+  }
+  .exam_standard .explanation > div .desc {
+    font-size: 13px;
+  }
+
+  .certificate_order li {
+    padding: 10px 0;
+  }
+  .certificate_order li .step {
+    padding-right: 10px;
+  }
+  .certificate_order li .desc {
+    padding-top: 20px;
+    margin-left: 10px;
+  }
+  .certificate_order li .desc .content p {
+    text-indent: -10px;
+    padding-left: 10px;
+  }
+
+  .rtf p {
+    padding: 0 10px;
+    line-height: 1.3;
+  }
+  .rtf .institution {
+    display: block;
+    padding: 10px;
+  }
+  .rtf .institution .ist_box {
+    margin-top: 20px;
+  }
+  .rtf .institution .ist_box:first-child {
+    margin-top: 0;
+  }
+  .rtf .institution .ist_box .title {
+    font-size: 18px;
+    letter-spacing: -1.5px;
+  }
+  .rtf .rtf-contact {
+    padding: 12px 10px;
+  }
+
+  .pass_announce .result_box .comment {
+    padding: 0 25px;
+  }
+}
