@@ -69,7 +69,9 @@
 	}
 	#review_container{
 		width:1200px;
-		margin : 20px auto;
+		margin : 40px auto;
+		padding:0px 30px;
+		text-align:left;
 		height: 300px; 
 		border: 1px solid black;
 	}
@@ -145,8 +147,11 @@ $(function(){
 	</table>
 	
 	<img id="Detail"alt="product_sample" src="imageLoad.do?fno=${requestScope.image.img_no}">
+	<hr>
 	<div id="review_container">
-		상품평 테스트
+		<p><h2>상품평</h2></p>
+		<p>동일한 상품에 대해 작성된 상품평으로 판매자는 다를 수 있습니다.<p>
+		<hr>
 	</div>
 	<div id="QnA_container">
 		상품문의 테스트
