@@ -71,20 +71,7 @@
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
-$(function(){
-	$("#lowprice").click(function(){
-		var d = $("#product").serialize();
-		$.ajax({
-			url:"lowPrice.do",
-			data : d,
-			type: "get",
-			success: function(r){
-				$("#product_list").html(r);
-				console.log(asdf);
-			}
-		});
-	});
-});
+
 </script>
 </head>
 <body>
@@ -93,9 +80,9 @@ $(function(){
         <div class="sub_bar">
             <p id="product_count">전체 상품 ${requestScope.count }개</p>
             <div id="sub_menu">
-            	<a href="recent">최신등록순</a>
-            	<a href="lowPrice.do"  id="lowprice">낮은가격순</a>
-            	<a href="highprice">높은가격순</a>
+            	<a href="productList.do?a=0">최신등록순</a>
+            	<a href="productList.do?a=1">낮은가격순</a>
+            	<a href="productList.do?a=2">높은가격순</a>
             </div>
         </div>
         <hr>
@@ -104,7 +91,7 @@ $(function(){
             	<c:forEach var="dto" items="${requestScope.list }">
                 	<a href="productDetail.do">
                     	<div id="product">
-                        	<img alt="" src="img/dog-food.jpg">
+                        	<img alt="" src="imageLoad.do?fno=${dto.img_no }">
                         	<p>상품명 ${dto.product_name}</p>
                         	<h4>${dto.product_price }원</h4>	
                  		</div>

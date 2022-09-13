@@ -1,6 +1,7 @@
 package com.gogangdo;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -10,9 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
@@ -50,8 +50,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("/productList.do")
-	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model) {
-		List<ProductDTO> list = productService.selectProductList(pageNo);
+	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int a) {
+		List<ProductDTO> list = productService.selectProductList(pageNo,a);
 		model.addAttribute("list", list);
 		
 		int count = productService.selectProductCount();
@@ -59,6 +59,28 @@ public class MainController {
 		model.addAttribute("pagging", vo);
 		model.addAttribute("count",count);
 		return "product_list";
+	}
+	@RequestMapping("/imageLoad.do")
+	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
+		String path = productService.selectImageFile(fno).getImg_path();
+		File file = new File(path);
+		
+		response.setHeader("Content-Disposition", "attachement;fileName="+file.getName());
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setContentLength((int)file.length());
+		
+		FileInputStream fis = new FileInputStream(file);
+		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+		byte[] buffer = new byte[1024*1024];
+		
+		while(true) {
+			int size = fis.read(buffer);
+			if(size == - 1) break;
+			bos.write(buffer,0,size);
+			bos.flush();
+		}
+		fis.close();
+		bos.close();
 	}
 	
 	@RequestMapping("/productDetail.do")
@@ -70,7 +92,8 @@ public class MainController {
 		return "mypage";
 	}
 	@RequestMapping("/cartView.do")
-	public String cartView() {
+	public String cartView(Model model) {
+		//List<ProductDTO> list = productService.selectProductBuy();
 		return "cart";
 	}
 	@RequestMapping("/purchase.do")
@@ -94,13 +117,6 @@ public class MainController {
 		} catch (IOException e) {			
 			e.printStackTrace();
 		}
-	}
-	
-	@RequestMapping("/lowPrice.do")
-	public void lowPrice(int product_price, Model model) {
-		List<ProductDTO> list = productService.selectProductLowPrice(product_price);
-		model.addAttribute("list", list);
-		System.out.println("price");
 	}
 	
 }

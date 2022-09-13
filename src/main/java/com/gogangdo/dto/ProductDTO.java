@@ -12,7 +12,7 @@ public class ProductDTO {
 	private int product_sell;
 	private String product_desc;
 	private int sub_category_no;
-	
+	private int img_no;
 	
 	
 	
@@ -20,11 +20,8 @@ public class ProductDTO {
 		super();
 	}
 
-
-
-
 	public ProductDTO(int product_no, int category_no, String product_name, int product_price, int product_stock,
-			int product_sell, String product_desc, int sub_category_no) {
+			int product_sell, String product_desc, int sub_category_no, int img_no) {
 		super();
 		this.product_no = product_no;
 		this.category_no = category_no;
@@ -34,13 +31,33 @@ public class ProductDTO {
 		this.product_sell = product_sell;
 		this.product_desc = product_desc;
 		this.sub_category_no = sub_category_no;
+		this.img_no = img_no;
 	}
+
+
+
+
+
 
 
 
 
 	public int getProduct_no() {
 		return product_no;
+	}
+
+
+
+
+	public int getImg_no() {
+		return img_no;
+	}
+
+
+
+
+	public void setImg_no(int img_no) {
+		this.img_no = img_no;
 	}
 
 
