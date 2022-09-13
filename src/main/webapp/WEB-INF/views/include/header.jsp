@@ -15,7 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
 <script type="text/javascript">
-$(function(){3
+$(function(){
 	$('#header_top').offset({top:800, left:1800});
 	$("#header_nav_menu_bar").hide();
 	$('#menubar').mouseenter(function(){
@@ -39,18 +39,35 @@ $(function(){3
 </head>
 <body>
 <div id="header_container"> 
-<div id = "header_non_login">
-	<ul>
-	 	<c:choose>
-	 	<c:when test="${sessionScope.login }">
-	 	<a href="loginoutView.do">로그아웃</a>
-	 	</c:when>
-	 	<c:otherwise>
-		<a href="loginView.do"><li>로그인</li></a>
-		<a href="registerView.do"><li>회원가입</li></a>
-		</c:otherwise>
-		</c:choose>	
-	</ul>
+<div id = "header_login_container">
+<c:choose>
+	<c:when test="${!sessionScope.login }">
+	<div id = "header_non_login">	
+		<ul>
+		<li><a href="loginView.do">로그인</a></li>
+		<li><a href="registerView.do">회원가입</a></li>
+		</ul>
+	</div>
+	</c:when>
+	<c:when test="${sessionScope.user_no != 0 }">
+	<div id = "header_login">
+		 <ul>
+		 <li>${sessionScope.user_name }님</li>
+		 <li><a href="myPage.do">마이페이지</a></li>	 	
+		 <li><a href="loginoutView.do">로그아웃</a></li>
+		 </ul>
+	</div>		 
+	</c:when>
+	<c:otherwise>
+	<div id = "header_admin">
+		 <ul>
+		 <li>${sessionScope.user_name }님</li>
+		 <li><a href="myPage.do">관리자페이지</a></li>	 	
+		 <li><a href="loginoutView.do">로그아웃</a></li>
+		 </ul>
+	</div>	
+	</c:otherwise>
+</c:choose>	
 </div>
 <div id="header_main">
 	<table>
@@ -73,8 +90,6 @@ $(function(){3
 		<li><a href="productList.do">영양제</a></li>
 		<li><a href="productList.do">위생/배변</a></li>
 		<li><a href="productList.do">미용/목욕</a></li>
-		<li><a href="getInfo.do">장난감</a></li>
-		<li><a href="myPage.do">고양이</a></li>
 	</ul>
 </nav>
 <table id="header_nav_menu_bar">
@@ -108,10 +123,6 @@ $(function(){3
 	<tr><td><a href="cartView.do">장난감</a></td></tr>
 	<tr><td></td></tr><tr><td></td></tr>
 </table>
-<div id="header_top">
-	<img alt="top_arrow" src="resources/img/arrow.jpg" width="40px" height="40px">
-</div>
-
 </div>
 </body>
 </html>
