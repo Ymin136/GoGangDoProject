@@ -2,6 +2,7 @@ package com.gogangdo;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,26 @@ public class MainController {
 	public String loginView() {
 		return "login";
 	}
+	
+	@RequestMapping("/loginView2.do")
+	public String loginView(String id,String pw, HttpSession session) {
+		MemberDTO dto = memberService.login(id, pw);
+ 		
+		if(dto != null) {
+			session.setAttribute("login", true);
+			session.setAttribute("id", dto.getId());
+			session.setAttribute("pw", dto.getPw());
+			return "redirect:/";
+		}else {
+			session.setAttribute("login", false);
+			return "login";
+		}		
+	}
+	@RequestMapping("/loginoutView.do")
+	public String loginoutView(HttpSession session) {
+			session.invalidate();
+		return "redirect:/";		
+	}
 	@RequestMapping("/loginView1.do")
 	public String loginView1() {
 		return "findid";
@@ -55,7 +76,6 @@ public class MainController {
 	public String insertgisterView3(MemberDTO dto) {
 		System.out.println(dto);
 		memberService.insertmember(dto);
-		
 		return "register3";
 	}
 	@RequestMapping("/productList.do")

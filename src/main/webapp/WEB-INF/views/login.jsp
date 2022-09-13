@@ -20,9 +20,9 @@
     <div class="login">
       <div class="tit">LOGIN</div>
 <!--<div class="tit_desc">회원님의 이름과 휴대폰번호를 정확하게 입력하세요.</div>-->
-      <form>
-        <input type="text" class="id" placeholder="아이디"/>
-        <input type="password" class="phone" placeholder="비밀번호"/>
+      <form action="loginView2.do">
+        <input type="text" class="id" name="id" placeholder="아이디"/>
+        <input type="password" class="phone" name="pw" placeholder="비밀번호"/>
             <a href="#" class="first">아이디 저장</a>  
         <button>로그인</button>
         <div class="option">

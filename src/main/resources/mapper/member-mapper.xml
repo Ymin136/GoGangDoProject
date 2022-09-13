@@ -8,4 +8,7 @@
 		insert into SHOP_USER
 		values(#{user_no}, #{user_grade}, #{id}, #{pw}, #{user_name}, #{tel}, #{address}, #{email})
 	</insert>
+	<select id="login" parameterType="map" resultType="member">
+		select * from shop_user where id = #{id} and pw = #{pw}
+	</select>
 </mapper>
