@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,9 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.gogangdo.dto.CartDTO;
+import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.dto.FileDTO;
 import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
+import com.gogangdo.service.CartService;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
@@ -31,12 +35,14 @@ public class MainController {
 	private ProductService productService;
 	private MemberService memberService;
 	private TestService testService;
-	//private OrderService orderService;
-	
-	public MainController(ProductService productService, MemberService memberService, TestService testService) {
+	private OrderService orderService;
+	private CartService cartService;
+
+	public MainController(ProductService productService, MemberService memberService, OrderService orderService, CartService cartService, TestService testService) {
 		this.productService = productService;
 		this.memberService = memberService;
-		//this.orderService = orderservice;
+		this.orderService = orderService;
+		this.cartService = cartService;
 		this.testService = testService;
 	}
 
@@ -119,8 +125,8 @@ public class MainController {
 		return Integer.toString(randomNumber);
 	}
 	@RequestMapping("/productList.do")
-	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int a) {
-		List<ProductDTO> list = productService.selectProductList(pageNo,a);
+	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int category_no) {
+		List<ProductDTO> list = productService.selectProductList(pageNo, category_no);
 		model.addAttribute("list", list);
 		
 		int count = productService.selectProductCount();
@@ -129,6 +135,23 @@ public class MainController {
 		model.addAttribute("count",count);
 		return "product_list";
 	}
+	@RequestMapping("/productSubList.do")
+	public String productSubList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int sub_category_no) {
+		List<ProductDTO> sub_list = productService.selectProductSubList(pageNo, sub_category_no);
+		model.addAttribute("list", sub_list);
+		
+		int count = productService.selectProductCount();
+		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+		model.addAttribute("pagging", vo);
+		model.addAttribute("count",count);
+		return "product_list";
+	}
+//	@RequestMapping("/productSortList.do")
+//	public String productSortList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, int product_price, int sort, Model model) {
+//		List<ProductDTO> sort_list = productService.selectProductSortList(pageNo, product_price, sort);
+//		model.addAttribute("list", sort_list);
+//		return "product_list";
+//	}
 	@RequestMapping("/imageLoad.do")
 	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
 		String path = productService.selectImageFile(fno).getImg_path();
@@ -151,31 +174,66 @@ public class MainController {
 		fis.close();
 		bos.close();
 	}
-		@RequestMapping("/productDetail.do")
-		public String productDetail(int product_no, Model model) {
-			ProductDTO dto = productService.selectproductDTO(product_no);
-			FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
-			FileDTO image = productService.selectimageDTO(product_no);
-			System.out.println(dto.toString());
-			System.out.println(thumbnail.toString());
-			System.out.println(image.toString());
-			model.addAttribute("product", dto);
-			model.addAttribute("thumbnail", thumbnail);
-			model.addAttribute("image", image);
-			return "product_detail";
+	@RequestMapping("/productDetail.do")
+	public String productDetail(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,int product_no, Model model) {
+		try {
+		
+		List<ReviewDTO> list = productService.selectReviewList(pageNo,product_no);
+		ProductDTO dto = productService.selectproductDTO(product_no);
+		int count = productService.selectReviewCount(product_no);
+		
+		PaggingVO vo = new PaggingVO(count, pageNo, 5, 10);
+		
+		model.addAttribute("product", dto);
+		model.addAttribute("list", list);
+		model.addAttribute("pagging", vo);
+		System.out.println(list);
+		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
+		FileDTO image = productService.selectimageDTO(product_no);
+
+		model.addAttribute("thumbnail", thumbnail);			
+		model.addAttribute("image", image);
+		
+		}catch (Exception e) {
+			
 		}
-	
+		return "product_detail";
+	}
+	@RequestMapping("/ReviewList.do")
+	public ResponseEntity<List<ReviewDTO>> 
+							ReviewList(int pageNo, int product_no){
+		System.out.println("pageNo : "+pageNo);
+		System.out.println("product_no : "+product_no);
+		
+		
+		List<ReviewDTO> list = productService.selectReviewList(pageNo,product_no);
+		System.out.println(list.get(0));
+		
+		return ResponseEntity.ok(list);
+	}
 	@RequestMapping("/myPage.do")
 	public String myPage() {
 		return "mypage";
 	}
+	
 	@RequestMapping("/cartView.do")
-	public String cartView(Model model) {
-		//List<ProductDTO> list = productService.selectProductBuy();
+	public String cartView(Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		CartDTO dto = cartService.selectCartView(id);
+		int count = cartService.selectCartCount();
+		model.addAttribute("cart", dto);
+		model.addAttribute("cart_count", count);
 		return "cart";
 	}
+	@RequestMapping("/cartDelete.do")
+	public String cartDelete(int product_no, String id) {
+		cartService.cartDelete(product_no);
+		return "redirect:/cartView.do?id="+id;
+	}
+	
 	@RequestMapping("/purchase.do")
 	public String purchase() {
+		//ProductDTO dto = int product_no, int ea
 		return "purchase";
 	}
 	@RequestMapping("/productRegisterView.do")

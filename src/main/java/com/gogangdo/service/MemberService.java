@@ -27,9 +27,14 @@ public class MemberService {
 		membermap.put("pw", passwd);
 		return memberMapper.login(membermap);
 	}
-
 	public String selectId(String id) {
 		return memberMapper.selectid(id);
+   }
+	public int userUpdate(MemberDTO dto) {
+		return memberMapper.userUpdate(dto);
+	}
+	public int userDelete(String id) {
+		return memberMapper.userDelete(id);
 	}
 
 	

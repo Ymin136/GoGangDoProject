@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,19 +70,48 @@
 	}
 	#review_container{
 		width:1200px;
-		margin : 20px auto;
+		margin : 40px auto;
+		text-align:left;
 		height: 300px; 
-		border: 1px solid black;
+	}
+	#review_container p, h2{
+		margin-left:30px;
+	}
+	#review_container table{
+		width:1200px;
+		text-align: center;
+		border-collapse: collapse;
+		
+	}
+	#review_container td:not(#content){
+		border-bottom: 1px solid gray;
+		padding:10px 20px;
+		vertical-align: center;
+	}
+	#review_container #content{
+		width:60%;
+		text-align: left;
+		padding-left:150px;
+		border-bottom: 1px solid gray;
+	}
+	#review_container a{
+		margin:0px 10px;
+		text-decoration: none;
+		color : black;
 	}
 	#QnA_container{
 		width:1200px;
-		margin : 20px auto;
+		margin : 80px auto;
 		height: 300px; 
-		border: 1px solid black;
+		text-align: left;
+	}
+	#QnA_container p, h2{
+		margin-left:30px;
 	}
 	#introduce_container{
 		width:1200px;
-		margin : 40px auto;
+		margin : 20px auto;
+		padding : 20px 0px;
 		border-top : 1px solid black;
 	}
 	#introduce_container h3{
@@ -103,6 +133,31 @@ $(function(){
 		var price = ${requestScope.product.product_price };
 		var total_price = ea*price;
 		$('#total').text(total_price+" 원");
+	});
+	$('#review_container a').click(function(){
+		var pageNo = $(this).text();
+		var product_no = ${requestScope.product.product_no };
+		$.ajax({
+			url:"ReviewList.do",
+			data : "product_no="+product_no+"&pageNo="+pageNo,
+			dataType : "json",
+			success:function(r){
+				var tag = "";
+				for(i=0;i<r.length;i++){
+					tag += "<tr>";
+					tag += "<td>"+r[i].id+"</td>";
+					tag += "<td id='content'>"+r[i].review_content+"</td>";
+					tag += "<td>"+r[i].review_date+"</td>";
+					tag += "</tr>";
+				}
+				if(r.length<5)
+				for(i = 0; i<5-r.length;i++)
+	   			tag+="<tr><td colspan='3' style='height:20px;'></td></tr>";
+	   			
+				$('#review_list').html(tag);
+			}
+		});
+		return false;
 	});
 });
 </script>
@@ -145,11 +200,46 @@ $(function(){
 	</table>
 	
 	<img id="Detail"alt="product_sample" src="imageLoad.do?fno=${requestScope.image.img_no}">
+	<br>
 	<div id="review_container">
-		상품평 테스트
+		<p><h2>상품평</h2></p>
+		<p>동일한 상품에 대해 작성된 상품평으로 판매자는 다를 수 있습니다.<p>
+		<hr>
+		<table>
+		<tr id="thead">
+			<td>작성자</td>
+			<td style="width:60%;">내용</td>
+			<td>작성일자</td>
+		</tr>
+		<tbody id="review_list">
+		<c:forEach var="review" items="${requestScope.list }">
+	           	<tr>
+	           		<td>${review.id}</td>
+	           		<td id="content">${review.review_content }</td>
+	           		<td>${review.review_date }</td>
+	           	</tr>           	
+        </c:forEach>
+		<c:if test="${requestScope.list.size()<5}">
+   			<c:forEach var = "i" begin="1" end="${5-requestScope.list.size()}">
+   			<tr><td colspan="3" style="height:20px;"></td></tr> 
+   			</c:forEach>
+    	</c:if>
+        </tbody>
+	        <tr>
+	        	<td colspan="3" id = "page_bar" style ="padding:20px 10px; border:none;">
+	        		<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" end="${pagging.endPageOfPageGroup}">
+					<a href ="#"> ${ i}</a>
+				</c:forEach>
+	        	</td>
+    	    </tr>
+        </table>
 	</div>
+	<br>
+	
 	<div id="QnA_container">
-		상품문의 테스트
+		<p><h2>상품문의</h2></p>
+		
+		<hr>
 	</div>
 	<div id="introduce_container">
 		<ul>

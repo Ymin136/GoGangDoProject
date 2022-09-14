@@ -10,46 +10,70 @@
 		insert into shop_product 
 		values(#{product_no},#{category_no},#{product_name},#{product_price},#{product_stock},0,#{product_desc},#{sub_category_no})	
 	</insert>
-	<select id="selectProductListRecent" resultType="product" parameterType="int">
+	<select id="selectProductList" resultType="product" parameterType="int">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
-			where pageNo = #{pageNo}
+			where pageNo = #{pageNo} and category_no = #{category_no}
 	</select>
-	<select id="selectProductListLow" resultType="product" parameterType="int">
+	<select id="selectProductSubList" resultType="product" parameterType="Map">
+		select * from (select ceil(rownum / 20) as pageNo, pv.*
+			from productlist_view pv)
+			where pageNo = #{pageNo} and sub_category_no = #{sub_category_no}
+	</select>
+	
+	<select id="selectProductLowPrice" resultType="product" parameterType="int">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
 			where pageNo = #{pageNo} order by product_price
 	</select>
-	<select id="selectProductListHigh" resultType="product" parameterType="int">
+	<select id="selectProductHighPrice" resultType="product" parameterType="int">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
 			where pageNo = #{pageNo} order by product_price desc
 	</select>
+	
 	<select id="selectProductCount" resultType="int">
 		select count(*) from shop_product 
 	</select>
+	<!-- JYM -->
+	<select id="selectProductNo" resultType="int">
+		select productno_seq.nextval from dual
+	</select>
+	<insert id="registerProduct" parameterType="product">
+		insert into shop_product 
+		values(#{product_no},#{category_no},#{product_name},#{product_price},#{product_stock},0,#{product_desc},#{sub_category_no})	
+	</insert>
 	<select id="selectImageFile" parameterType = "int" resultType="file">
 	select * from shop_img where img_no = #{fno}
 </select>
 
 <select id="selectImageNo" resultType="int">
 		select imageno_seq.nextval from dual
-</select>
-<select id="selectproductDTO" resultType="product" parameterType="int">
-	select * from product_view where product_no = #{product_no}
-</select>
-<insert id="insertthumbnail" parameterType="file">
-	insert into shop_img
-	values(#{img_no},#{img_path},1,#{product_no})
-</insert>
-<insert id="insertproduct_img" parameterType="file">
-	insert into shop_img
-	values(#{img_no},#{img_path},0,#{product_no})
-</insert>
-<select id="selectThumbnailDTO" parameterType="int" resultType="file">
-	select * from shop_img where product_no = #{product_no} and thumbnail = 1
-</select>
-<select id="selectimageDTO" parameterType="int" resultType="file">
-	select * from shop_img where product_no = #{product_no} and thumbnail = 0
-</select>
+
+	</select>
+	<select id="selectproductDTO" resultType="product" parameterType="int">
+		select * from product_view where product_no = #{product_no}
+	</select>
+	<insert id="insertthumbnail" parameterType="file">
+		insert into shop_img
+		values(#{img_no},#{img_path},1,#{product_no})
+	</insert>
+	<insert id="insertproduct_img" parameterType="file">
+		insert into shop_img
+		values(#{img_no},#{img_path},0,#{product_no})
+	</insert>
+	<select id="selectThumbnailDTO" parameterType="int" resultType="file">
+		select * from shop_img where product_no = #{product_no} and thumbnail = 1
+	</select>
+	<select id="selectimageDTO" parameterType="int" resultType="file">
+		select * from shop_img where product_no = #{product_no} and thumbnail = 0
+	</select>
+	<select id="selectReviewList" resultType="review" parameterType="map">
+		select * from (select ceil(rownum / 5) as pageNo, rv.*
+		from review_view rv where product_no = #{product_no})
+        where pageno=#{pageNo}
+	</select>
+	<select id="selectReviewCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) FROM REVIEW_VIEW WHERE PRODUCT_NO=#{pno} 
+	</select>
 </mapper>

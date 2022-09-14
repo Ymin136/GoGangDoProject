@@ -12,7 +12,9 @@ public interface MemberMapper {
 	int insertmember(MemberDTO dto);
 
 	MemberDTO login(Map<String, Object> membermap);
-
 	String selectid(String id);
+	int userUpdate(MemberDTO dto);
+
+	int userDelete(String id);
 
 }

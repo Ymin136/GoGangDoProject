@@ -80,16 +80,15 @@
         <div class="sub_bar">
             <p id="product_count">전체 상품 ${requestScope.count }개</p>
             <div id="sub_menu">
-            	<a href="productList.do?a=0">최신등록순</a>
-            	<a href="productList.do?a=1">낮은가격순</a>
-            	<a href="productList.do?a=2">높은가격순</a>
+            	<a href="productSortList.do?sort=0">낮은가격순</a>
+            	<a href="productSortList.do?sort=1">높은가격순</a>
             </div>
         </div>
         <hr>
         <section id="product_list">
             <article>
             	<c:forEach var="dto" items="${requestScope.list }">
-                	<a href="productDetail.do">
+                	<a href="productDetail.do?product_no=${dto.product_no }">
                     	<div id="product">
                         	<img alt="" src="imageLoad.do?fno=${dto.img_no }">
                         	<p>상품명 ${dto.product_name}</p>
