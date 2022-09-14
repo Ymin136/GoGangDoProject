@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.dto.FileDTO;
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.mapper.ProductMapper;
@@ -64,7 +65,15 @@ public class ProductService {
 		map.put("sub_category_no", sub_category_no);
 		return mapper.selectProductSubList(map);
    }
-	public List<ProductDTO> selectReviewList(int pageNo, int product_no) {
-		return mapper.selectReviewList(pageNo, product_no);
+	public List<ReviewDTO> selectReviewList(int pageNo, int product_no) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pageNo", pageNo);
+		map.put("product_no", product_no);
+		return mapper.selectReviewList(map);
+	}
+
+	public int selectReviewCount(int product_no) {		
+		int count = mapper.selectReviewCount(product_no);
+		return count;
 	}
 }
