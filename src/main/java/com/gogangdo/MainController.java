@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
+import com.gogangdo.dto.CartDTO;
 import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.dto.FileDTO;
 import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
+import com.gogangdo.service.CartService;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
@@ -30,11 +31,12 @@ public class MainController {
 	private ProductService productService;
 	private MemberService memberService;
 	private OrderService orderService;
-	
-	public MainController(ProductService productService, MemberService memberService, OrderService orderservice) {
+	private CartService cartService;
+	public MainController(ProductService productService, MemberService memberService, OrderService orderservice, CartService cartService) {
 		this.productService = productService;
 		this.memberService = memberService;
 		this.orderService = orderservice;
+		this.cartService = cartService;
 	}
 
 	@RequestMapping("/")
@@ -144,6 +146,12 @@ public class MainController {
 		session.invalidate();
 		return "redirect:/main.do";
 	}
+//	@RequestMapping("/productSortList.do")
+//	public String productSortList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, int product_price, int sort, Model model) {
+//		List<ProductDTO> sort_list = productService.selectProductSortList(pageNo, product_price, sort);
+//		model.addAttribute("list", sort_list);
+//		return "product_list";
+//	}
 	@RequestMapping("/imageLoad.do")
 	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
 		String path = productService.selectImageFile(fno).getImg_path();
@@ -207,10 +215,18 @@ public class MainController {
 	public String myPage() {
 		return "mypage";
 	}
-	@RequestMapping("/cartView.do")
-	public String cartView(Model model) {
-		//List<ProductDTO> list = productService.selectProductBuy();
+	public String cartView(Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		CartDTO dto = cartService.selectCartView(id);
+		int count = cartService.selectCartCount();
+		model.addAttribute("cart", dto);
+		model.addAttribute("cart_count", count);
 		return "cart";
+	}
+	@RequestMapping("/cartDelete.do")
+	public String cartDelete(int product_no, String id) {
+		cartService.cartDelete(product_no);
+		return "redirect:/cartView.do?id="+id;
 	}
 	@RequestMapping("/purchase.do")
 	public String purchase() {
