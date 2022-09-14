@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -21,18 +23,21 @@ import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
+import com.gogangdo.service.TestService;
 import com.gogangdo.vo.PaggingVO;
 
 @Controller
 public class MainController {
 	private ProductService productService;
 	private MemberService memberService;
+	private TestService testService;
 	//private OrderService orderService;
 	
-	public MainController(ProductService productService, MemberService memberService) {
+	public MainController(ProductService productService, MemberService memberService, TestService testService) {
 		this.productService = productService;
 		this.memberService = memberService;
 		//this.orderService = orderservice;
+		this.testService = testService;
 	}
 
 	@RequestMapping("/")
@@ -105,6 +110,13 @@ public class MainController {
 		} else {
 			response.getWriter().write(String.valueOf(1));
 		}
+	}
+	@RequestMapping
+	@ResponseBody
+	public String sendSNS(@RequestParam("phone") String userPhoneNumber, HttpServletRequest HttpServletRequest) {
+		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);
+		testService.certifiedPhoneNumber(userPhoneNumber,randomNumber, HttpServletRequest);
+		return Integer.toString(randomNumber);
 	}
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int a) {
