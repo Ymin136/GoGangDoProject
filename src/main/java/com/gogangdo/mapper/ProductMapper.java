@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.dto.FileDTO;
 import com.gogangdo.dto.ProductDTO;
 
@@ -36,10 +37,11 @@ public interface ProductMapper {
 	ProductDTO selectproductDTO(int product_no);
 	FileDTO selectThumbnailDTO(int product_no);
 	FileDTO selectimageDTO(int product_no);
-	List<ProductDTO> selectReviewList(int pageNo, int product_no);
-
+	List<ReviewDTO> selectReviewList(Map<String, Integer> map);
 
 	List<ProductDTO> selectProductSubList(Map<Object, Object> map);
+
+	int selectReviewCount(int product_no);
 
 
 
