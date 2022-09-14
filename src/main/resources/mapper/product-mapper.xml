@@ -15,12 +15,12 @@
 			where pageNo = #{pageNo} and sub_category_no = #{sub_category_no}
 	</select>
 	
-	<select id="selectProductListLow" resultType="product" parameterType="int">
+	<select id="selectProductLowPrice" resultType="product" parameterType="int">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
 			where pageNo = #{pageNo} order by product_price
 	</select>
-	<select id="selectProductListHigh" resultType="product" parameterType="int">
+	<select id="selectProductHighPrice" resultType="product" parameterType="int">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
 			where pageNo = #{pageNo} order by product_price desc

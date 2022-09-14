@@ -25,8 +25,18 @@ public class ProductService {
 	public int selectProductCount() {
 		return mapper.selectProductCount();
 	}
-	
-	
+	public List<ProductDTO> selectProductSubList(int pageNo, int sub_category_no) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("pageNo", pageNo);
+		map.put("sub_category_no", sub_category_no);
+		return mapper.selectProductSubList(map);
+   }
+//	public List<ProductDTO> selectProductSortList(int pageNo, int product_price, int sort) {
+//	if(sort == 0)
+//		return mapper.selectProductLowPrice(pageNo, product_price);
+//	else
+//		return mapper.selectProductHighPrice(pageNo, product_price);
+//}
 	
 	//jym
 	public List<ProductDTO> selectProductLowPrice(int product_price) {
@@ -59,12 +69,6 @@ public class ProductService {
 	public FileDTO selectimageDTO(int product_no) {
 		return mapper.selectimageDTO(product_no);
 	}
-	public List<ProductDTO> selectProductSubList(int pageNo, int sub_category_no) {
-		Map<Object, Object> map = new HashMap<Object, Object>();
-		map.put("pageNo", pageNo);
-		map.put("sub_category_no", sub_category_no);
-		return mapper.selectProductSubList(map);
-   }
 	public List<ReviewDTO> selectReviewList(int pageNo, int product_no) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("pageNo", pageNo);
