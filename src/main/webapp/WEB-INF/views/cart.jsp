@@ -82,6 +82,10 @@
             color: white;
             border: none;
         }
+        #delete_choose a{
+        	text-decoration: none;
+        	color: white;
+        }
         #continue{
             text-align: center;
             margin: 20px;
@@ -119,6 +123,17 @@ $(function() {
     $("#delete_choose").click(function(){
     	
     });
+    $('#ea').change(function(){
+		var ea = $('#ea').val();
+		var price = ${requestScope.cart.product_price };
+		var total_price = ea*price;
+		$('#total').text(total_price+" 원");
+	});
+    //var cart_price = 0;
+    //var deliv_price = 3000;
+    //$('#cart_price').change(function(){
+    	//cart_price = parseInt(${requestScope.cart.product_price}) + deliv_price;
+    //});
  });
 </script>
 </head>
@@ -152,25 +167,19 @@ $(function() {
             </thead>
             <tr style="height:70px">
                 <td><input type="checkbox" name="check"></td>
-                <td><img alt="" src="img/dog-food.jpg">상품명OOOO</td>
-                <td>1개</td>
-                <td>4,000원</td>
-                <td>4,000원</td>
-                <td rowspan="2">3,000원</td>
-            </tr>
-            <tr style="height:70px">
-                <td><input type="checkbox" name="check"></td>
-                <td><img alt="" src="img/dog-food.jpg">상품명OOOO</td>
-                <td>1개</td>
-                <td>4,000원</td>
-                <td>4,000원</td>
-                <!--<td>3,000원</td>-->
+                <td><img alt="" src="imageLoad.do?fno=${requestScope.cart.img_no }">${requestScope.cart.product_name }</td>
+                <td id="ea">${requestScope.cart.product_ea }</td>
+                <td>${requestScope.cart.product_price }</td>
+                <td id="total">${requestScope.cart.product_price }</td>
+                <td rowspan="${requestScope.cart_count }">3,000원</td>
             </tr>
         </table>
         <form action="#" class="cart_total">
             <div id="choose">
                 <button id="choose_all">전체 선택</button>
-                <button id="delete_choose">선택 상품 삭제</button>
+                <button id="delete_choose">
+                	<a href="cartDelete.do?product_no=${requestScope.cart.product_no }&id=${requestScope.cart.id}">선택 상품 삭제</a>
+                </button>
             </div>
                 <table class="total">
                     <tr>
@@ -183,9 +192,9 @@ $(function() {
                     <tr >
                         <td></td>
                         <td></td>
-                        <td>4,000원</td>
+                        <td>${requestScope.cart.product_price }원</td>
                         <td> 3,000원</td>
-                        <td>7,000원</td>
+                        <td id="cart_price">7,000원</td>
                     </tr>
                 </table>   
             <div id="continue">
