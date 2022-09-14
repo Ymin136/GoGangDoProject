@@ -79,14 +79,14 @@
 				<td rowspan='2' class="j">*이메일</td>
 				<td >
 					<form>
-  						<input type="text" id="pname" class="mail" name="email" value="jun@naver.com">
+  						<input type="text" id="pname" class="mail" name="email" value="jun@">
 					<select id="pname" mutiple>
 					<option value="">직접입력</option>
 					<option value="naver.com">naver.com</option>
-					<option value="naver.com">nate.com</option>
-					<option value="naver.com">gmail.com</option>
-					<option value="naver.com">hanmail.com</option>
-					<option value="naver.com" >outlook.com</option>
+					<option value="nate.com">nate.com</option>
+					<option value="gmail.com">gmail.com</option>
+					<option value="hanmail.com.com">hanmail.com</option>
+					<option value="outlook.com">outlook.com</option>
 					</select>
 					</form>
 				</td>
@@ -113,7 +113,7 @@
 			</tr>
 			<tr class="adress">
 				<td rowspan='3' class="j">*주소</td>
-				<td><input type="text" id="pname" name="address"><button id="bu" style='cursor:pointer;'>우편번호검색</button></td>
+				<td><input type="text" id="pname" name="address"><button type="button" id="bu" onclick="location.href='https://www.epost.go.kr/search.RetrieveIntegrationNewZipCdList.comm' " style='cursor:pointer;'>우편번호검색</button></td>
 				<td></td>
 			</tr>
 			<tr>

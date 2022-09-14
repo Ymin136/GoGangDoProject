@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gogangdo.dto.CartDTO;
+import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.dto.FileDTO;
 import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
@@ -150,20 +152,43 @@ public class MainController {
 		fis.close();
 		bos.close();
 	}
-		@RequestMapping("/productDetail.do")
-		public String productDetail(int product_no, Model model) {
-			ProductDTO dto = productService.selectproductDTO(product_no);
-			FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
-			FileDTO image = productService.selectimageDTO(product_no);
-			System.out.println(dto.toString());
-			System.out.println(thumbnail.toString());
-			System.out.println(image.toString());
-			model.addAttribute("product", dto);
-			model.addAttribute("thumbnail", thumbnail);
-			model.addAttribute("image", image);
-			return "product_detail";
+	@RequestMapping("/productDetail.do")
+	public String productDetail(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,int product_no, Model model) {
+		try {
+		
+		List<ReviewDTO> list = productService.selectReviewList(pageNo,product_no);
+		ProductDTO dto = productService.selectproductDTO(product_no);
+		int count = productService.selectReviewCount(product_no);
+		
+		PaggingVO vo = new PaggingVO(count, pageNo, 5, 10);
+		
+		model.addAttribute("product", dto);
+		model.addAttribute("list", list);
+		model.addAttribute("pagging", vo);
+		System.out.println(list);
+		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
+		FileDTO image = productService.selectimageDTO(product_no);
+
+		model.addAttribute("thumbnail", thumbnail);			
+		model.addAttribute("image", image);
+		
+		}catch (Exception e) {
+			
 		}
-	
+		return "product_detail";
+	}
+	@RequestMapping("/ReviewList.do")
+	public ResponseEntity<List<ReviewDTO>> 
+							ReviewList(int pageNo, int product_no){
+		System.out.println("pageNo : "+pageNo);
+		System.out.println("product_no : "+product_no);
+		
+		
+		List<ReviewDTO> list = productService.selectReviewList(pageNo,product_no);
+		System.out.println(list.get(0));
+		
+		return ResponseEntity.ok(list);
+	}
 	@RequestMapping("/myPage.do")
 	public String myPage() {
 		return "mypage";
