@@ -88,8 +88,8 @@ $(function(){
 		<li><a href="productList.do?category_no=0">사료/분유</a></li>
 		<li><a href="productList.do?category_no=1">간식</a></li>	
 		<li><a href="productList.do?category_no=2">영양제</a></li>
-		<li><a href="productList.do">위생/배변</a></li>
-		<li><a href="productList.do">미용/목욕</a></li>
+		<li><a href="getInfo.do">위생/배변</a></li>
+		<li><a href="myPage.do">미용/목욕</a></li>
 	</ul>
 </nav>
 <table id="header_nav_menu_bar">
