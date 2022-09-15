@@ -3,6 +3,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -215,11 +216,26 @@ public class MainController {
 	public String myPage() {
 		return "mypage";
 	}
+	@RequestMapping("/cartView.do")
 	public String cartView(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
-		CartDTO dto = cartService.selectCartView(id);
+		List<CartDTO> list = cartService.selectCartView(id);
+		model.addAttribute("cart", list);
+		
+		int all_price = 0;
+		int total_price = 0;
+		for(int i=0; i<list.size();i++) {
+			CartDTO dto = list.get(i);
+			total_price = dto.getProduct_price() * dto.getOrder_ea();
+			all_price = all_price + total_price;
+		}
+		//int total_price = cartService.selectTotalPrice();
+		model.addAttribute("total_price", total_price);
+		model.addAttribute("all_price", all_price);
+		int deliv = 3000;
+		model.addAttribute("cart_price", all_price + deliv);
+		
 		int count = cartService.selectCartCount();
-		model.addAttribute("cart", dto);
 		model.addAttribute("cart_count", count);
 		return "cart";
 	}

@@ -2,6 +2,7 @@ package com.gogangdo.service;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Service;
 
 import com.gogangdo.dto.CartDTO;
@@ -15,7 +16,7 @@ public class CartService {
 		this.mapper = mapper;
 	}
 
-	public CartDTO selectCartView(String id) {
+	public List<CartDTO> selectCartView(String id) {
 		return mapper.selectCartView(id);
 	}
 
@@ -26,6 +27,10 @@ public class CartService {
 	public int cartDelete(int product_no) {
 		return mapper.cartDelete(product_no);
 	}
+
+//	public int selectTotalPrice() {
+//		return mapper.selectTotalPrice();
+//	}
 
 
 

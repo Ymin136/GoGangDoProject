@@ -106,34 +106,45 @@
 <script type="text/javascript">
 $(function() {
     $("#check_all").click(function() {
-       if($("#check_all").is(":checked")) $("input[name=check]").prop("checked", true);
-       else $("input[name=check]").prop("checked", false);
+       if($("#check_all").is(":checked")) 
+    	   $("input[name=check]").prop("checked", true);
+       else 
+    	   $("input[name=check]").prop("checked", false);
     });
     $("input[name=check]").click(function() {
        var total = $("input[name=check]").length;
        var checked = $("input[name=check]:checked").length;
        
-       if(total != checked) $("#check_all").prop("checked", false);
-       else $("#check_all").prop("checked", true); 
+       if(total != checked) 
+    	   $("#check_all").prop("checked", false);
+       else 
+    	   $("#check_all").prop("checked", true); 
     });
     $("#choose_all").click(function(){
     	$("input[type=checkbox]").prop("checked",true);
     });
-    
     $("#delete_choose").click(function(){
-    	
+    	var check_product = $(".check").prop("checked");
+    	$.ajax({
+    		url: "cartDelete.do",
+    		data: check_product,
+    		type: "post",
+    		success: function(r){
+    			var tag = "";
+    			for(int i=0; i<r.length; i++){
+    				tag += '<tr>';
+    				tag += '<td><input type="checkbox" name="check" class="check"></td>';
+    				tag += '<td><img alt="#" src="imageLoad.do?fno="'+r[i].img_no+'">'+r[i].product_name+'</td>';
+    				tag += '<td id="ea">'+r[i].order_ea+'</td>';
+    				tag += '<td>'+r[i].product_price+'</td>';
+    				tag += '<td id="total_price">'+r[i].total_price+'</td>';
+                    tag += '<td rowspan='+r[i].cart_count+'>3,000원</td>';
+                    tag += '</tr>';
+    			}
+    			$(".cart_product").html(tag);
+    		}
+    	});
     });
-    $('#ea').change(function(){
-		var ea = $('#ea').val();
-		var price = ${requestScope.cart.product_price };
-		var total_price = ea*price;
-		$('#total').text(total_price+" 원");
-	});
-    //var cart_price = 0;
-    //var deliv_price = 3000;
-    //$('#cart_price').change(function(){
-    	//cart_price = parseInt(${requestScope.cart.product_price}) + deliv_price;
-    //});
  });
 </script>
 </head>
@@ -165,21 +176,23 @@ $(function() {
                 <th>합계 금액</th>
                 <th>배송비</th>
             </thead>
-            <tr style="height:70px">
-                <td><input type="checkbox" name="check"></td>
-             <td><img alt="" src="imageLoad.do?fno=${requestScope.cart.img_no }">${requestScope.cart.product_name }</td>
-                <td id="ea">${requestScope.cart.product_ea }</td>
-                <td>${requestScope.cart.product_price }</td>
-                <td id="total">${requestScope.cart.product_price }</td>
-                <td rowspan="${requestScope.cart_count }">3,000원</td>
-            </tr>
+        	<tbody class="cart_product">
+            	<tr style="height:70px">
+            	<c:forEach var="cart" items="${requestScope.cart }">
+                	<td><input type="checkbox" name="check" class="check"></td>
+             		<td><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
+                	<td id="ea">${cart.order_ea }</td>
+                	<td>${cart.product_price }</td>
+                	<td id="total_price">${requestScope.total_price }</td>
+                	<td rowspan="${requestScope.cart_count }">3,000원</td>
+            	</c:forEach>
+            	</tr>
+            </tbody>
         </table>
         <form action="#" class="cart_total">
             <div id="choose">
                 <button id="choose_all">전체 선택</button>
-                <button id="delete_choose">
-                	<a href="cartDelete.do?product_no=${requestScope.cart.product_no }&id=${requestScope.cart.id}">선택 상품 삭제</a>
-                </button>
+                <button id="delete_choose">선택 상품 삭제</button>
             </div>
                 <table class="total">
                     <tr>
@@ -192,9 +205,9 @@ $(function() {
                     <tr >
                         <td></td>
                         <td></td>
-                        <td>${requestScope.cart.product_price }원</td>
-                        <td> 3,000원</td>
-                         <td id="cart_price">7,000원</td>
+                        <td>${requestScope.all_price }원</td>
+                        <td>3,000원</td>
+                        <td id="cart_price">${requestScope.cart_price }원</td>
                     </tr>
                 </table>   
             <div id="continue">

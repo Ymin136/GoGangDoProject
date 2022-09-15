@@ -9,11 +9,13 @@ import com.gogangdo.dto.CartDTO;
 @Mapper
 public interface CartMapper {
 
-	CartDTO selectCartView(String id);
+	List<CartDTO> selectCartView(String id);
 
 	int selectCartCount();
 
 	int cartDelete(int product_no);
+
+//	int selectTotalPrice();
 
 
 }
