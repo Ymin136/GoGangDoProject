@@ -35,8 +35,7 @@
                 <td><img src="resources/img/mpi4.png" alt="#"><br>상품명<br>상품간략설명<br><span style="font-weight: bold;">가격</font></td>
             </div>
         </tr>
-    </table>    
-    
+    </table>        
 <jsp:include page="include/footer.jsp"></jsp:include>
 </script>
 </div>
