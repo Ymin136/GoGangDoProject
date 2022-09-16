@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,10 @@
             color: white;
             border: none;
         }
+         #delete_choose a{
+        	text-decoration: none;
+        	color: white;
+        }
         #continue{
             text-align: center;
             margin: 20px;
@@ -101,27 +106,55 @@
 <script type="text/javascript">
 $(function() {
     $("#check_all").click(function() {
-       if($("#check_all").is(":checked")) $("input[name=check]").prop("checked", true);
-       else $("input[name=check]").prop("checked", false);
+       if($("#check_all").is(":checked")) 
+    	   $("input[name=check]").prop("checked", true);
+       else 
+    	   $("input[name=check]").prop("checked", false);
     });
     $("input[name=check]").click(function() {
        var total = $("input[name=check]").length;
        var checked = $("input[name=check]:checked").length;
        
-       if(total != checked) $("#check_all").prop("checked", false);
-       else $("#check_all").prop("checked", true); 
+       if(total != checked) 
+    	   $("#check_all").prop("checked", false);
+       else 
+    	   $("#check_all").prop("checked", true); 
     });
     $("#choose_all").click(function(){
     	$("input[type=checkbox]").prop("checked",true);
     });
-    
     $("#delete_choose").click(function(){
-    	
+    	var check_product = $(".check").prop("checked");
+    	$.ajax({
+    		url: "cartDelete.do",
+    		data: check_product,
+    		type: "post",
+    		success: function(r){
+    			var tag = "";
+    			for(int i=0; i<r.length; i++){
+    				tag += '<tr>';
+    				tag += '<td><input type="checkbox" name="check" class="check"></td>';
+    				tag += '<td><img alt="#" src="imageLoad.do?fno="'+r[i].img_no+'">'+r[i].product_name+'</td>';
+    				tag += '<td id="ea">'+r[i].order_ea+'</td>';
+    				tag += '<td>'+r[i].product_price+'</td>';
+    				tag += '<td id="total_price">'+r[i].total_price+'</td>';
+                    tag += '<td rowspan='+r[i].cart_count+'>3,000원</td>';
+                    tag += '</tr>';
+    			}
+    			$(".cart_product").html(tag);
+    		}
+    	});
     });
  });
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.login == null || sessionScope.login == false  }">
+	<script>
+		alert("로그인을 하셔야 이용할수 있습니다.");
+		location.href="loginView.do";
+	</script>
+</c:if>
 <jsp:include page="include/header.jsp"></jsp:include>
 	<div class="main_container">
         <div class="sub_header">
@@ -143,22 +176,18 @@ $(function() {
                 <th>합계 금액</th>
                 <th>배송비</th>
             </thead>
-            <tr style="height:70px">
-                <td><input type="checkbox" name="check"></td>
-                <td><img alt="" src="img/dog-food.jpg">상품명OOOO</td>
-                <td>1개</td>
-                <td>4,000원</td>
-                <td>4,000원</td>
-                <td rowspan="2">3,000원</td>
-            </tr>
-            <tr style="height:70px">
-                <td><input type="checkbox" name="check"></td>
-                <td><img alt="" src="img/dog-food.jpg">상품명OOOO</td>
-                <td>1개</td>
-                <td>4,000원</td>
-                <td>4,000원</td>
-                <!--<td>3,000원</td>-->
-            </tr>
+        	<tbody class="cart_product">
+            	<tr style="height:70px">
+            	<c:forEach var="cart" items="${requestScope.cart }">
+                	<td><input type="checkbox" name="check" class="check"></td>
+             		<td><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
+                	<td id="ea">${cart.order_ea }</td>
+                	<td>${cart.product_price }</td>
+                	<td id="total_price">${requestScope.total_price }</td>
+                	<td rowspan="${requestScope.cart_count }">3,000원</td>
+            	</c:forEach>
+            	</tr>
+            </tbody>
         </table>
         <form action="#" class="cart_total">
             <div id="choose">
@@ -176,9 +205,9 @@ $(function() {
                     <tr >
                         <td></td>
                         <td></td>
-                        <td>4,000원</td>
-                        <td> 3,000원</td>
-                        <td>7,000원</td>
+                        <td>${requestScope.all_price }원</td>
+                        <td>3,000원</td>
+                        <td id="cart_price">${requestScope.cart_price }원</td>
                     </tr>
                 </table>   
             <div id="continue">
