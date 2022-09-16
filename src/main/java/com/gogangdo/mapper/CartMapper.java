@@ -15,6 +15,12 @@ public interface CartMapper {
 
 	int cartDelete(int product_no);
 
+	int selectCartNo();
+
+	void insertCart(CartDTO dto);
+
+//	int selectCartPrice();
+
 //	int selectTotalPrice();
 
 
