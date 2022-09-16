@@ -43,12 +43,14 @@
         	text-decoration: none;
         }
         article{
+        	width:100%;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
         }
         #product{
-            margin: 20px;
+        	width:25%;
+
         }
         .main_container img{
             width: 250px;
@@ -88,13 +90,13 @@
         <section id="product_list">
             <article>
             	<c:forEach var="dto" items="${requestScope.list }">
-                	<a href="productDetail.do?product_no=${dto.product_no }">
                     	<div id="product">
+                    	<a href="productDetail.do?product_no=${dto.product_no }">
                         	<img alt="" src="imageLoad.do?fno=${dto.img_no }">
                         	<p>상품명 ${dto.product_name}</p>
+                        </a>
                         	<h4>${dto.product_price }원</h4>	
-                 		</div>
-                    </a>
+                    	</div>
             	</c:forEach>
             </article>
         </section>

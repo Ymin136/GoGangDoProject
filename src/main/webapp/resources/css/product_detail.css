@@ -1,0 +1,160 @@
+@charset "UTF-8";
+#product_detail_container{
+		width:1200px;
+		margin : 20px auto;
+		text-align: center;
+	}
+	#product_detail{
+		width:1000px;
+		height:600px;
+		margin : 0px auto;
+		box-sizing: border-box;
+		background-color: #d3d3d3;
+		
+	}
+	#product_detail #title{
+		width : 15%;
+		text-align: left;
+		padding-left:30px;
+	}
+	#product_detail td:not(#sample_img){
+		padding-right:20px;
+		text-align: left;
+		
+	}
+	#sample_img, #sample_img img{
+		text-align : center;
+		width:500px;
+		height: 600px;
+	}
+	#product_detail select{
+		width : 55%;
+	}
+	td button{
+		color: white;
+		font-weight:bold;
+		text-align: center;
+		width:45%;
+		height:40px; 
+		background: gray;
+		border: none;
+		border-radius:5px; 		
+		margin-left:20px;		
+	}
+	#product_int{
+	width:1200px;
+	height:80px;
+	margin:40px auto;
+	border-collapse:collapse;
+	box-sizing:border-box;
+	text-align: center;
+	vertical-align:center;	 
+	}
+	#product_int td{
+		border-top: 1px solid black;
+		font-size:20px;
+		font-weight:bold;
+		width:25%;
+	}
+	#product_int a:link, #product_int a:visited{
+		text-decoration: none;
+		color:black;
+	}
+	#review_container{
+		width:1200px;
+		margin : 40px auto;
+		text-align:left;
+		height: 300px; 
+	}
+	#review_container p, h2{
+		margin-left:30px;
+	}
+	#review_container table{
+		width:1200px;
+		text-align: center;
+		border-collapse: collapse;
+		
+	}
+	#review_container td:not(#content){
+		border-bottom: 1px solid lightgray;
+		padding:10px 20px;
+		vertical-align: center;
+	}
+	#review_container #content{
+		width:60%;
+		text-align: left;
+		padding-left:150px;
+		border-bottom: 1px solid lightgray;
+	}
+	#review_container a{
+		margin:0px 10px;
+		text-decoration: none;
+		color : black;
+	}
+	#QnA_container{
+		width:1150px;
+		padding : 25px;
+		margin : 80px auto;
+		height: auto; 
+		text-align: center;
+		border : 1px solid lightgray;
+	}
+	#QnA_container p, h2{
+		margin-left:30px;
+		text-align: left;
+	}
+	#QnA_container a{
+		margin:0px 10px;
+		text-decoration: none;
+		color : black;
+	}
+	#QnA_container table{
+		width : 1100px;
+		margin-left:30px;
+		border-collapse: collapse;
+	}
+	#QnA_container table td{
+		padding :5px 0px;
+	}
+	#QnA_container table #title{
+		width:10%;
+		text-align: left;
+	}
+	#QnA_container table #date{
+		width:15%;
+	} 
+	#QnA_container table #content{
+		width : 75%;
+		text-align: left;
+	}
+	#QnA_container table #under td{
+		border-bottom:1px solid lightgray;
+		padding-bottom:10px;
+	}
+	#QnA_container table #question td{
+		padding-top:30px;
+	}
+	#introduce_container{
+		width:1200px;
+		margin : 20px auto;
+		padding : 20px 0px;
+		border-top : 1px solid black;
+	}
+	#introduce_container h3{
+		color:black;
+	}
+	#introduce_container ul li{
+		list-style-type: none;
+		color : gray;
+		text-align: left;
+		margin-bottom: 10px;
+	}
+	#qna_btn{
+		width:100px;
+		height:50px;
+		border:none;
+		background-color : gray;
+		color : white;
+		border-radius:5px;
+		margin-left:1000px;
+	}

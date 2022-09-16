@@ -6,124 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>고강도</title>
-<style type="text/css">
-#product_detail_container{
-		width:1200px;
-		margin : 20px auto;
-		text-align: center;
-	}
-	#product_detail{
-		width:1000px;
-		height:600px;
-		margin : 0px auto;
-		box-sizing: border-box;
-		background-color: #d3d3d3;
-		
-	}
-	#product_detail #title{
-		width : 15%;
-		text-align: left;
-		padding-left:30px;
-	}
-	#product_detail td:not(#sample_img){
-		padding-right:20px;
-		text-align: left;
-		
-	}
-	#sample_img, #sample_img img{
-		text-align : center;
-		width:500px;
-		height: 600px;
-	}
-	#product_detail select{
-		width : 55%;
-	}
-	td button{
-		color: white;
-		font-weight:bold;
-		text-align: center;
-		width:45%;
-		height:40px; 
-		background: gray;
-		border: none;
-		border-radius:5px; 		
-		margin-left:20px;		
-	}
-	#product_int{
-	width:1200px;
-	height:80px;
-	margin:40px auto;
-	border-collapse:collapse;
-	box-sizing:border-box;
-	text-align: center;
-	vertical-align:center;	 
-	}
-	#product_int td{
-		border-top: 1px solid black;
-		font-size:20px;
-		font-weight:bold;
-		width:25%;
-	}
-	#product_int a:link, #product_int a:visited{
-		text-decoration: none;
-		color:black;
-	}
-	#review_container{
-		width:1200px;
-		margin : 40px auto;
-		text-align:left;
-		height: 300px; 
-	}
-	#review_container p, h2{
-		margin-left:30px;
-	}
-	#review_container table{
-		width:1200px;
-		text-align: center;
-		border-collapse: collapse;
-		
-	}
-	#review_container td:not(#content){
-		border-bottom: 1px solid gray;
-		padding:10px 20px;
-		vertical-align: center;
-	}
-	#review_container #content{
-		width:60%;
-		text-align: left;
-		padding-left:150px;
-		border-bottom: 1px solid gray;
-	}
-	#review_container a{
-		margin:0px 10px;
-		text-decoration: none;
-		color : black;
-	}
-	#QnA_container{
-		width:1200px;
-		margin : 80px auto;
-		height: 300px; 
-		text-align: left;
-	}
-	#QnA_container p, h2{
-		margin-left:30px;
-	}
-	#introduce_container{
-		width:1200px;
-		margin : 20px auto;
-		padding : 20px 0px;
-		border-top : 1px solid black;
-	}
-	#introduce_container h3{
-		color:black;
-	}
-	#introduce_container ul li{
-		list-style-type: none;
-		color : gray;
-		text-align: left;
-		margin-bottom: 10px;
-	}
-</style>
+<link href="/resources/css/product_detail.css" rel="stylesheet">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -150,15 +33,51 @@ $(function(){
 					tag += "<td>"+r[i].review_date+"</td>";
 					tag += "</tr>";
 				}
-				if(r.length<5)
-				for(i = 0; i<5-r.length;i++)
-	   			tag+="<tr><td colspan='3' style='height:20px;'></td></tr>";
-	   			
 				$('#review_list').html(tag);
 			}
 		});
 		return false;
 	});
+	$('#QnA_container a').click(function(){
+		var pageNo = $(this).text();
+		var product_no = ${requestScope.product.product_no };
+		$.ajax({
+			url:"qnaList.do",
+			data : "product_no="+product_no+"&pageNo="+pageNo,
+			dataType : "json",
+			success:function(r){
+				var tag = "";
+				for(i=0;i<r.length;i++){
+					tag += "<tr id='question'><td id='title'><span style='color:blue;font-weight:bold;'>질문</span> : "+r[i].id+"</td>";
+					tag += "<td id='content'>"+r[i].qna_content+"</td><td>"+r[i].qna_date+"</td></tr>";
+					if(r[i].answer_check==1)
+					tag+="<tr id='under'><td id='title'><span style='color:red;font-weight:bold;'>> 답변</span></td><td id='content'>"+r[i].answer_content+"</td><td id ='date'></td></tr>";
+					if(r[i].answer_check==0)
+					tag+="<tr id='under'><td id='title' colspan='3'><span style='color:gray;font-weight:bold;'>> 답변 미등록</span></td></tr>";
+				}
+				$('#qna_list').html(tag);
+			}
+		});
+		return false;
+	});
+	$('#cart_btn').click(function(){
+        if(${sessionScope.login == null || sessionScope.login == false}){
+           alert("로그인을 하셔야 이용할수 있습니다.");
+           return false;
+     }
+        var id = '${sessionScope.id}';
+        var product_no = ${requestScope.product.product_no };
+        var price = ${requestScope.product.product_price };
+        var ea = $('#ea').val();
+        $.ajax({
+           url:"insertCart.do",
+           data : "product_no="+product_no+"&id="+id+"&product_price="+price+"&cart_ea="+ea,
+           dataType : "json",
+           success:function(r){
+              console.log(r);
+           }
+        });
+     });
 });
 </script>
 </head>
@@ -185,7 +104,7 @@ $(function(){
 			<span id = "total">${requestScope.product.product_price } 원</span></td>
 		</tr>
 		<tr>
-			<td colspan="3"><button>장바구니</button><a href="purchaseView.do"><button>구매하기</button></a></td>
+			<td colspan="3"><button type="button" id="cart_btn">장바구니</button><a href="purchaseView.do"><button>구매하기</button></a></td>
 		</tr>
 		<tr><td></td></tr>
 	</table>
@@ -212,22 +131,21 @@ $(function(){
 			<td>작성일자</td>
 		</tr>
 		<tbody id="review_list">
-		<c:forEach var="review" items="${requestScope.list }">
+		<c:forEach var="review" items="${requestScope.reviewlist }">
 	           	<tr>
 	           		<td>${review.id}</td>
 	           		<td id="content">${review.review_content }</td>
 	           		<td>${review.review_date }</td>
 	           	</tr>           	
         </c:forEach>
-		<c:if test="${requestScope.list.size()<5}">
-   			<c:forEach var = "i" begin="1" end="${5-requestScope.list.size()}">
-   			<tr><td colspan="3" style="height:20px;"></td></tr> 
-   			</c:forEach>
+		<c:if test="${requestScope.reviewlist.size()==0}">
+   			<tr><td colspan="3">작성된 상품평이 없습니다.</td></tr> 
+   		
     	</c:if>
         </tbody>
 	        <tr>
 	        	<td colspan="3" id = "page_bar" style ="padding:20px 10px; border:none;">
-	        		<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" end="${pagging.endPageOfPageGroup}">
+	        		<c:forEach var="i" begin="${review_pagging.startPageOfPageGroup}" end="${review_pagging.endPageOfPageGroup}">
 					<a href ="#"> ${ i}</a>
 				</c:forEach>
 	        	</td>
@@ -238,8 +156,37 @@ $(function(){
 	
 	<div id="QnA_container">
 		<p><h2>상품문의</h2></p>
-		
-		<hr>
+		<table>
+		<tbody id="qna_list">
+		<c:forEach var="qna" items="${requestScope.qnalist }">
+	           	<tr id="question">
+	           	 <td id="title"><span style="color:blue;font-weight:bold;">질문</span> : ${qna.id}</td>
+	           	 <td id="content">${qna.qna_content }</td>
+	           	 <td id ="date">${qna.qna_date }</td>
+	           	</tr>
+	           	<c:if test="${qna.answer_check==1}">
+	           	 <tr id="under"><td id="title"><span style="color:red;font-weight:bold;">> 답변</span></td><td id="content">${qna.answer_content }</td><td id ="date"></td>
+	           	</tr>
+	           	</c:if>
+	           	<c:if test="${qna.answer_check==0}">
+	           	 <tr id="under"><td id="title" colspan="3"><span style="color:gray;font-weight:bold;">> 답변 미등록</span></td>
+	           	</tr>
+	           	</c:if>       	
+        </c:forEach>
+		<c:if test="${requestScope.qnalist.size()==0}">
+   			<tr><td colspan="3">작성된 문의글이 없습니다.</td></tr> 
+    	</c:if>
+    	</tbody>
+	        <tr>
+	        	<td colspan="3" id = "page_bar" style ="padding:20px 10px; border:none;">
+	        		<c:forEach var="i" begin="${qna_pagging.startPageOfPageGroup}" end="${qna_pagging.endPageOfPageGroup}">
+					<a href ="#"> ${ i}</a>
+				</c:forEach>
+	        	</td>
+    	    </tr>
+        </table>
+        
+   			<button id="qna_btn">문의하기</button>
 	</div>
 	<div id="introduce_container">
 		<ul>
