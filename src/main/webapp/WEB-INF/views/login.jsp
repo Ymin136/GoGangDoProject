@@ -30,12 +30,12 @@
           </div>
           <div class="find">
             <a href="loginView1.do" class="first">아이디 찾기</a>  
-            <a href="#">비밀번호 찾기</a>
+            <a href="login2.do">비밀번호 찾기</a>
           </div>
         </div>
         <div class="member">
           <div class="text">아직 회원이 아니신가요?</div>
-          <a class="btn_memjoin" href="#">회원가입</a>
+          <a class="btn_memjoin" href="registerView.do">회원가입</a>
         </div>
       </form>
     </div>

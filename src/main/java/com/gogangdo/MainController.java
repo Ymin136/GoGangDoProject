@@ -3,6 +3,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,29 +20,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
+import com.gogangdo.dto.CartDTO;
+import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.dto.FileDTO;
 import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
+import com.gogangdo.service.CartService;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
-import com.gogangdo.service.CertificationService;
 import com.gogangdo.vo.PaggingVO;
 
 @Controller
 public class MainController {
 	private ProductService productService;
 	private MemberService memberService;
-	private CertificationService certificationService;
-	//private OrderService orderService;
+	private OrderService orderService;
+	private CartService cartService;
 	
-	public MainController(ProductService productService, MemberService memberService, CertificationService certificationService) {
+	
+	public MainController(OrderService orderService, ProductService productService, MemberService memberService, CartService cartService) {
 		this.productService = productService;
 		this.memberService = memberService;
-		this.certificationService = certificationService ;
-		//this.orderService = orderservice;
 		
+		this.orderService = orderService;
+		this.cartService = cartService;
 	}
 
 	@RequestMapping("/")
@@ -56,18 +60,34 @@ public class MainController {
 	public String loginView() {
 		return "login";
 	}
-	
+	@RequestMapping("/getInfo.do")
+	public String getInfo() {
+		return "getinfo";
+	}
+	@RequestMapping("/userUpdate.do")
+	public String userUpdate(MemberDTO dto) {
+		System.out.println(dto.toString());
+		int result = memberService.userUpdate(dto);
+		if(result == 1)
+		System.out.println("회원정보 수정 완료");
+		else 
+		System.out.println("실패");
+		
+		return "redirect:/";
+	}
 	@RequestMapping("/loginView2.do")
 	public String loginView2(String id,String pw, HttpSession session) {
 		MemberDTO dto = memberService.login(id, pw);
 		if(dto != null) {
 			session.setAttribute("login", true);
+			
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("pw", dto.getPw());
 			session.setAttribute("user_no", dto.getUser_grade());
 			session.setAttribute("user_name", dto.getUser_name());
 			session.setAttribute("tel", dto.getTel());
-			session.setAttribute("address", dto.getAddress());
+			session.setAttribute("address1", dto.getAddress1());
+			session.setAttribute("address2", dto.getAddress2());
 			session.setAttribute("email", dto.getEmail());
 			return "redirect:/";
 		}else {
@@ -84,6 +104,12 @@ public class MainController {
 	public String loginView1() {
 		return "findid";
 	}
+	@RequestMapping("login2.do")
+	public String login2() {
+		return "findpw";
+	}
+	
+	
 	@RequestMapping("/registerView.do")
 	public String registerView() {
 		return "register";
@@ -114,23 +140,9 @@ public class MainController {
 			response.getWriter().write(String.valueOf(1));
 		}
 	}
-	@GetMapping
-	public @ResponseBody
-	String sendSMS(String phoneNumber) {
-		Random rand = new Random();
-		String numStr = "";
-		for(int i=0;i<4;i++) {
-			String ran = Integer.toString(rand.nextInt(10));
-			numStr+=ran;
-		}
-		System.out.println("수신자 번호 : " + phoneNumber);
-		System.out.println("인증번호 : " + numStr);
-		certificationService.certifiedPhoneNumber(phoneNumber,numStr);
-		return numStr;
-	}
 	@RequestMapping("/productList.do")
-	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int a) {
-		List<ProductDTO> list = productService.selectProductList(pageNo,a);
+	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int category_no) {
+		List<ProductDTO> list = productService.selectProductList(pageNo, category_no);
 		model.addAttribute("list", list);
 		
 		int count = productService.selectProductCount();
@@ -139,6 +151,34 @@ public class MainController {
 		model.addAttribute("count",count);
 		return "product_list";
 	}
+	@RequestMapping("/productSubList.do")
+	public String productSubList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int sub_category_no) {
+		List<ProductDTO> sub_list = productService.selectProductSubList(pageNo, sub_category_no);
+		model.addAttribute("list", sub_list);
+		
+		int count = productService.selectProductCount();
+		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+		model.addAttribute("pagging", vo);
+		return "product_list";
+    }
+    
+	@RequestMapping("/userDelete.do")
+	public String userDelete(String id, HttpSession session) {
+		System.out.println(id);
+		int result = memberService.userDelete(id);
+		if(result == 1)
+			System.out.println("회원정보 삭제 완료");
+			else 
+			System.out.println("실패");
+		session.invalidate();
+		return "redirect:/main.do";
+	}
+//	@RequestMapping("/productSortList.do")
+//	public String productSortList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, int product_price, int sort, Model model) {
+//		List<ProductDTO> sort_list = productService.selectProductSortList(pageNo, product_price, sort);
+//		model.addAttribute("list", sort_list);
+//		return "product_list";
+//	}
 	@RequestMapping("/imageLoad.do")
 	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
 		String path = productService.selectImageFile(fno).getImg_path();
@@ -161,31 +201,78 @@ public class MainController {
 		fis.close();
 		bos.close();
 	}
-		@RequestMapping("/productDetail.do")
-		public String productDetail(int product_no, Model model) {
-			ProductDTO dto = productService.selectproductDTO(product_no);
-			FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
-			FileDTO image = productService.selectimageDTO(product_no);
-			System.out.println(dto.toString());
-			System.out.println(thumbnail.toString());
-			System.out.println(image.toString());
-			model.addAttribute("product", dto);
-			model.addAttribute("thumbnail", thumbnail);
-			model.addAttribute("image", image);
-			return "product_detail";
+	@RequestMapping("/productDetail.do")
+	public String productDetail(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,int product_no, Model model) {
+		try {
+		
+		List<ReviewDTO> list = productService.selectReviewList(pageNo,product_no);
+		ProductDTO dto = productService.selectproductDTO(product_no);
+		int count = productService.selectReviewCount(product_no);
+		
+		PaggingVO vo = new PaggingVO(count, pageNo, 5, 10);
+		
+		model.addAttribute("product", dto);
+		model.addAttribute("list", list);
+		model.addAttribute("pagging", vo);
+		System.out.println(list);
+		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
+		FileDTO image = productService.selectimageDTO(product_no);
+
+		model.addAttribute("thumbnail", thumbnail);			
+		model.addAttribute("image", image);
+		
+		}catch (Exception e) {
+			
 		}
-	
+		return "product_detail";
+	}
+	@RequestMapping("/ReviewList.do")
+	public ResponseEntity<List<ReviewDTO>> 
+							ReviewList(int pageNo, int product_no){
+		System.out.println("pageNo : "+pageNo);
+		System.out.println("product_no : "+product_no);
+		
+		
+		List<ReviewDTO> list = productService.selectReviewList(pageNo,product_no);
+		System.out.println(list.get(0));
+		
+		return ResponseEntity.ok(list);
+	}
 	@RequestMapping("/myPage.do")
 	public String myPage() {
-		return "mypage";
+		return "manager";
 	}
 	@RequestMapping("/cartView.do")
-	public String cartView(Model model) {
-		//List<ProductDTO> list = productService.selectProductBuy();
+	public String cartView(Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		List<CartDTO> list = cartService.selectCartView(id);
+		model.addAttribute("cart", list);
+		
+		int all_price = 0;
+		int total_price = 0;
+		for(int i=0; i<list.size();i++) {
+			CartDTO dto = list.get(i);
+			total_price = dto.getProduct_price() * dto.getOrder_ea();
+			all_price = all_price + total_price;
+		}
+		//int total_price = cartService.selectTotalPrice();
+		model.addAttribute("total_price", total_price);
+		model.addAttribute("all_price", all_price);
+		int deliv = 3000;
+		model.addAttribute("cart_price", all_price + deliv);
+		
+		int count = cartService.selectCartCount();
+		model.addAttribute("cart_count", count);
 		return "cart";
+	}
+	@RequestMapping("/cartDelete.do")
+	public String cartDelete(int product_no, String id) {
+		cartService.cartDelete(product_no);
+		return "redirect:/cartView.do?id="+id;
 	}
 	@RequestMapping("/purchase.do")
 	public String purchase() {
+		//ProductDTO dto = int product_no, int ea
 		return "purchase";
 	}
 	@RequestMapping("/productRegisterView.do")
