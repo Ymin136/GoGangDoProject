@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,21 +25,22 @@ import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
-import com.gogangdo.service.TestService;
+import com.gogangdo.service.CertificationService;
 import com.gogangdo.vo.PaggingVO;
 
 @Controller
 public class MainController {
 	private ProductService productService;
 	private MemberService memberService;
-	private TestService testService;
+	private CertificationService certificationService;
 	//private OrderService orderService;
 	
-	public MainController(ProductService productService, MemberService memberService, TestService testService) {
+	public MainController(ProductService productService, MemberService memberService, CertificationService certificationService) {
 		this.productService = productService;
 		this.memberService = memberService;
+		this.certificationService = certificationService ;
 		//this.orderService = orderservice;
-		this.testService = testService;
+		
 	}
 
 	@RequestMapping("/")
@@ -111,12 +114,19 @@ public class MainController {
 			response.getWriter().write(String.valueOf(1));
 		}
 	}
-	@RequestMapping
-	@ResponseBody
-	public String sendSNS(@RequestParam("phone") String userPhoneNumber, HttpServletRequest HttpServletRequest) {
-		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);
-		testService.certifiedPhoneNumber(userPhoneNumber,randomNumber, HttpServletRequest);
-		return Integer.toString(randomNumber);
+	@GetMapping
+	public @ResponseBody
+	String sendSMS(String phoneNumber) {
+		Random rand = new Random();
+		String numStr = "";
+		for(int i=0;i<4;i++) {
+			String ran = Integer.toString(rand.nextInt(10));
+			numStr+=ran;
+		}
+		System.out.println("수신자 번호 : " + phoneNumber);
+		System.out.println("인증번호 : " + numStr);
+		certificationService.certifiedPhoneNumber(phoneNumber,numStr);
+		return numStr;
 	}
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int a) {
