@@ -83,7 +83,9 @@ public class MainController {
 			session.setAttribute("user_no", dto.getUser_grade());
 			session.setAttribute("user_name", dto.getUser_name());
 			session.setAttribute("tel", dto.getTel());
-			session.setAttribute("address", dto.getAddress());
+			session.setAttribute("address1", dto.getAddress1());
+			session.setAttribute("address2", dto.getAddress2());
+			session.setAttribute("post", dto.getPost());
 			session.setAttribute("email", dto.getEmail());
 			return "redirect:/";
 		}else {
@@ -241,6 +243,16 @@ public class MainController {
 	public String myPage() {
 		return "mypage";
 	}
+	@RequestMapping("/insertCart.do")
+	public void insertCart(CartDTO dto, HttpServletResponse response, MultipartHttpServletRequest request) throws IOException {
+		//dto.setCart_no(cartService.selectCartNo());
+		System.out.println(dto.toString());
+		int cno = cartService.selectCartNo();
+		System.out.println(dto.toString());
+		dto.setCart_no(cno);
+		
+		cartService.insertCart(dto);
+	}
 	@RequestMapping("/cartView.do")
 	public String cartView(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
@@ -249,12 +261,14 @@ public class MainController {
 		
 		int all_price = 0;
 		int total_price = 0;
+//		int total_price = cartService.selectCartPrice();
+		
 		for(int i=0; i<list.size();i++) {
 			CartDTO dto = list.get(i);
-			total_price = dto.getProduct_price() * dto.getOrder_ea();
+			total_price = dto.getProduct_price() * dto.getCart_ea();
 			all_price = all_price + total_price;
 		}
-		//int total_price = cartService.selectTotalPrice();
+		
 		model.addAttribute("total_price", total_price);
 		model.addAttribute("all_price", all_price);
 		int deliv = 3000;
@@ -270,10 +284,30 @@ public class MainController {
 		return "redirect:/cartView.do?id="+id;
 	}
 	@RequestMapping("/purchase.do")
-	public String purchase() {
-		//ProductDTO dto = int product_no, int ea
+	public String purchase(Model model, HttpSession session) {
+		String id = (String) session.getAttribute("id");
+		List<CartDTO> list = cartService.selectCartView(id);
+		model.addAttribute("cart", list);
+		
+		int all_price = 0;
+		int total_price = 0;
+		for(int i=0; i<list.size();i++) {
+			CartDTO dto = list.get(i);
+			total_price = dto.getProduct_price() * dto.getCart_ea();
+			all_price = all_price + total_price;
+		}
+		//int total_price = cartService.selectTotalPrice();
+		model.addAttribute("total_price", total_price);
+		model.addAttribute("all_price", all_price);
+		int deliv = 3000;
+		model.addAttribute("cart_price", all_price + deliv);
+		
+		int count = cartService.selectCartCount();
+		model.addAttribute("cart_count", count);
+		
 		return "purchase";
 	}
+	
 	@RequestMapping("/productRegisterView.do")
 	public String productRegisterView() {
 		return "product_register";

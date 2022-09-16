@@ -106,21 +106,15 @@
 <script type="text/javascript">
 $(function() {
     $("#check_all").click(function() {
-       if($("#check_all").is(":checked")) 
-    	   $("input[name=check]").prop("checked", true);
-       else 
-    	   $("input[name=check]").prop("checked", false);
-    });
-    $("input[name=check]").click(function() {
-       var total = $("input[name=check]").length;
-       var checked = $("input[name=check]:checked").length;
-       
-       if(total != checked) 
-    	   $("#check_all").prop("checked", false);
-       else 
-    	   $("#check_all").prop("checked", true); 
+    	var check = $("#check_all").prop("checked");
+    	if(check){
+    		$(".check").prop("checked", true);
+    	}else{
+    		$(".check").prop("checked", false);    		
+    	}
     });
     $("#choose_all").click(function(){
+    	$("#check_all").prop("checked",false);
     	$("input[type=checkbox]").prop("checked",true);
     });
     $("#delete_choose").click(function(){
@@ -135,7 +129,7 @@ $(function() {
     				tag += '<tr>';
     				tag += '<td><input type="checkbox" name="check" class="check"></td>';
     				tag += '<td><img alt="#" src="imageLoad.do?fno="'+r[i].img_no+'">'+r[i].product_name+'</td>';
-    				tag += '<td id="ea">'+r[i].order_ea+'</td>';
+    				tag += '<td id="ea">'+r[i].cart_ea+'</td>';
     				tag += '<td>'+r[i].product_price+'</td>';
     				tag += '<td id="total_price">'+r[i].total_price+'</td>';
                     tag += '<td rowspan='+r[i].cart_count+'>3,000원</td>';
@@ -174,19 +168,17 @@ $(function() {
                 <th>수량</th>
                 <th>상품 금액</th>
                 <th>합계 금액</th>
-                <th>배송비</th>
             </thead>
         	<tbody class="cart_product">
-            	<tr style="height:70px">
             	<c:forEach var="cart" items="${requestScope.cart }">
+            	<tr style="height:70px">
                 	<td><input type="checkbox" name="check" class="check"></td>
              		<td><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
-                	<td id="ea">${cart.order_ea }</td>
+                	<td id="ea">${cart.cart_ea }</td>
                 	<td>${cart.product_price }</td>
-                	<td id="total_price">${requestScope.total_price }</td>
-                	<td rowspan="${requestScope.cart_count }">3,000원</td>
-            	</c:forEach>
+                	<td id="total_price">${cart.cart_ea*cart.product_price }</td>
             	</tr>
+            	</c:forEach>
             </tbody>
         </table>
         <form action="#" class="cart_total">
@@ -211,7 +203,7 @@ $(function() {
                     </tr>
                 </table>   
             <div id="continue">
-                <button><a href="productList.do">쇼핑 계속하기</a></button>
+                <button><a href="productList.do?category_no=0">쇼핑 계속하기</a></button>
                 <button><a href="purchase.do">구매하기</a></button>
             </div>
         </form>

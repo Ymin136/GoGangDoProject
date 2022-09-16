@@ -28,6 +28,18 @@ public class CartService {
 		return mapper.cartDelete(product_no);
 	}
 
+	public int selectCartNo() {
+		return mapper.selectCartNo();
+	}
+
+	public void insertCart(CartDTO dto) {
+		mapper.insertCart(dto);
+	}
+
+//	public int selectCartPrice() {
+//		return mapper.selectCartPrice();
+//	}
+
 //	public int selectTotalPrice() {
 //		return mapper.selectTotalPrice();
 //	}
