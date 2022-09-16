@@ -3,28 +3,25 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
 import com.gogangdo.dto.CartDTO;
-import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.dto.FileDTO;
 import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
+import com.gogangdo.dto.QnADTO;
+import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.service.CartService;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
@@ -195,19 +192,24 @@ public class MainController {
 		bos.close();
 	}
 	@RequestMapping("/productDetail.do")
-	public String productDetail(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,int product_no, Model model) {
+	public String productDetail(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo,
+			int product_no, Model model) {
 		try {
 		
-		List<ReviewDTO> list = productService.selectReviewList(pageNo,product_no);
+		List<ReviewDTO> review_list = productService.selectReviewList(pageNo,product_no);
+		List<QnADTO> qna_list = productService.selectQnAList(pageNo,product_no);
 		ProductDTO dto = productService.selectproductDTO(product_no);
-		int count = productService.selectReviewCount(product_no);
+		int review_count = productService.selectReviewCount(product_no);
+		int qna_count = productService.selectQnaCount(product_no);
 		
-		PaggingVO vo = new PaggingVO(count, pageNo, 5, 10);
+		PaggingVO review_vo = new PaggingVO(review_count, pageNo, 5, 10);
+		PaggingVO qna_vo = new PaggingVO(qna_count, pageNo, 5, 10);
 		
 		model.addAttribute("product", dto);
-		model.addAttribute("list", list);
-		model.addAttribute("pagging", vo);
-		System.out.println(list);
+		model.addAttribute("reviewlist", review_list);
+		model.addAttribute("qnalist", qna_list);
+		model.addAttribute("review_pagging", review_vo);
+		model.addAttribute("qna_pagging", qna_vo);
 		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
 		FileDTO image = productService.selectimageDTO(product_no);
 
@@ -224,11 +226,15 @@ public class MainController {
 							ReviewList(int pageNo, int product_no){
 		System.out.println("pageNo : "+pageNo);
 		System.out.println("product_no : "+product_no);
-		
-		
 		List<ReviewDTO> list = productService.selectReviewList(pageNo,product_no);
-		System.out.println(list.get(0));
-		
+		return ResponseEntity.ok(list);
+	}
+	@RequestMapping("/qnaList.do")
+	public ResponseEntity<List<QnADTO>> 
+							QnAList(int pageNo, int product_no){
+		System.out.println("pageNo : "+pageNo);
+		System.out.println("product_no : "+product_no);
+		List<QnADTO> list = productService.selectQnAList(pageNo,product_no);
 		return ResponseEntity.ok(list);
 	}
 	@RequestMapping("/myPage.do")
@@ -306,7 +312,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().write("<script>alert('상품 등록 성공');location.href='productList.do';</script>");
+		response.getWriter().write("<script>alert('상품 등록 성공');location.href='productDetail.do?product_no="+pno+"';</script>");
 		} catch (IOException e) {			
 			response.getWriter().write("<script>alert('데이터입력이 잘못됐습니다.');history.bakc();</script>");
 		}
