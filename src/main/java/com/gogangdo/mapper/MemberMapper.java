@@ -17,4 +17,7 @@ public interface MemberMapper {
 
 	int userDelete(String id);
 
+	String selectid(String id);
+
+
 }

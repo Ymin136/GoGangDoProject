@@ -19,6 +19,7 @@
       <div class="tit_desc">회원님의 이름과 휴대폰번호를 정확하게 입력하세요.</div>
       <form>
         <input type="text" class="id" placeholder="아이디"/>
+        <input type="text" class="name" placeholder="이름"/>
         <input type="text" class="phone" placeholder="휴대폰 번호"/>
         <button>확인</button>
         <div class="option">
@@ -28,7 +29,7 @@
         </div>
         <div class="member">
           <div class="text">아직 회원이 아니신가요?</div>
-          <a class="btn_memjoin" href="registerView.do">회원가입</a>
+          <a class="btn_memjoin" href="registerView3.do">회원가입</a>
         </div>
       </form>
     </div>

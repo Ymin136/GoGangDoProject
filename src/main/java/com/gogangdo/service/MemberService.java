@@ -35,6 +35,9 @@ public class MemberService {
 	public int userDelete(String id) {
 		
 		return memberMapper.userDelete(id);
+   }
+	public String selectId(String id) {
+		return memberMapper.selectid(id);
 	}
 
 	

@@ -5,15 +5,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.gogangdo.dto.CartDTO;
@@ -25,6 +29,7 @@ import com.gogangdo.service.CartService;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
+import com.gogangdo.service.CertificationService;
 import com.gogangdo.vo.PaggingVO;
 
 @Controller
@@ -33,9 +38,12 @@ public class MainController {
 	private MemberService memberService;
 	private OrderService orderService;
 	private CartService cartService;
-	public MainController(ProductService productService, MemberService memberService, OrderService orderservice, CartService cartService) {
+	private CertificationService certificationService;
+	
+	public MainController(ProductService productService, MemberService memberService, CertificationService certificationService, CartService cartService) {
 		this.productService = productService;
 		this.memberService = memberService;
+		this.certificationService = certificationService ;
 		this.orderService = orderservice;
 		this.cartService = cartService;
 	}
@@ -69,26 +77,22 @@ public class MainController {
 		return "redirect:/";
 	}
 	@RequestMapping("/loginView2.do")
-	public String loginView(String id,String pw, HttpSession session) {
+	public String loginView2(String id,String pw, HttpSession session) {
 		MemberDTO dto = memberService.login(id, pw);
- 		
 		if(dto != null) {
 			session.setAttribute("login", true);
-			//session.setAttribute("id", dto.getId());
-			//session.setAttribute("pw", dto.getPw());
 			
 			session.setAttribute("id", dto.getId());
-	        session.setAttribute("pw", dto.getPw());
-	        session.setAttribute("user_no", dto.getUser_grade());
-	        session.setAttribute("user_name", dto.getUser_name());
-	        session.setAttribute("tel", dto.getTel());
-	        session.setAttribute("address", dto.getAddress());
-	        session.setAttribute("email", dto.getEmail());
-			
+			session.setAttribute("pw", dto.getPw());
+			session.setAttribute("user_no", dto.getUser_grade());
+			session.setAttribute("user_name", dto.getUser_name());
+			session.setAttribute("tel", dto.getTel());
+			session.setAttribute("address", dto.getAddress());
+			session.setAttribute("email", dto.getEmail());
 			return "redirect:/";
 		}else {
 			session.setAttribute("login", false);
-			return "login";
+			return "redirect:/loginView.do";
 		}		
 	}
 	@RequestMapping("/loginoutView.do")
@@ -109,10 +113,40 @@ public class MainController {
 		return "register2";
 	}
 	@RequestMapping("/registerView3.do")
-	public String insertgisterView3(MemberDTO dto) {
+	public String insertgisterView3(MemberDTO dto, HttpSession session) {
 		System.out.println(dto);
-		memberService.insertmember(dto);
-		return "register3";
+		int registerView3=memberService.insertmember(dto);
+		if(registerView3 != 0) {
+			System.out.println("회원가입 성공");
+			return "redirect:/";
+		}else {
+			System.out.println("회원가입 실패");
+			return "redirect:/";
+		}		
+	}
+	@RequestMapping("/idCheck.do")
+	public void idCheck(String id, HttpServletResponse response) throws IOException {
+		String id_cmp = memberService.selectId(id);
+		System.out.println(id_cmp);
+		if(id.equals(id_cmp)) {
+			response.getWriter().write(String.valueOf(0));
+		} else {
+			response.getWriter().write(String.valueOf(1));
+		}
+	}
+	@GetMapping
+	public @ResponseBody
+	String sendSMS(String phoneNumber) {
+		Random rand = new Random();
+		String numStr = "";
+		for(int i=0;i<4;i++) {
+			String ran = Integer.toString(rand.nextInt(10));
+			numStr+=ran;
+		}
+		System.out.println("수신자 번호 : " + phoneNumber);
+		System.out.println("인증번호 : " + numStr);
+		certificationService.certifiedPhoneNumber(phoneNumber,numStr);
+		return numStr;
 	}
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int category_no) {
