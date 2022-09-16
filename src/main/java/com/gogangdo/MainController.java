@@ -29,7 +29,6 @@ import com.gogangdo.service.CartService;
 import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
-import com.gogangdo.service.CertificationService;
 import com.gogangdo.vo.PaggingVO;
 
 @Controller
@@ -38,13 +37,13 @@ public class MainController {
 	private MemberService memberService;
 	private OrderService orderService;
 	private CartService cartService;
-	private CertificationService certificationService;
 	
-	public MainController(ProductService productService, MemberService memberService, CertificationService certificationService, CartService cartService) {
+	
+	public MainController(OrderService orderService, ProductService productService, MemberService memberService, CartService cartService) {
 		this.productService = productService;
 		this.memberService = memberService;
-		this.certificationService = certificationService ;
-		this.orderService = orderservice;
+		
+		this.orderService = orderService;
 		this.cartService = cartService;
 	}
 
@@ -133,20 +132,6 @@ public class MainController {
 		} else {
 			response.getWriter().write(String.valueOf(1));
 		}
-	}
-	@GetMapping
-	public @ResponseBody
-	String sendSMS(String phoneNumber) {
-		Random rand = new Random();
-		String numStr = "";
-		for(int i=0;i<4;i++) {
-			String ran = Integer.toString(rand.nextInt(10));
-			numStr+=ran;
-		}
-		System.out.println("수신자 번호 : " + phoneNumber);
-		System.out.println("인증번호 : " + numStr);
-		certificationService.certifiedPhoneNumber(phoneNumber,numStr);
-		return numStr;
 	}
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int category_no) {
