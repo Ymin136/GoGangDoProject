@@ -32,7 +32,7 @@
 					<th>마일리지</th>
 				</tr>
 				<tr>
-					<th><button type="button" style='cursor:pointer;'><img src="resources/img/MembershipBenefits.png" alt="">등급혜택보기</button></th>
+					<th><a href="getInfo.do"><button type="button" style='cursor:pointer;'>개인정보 수정</button></a></th>
 					<th>3장</th>
 					<th>0원</th>	
 				</tr>

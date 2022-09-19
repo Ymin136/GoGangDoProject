@@ -226,7 +226,8 @@
 		<div id="infofix">
 		<a href="javascript:window.history.back();">
 		<button type="button" class="info" style='cursor:pointer;'>정보수정</button></a>
-		<button class="fix" style='cursor:pointer;'>취소</button>
+		<a href="javascript:window.history.back();">
+		<button type="button" class="fix" style='cursor:pointer;'>취소</button></a>
 		</div>
 		</form>
 		<div id="exit">
