@@ -134,9 +134,9 @@ $(function() {
         $.ajax({
            url:"insertPurchase.do",
            data : "product_no="+product_no+"&id="+id+"&product_price="+product_price+"&order_ea="+order_ea,
-           dataType : "json",
+           dataType : "text",
            success:function(r){
-              console.log(r);
+        	   location.href="/purchase.do";
            }
         });
      });

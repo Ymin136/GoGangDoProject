@@ -108,30 +108,30 @@
 		text-decoration: none;
 		color : black;
 	}
-	#QnA_container table{
+	#QnA_container #qna_table{
 		width : 1100px;
 		margin-left:30px;
 		border-collapse: collapse;
 	}
-	#QnA_container table td{
+	#QnA_container #qna_table td{
 		padding :5px 0px;
 	}
-	#QnA_container table #title{
+	#QnA_container #qna_table #title{
 		width:10%;
 		text-align: left;
 	}
-	#QnA_container table #date{
+	#QnA_container #qna_table #date{
 		width:15%;
 	} 
-	#QnA_container table #content{
+	#QnA_container #qna_table #content{
 		width : 75%;
 		text-align: left;
 	}
-	#QnA_container table #under td{
+	#QnA_container #qna_table #under td{
 		border-bottom:1px solid lightgray;
 		padding-bottom:10px;
 	}
-	#QnA_container table #question td{
+	#QnA_container #qna_table #question td{
 		padding-top:30px;
 	}
 	#introduce_container{
@@ -158,3 +158,56 @@
 		border-radius:5px;
 		margin-left:1000px;
 	}
+	#qna_pop{
+		width:640px;
+		height:auto;
+		padding-bottom:20px; 
+		top:20%;
+		left:35%;
+		background-color:#fff;
+		position:fixed;
+		border:1px solid black;
+		vertical-align:middle; content:'';
+		overflow: hidden;
+	}
+	#qna_pop textarea{
+		width:100%;
+		height:200px;
+	}
+	#qna_pop table{
+		width:90%;
+		margin : 0 auto;
+		border-top : 3px solid gray;
+		border-collapse: collapse;
+	}
+	#qna_pop td:not(#btn_td){
+		text-align: left;
+		padding :20px;
+		border-bottom:1px solid lightgray;
+	}
+	#btn_td{
+		text-align: left;
+		padding:10px;
+		padding-top:20px;
+	}
+	#qna_pop #title{
+		vertical-align: top;
+		text-align: left;
+		width:30%;
+		border-right:1px solid lightgray;
+		border-bottom:1px solid lightgray;
+	}
+	#qna_pop button{
+		color: white;
+	    font-weight: bold;
+	    text-align: center;
+	    width: 45%;
+	    height: 40px;
+	    border: none;
+	    border-radius: 5px;
+	    margin-left: 20px;
+	}
+	#btn_send{
+		background: #008cff;
+	}
+	.shadow{position: fixed;left: 0;top: 0;background: rgba(0, 0, 0, 0.52);width: 100%;height: 100vh;display: none}

@@ -93,4 +93,25 @@ public class ProductService {
 		return count;
 	}
 
+	public int selectQnaNo() {
+		
+		return mapper.selectQnaNo();
+	}
+
+	public void insertQnA(QnADTO dto) {
+		mapper.insertQnA(dto);
+	}
+
+	public List<QnADTO> selectQnaAllList(int pageNo, int answer_check) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pageNo", pageNo);
+		map.put("answer_check", answer_check);
+		return mapper.selectQnaAllList(map);
+	}
+
+	public int selectQnaAllCount(int answer_check) {
+		int count = mapper.selectQnaAllCount(answer_check);
+		return count;
+	}
+
 }
