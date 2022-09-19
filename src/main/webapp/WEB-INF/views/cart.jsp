@@ -106,39 +106,40 @@
 <script type="text/javascript">
 $(function() {
     $("#check_all").click(function() {
-    	var check = $("#check_all").prop("checked");
-    	if(check){
-    		$(".check").prop("checked", true);
-    	}else{
-    		$(".check").prop("checked", false);    		
-    	}
+    	if($("#check_all").is(":checked"))
+    		$(".check").prop("checked",true);
+    	else
+    		$(".check").prop("checked",false);
+    });
+    $(".check").click(function(){
+    	var total = $(".check").length;
+		var checked = $(".check:checked").length;
+		if(total != checked) 
+			$("#check_all").prop("checked", false);
+		else 
+			$("#check_all").prop("checked", true); 
     });
     $("#choose_all").click(function(){
-    	$("#check_all").prop("checked",false);
-    	$("input[type=checkbox]").prop("checked",true);
+    	if($("#check_all").is(":checked"))
+    		$(".check").prop("checked",true);
+    	else
+    		$(".check").prop("checked",false);
     });
-    $("#delete_choose").click(function(){
-    	var check_product = $(".check").prop("checked");
-    	$.ajax({
-    		url: "cartDelete.do",
-    		data: check_product,
-    		type: "post",
-    		success: function(r){
-    			var tag = "";
-    			for(int i=0; i<r.length; i++){
-    				tag += '<tr>';
-    				tag += '<td><input type="checkbox" name="check" class="check"></td>';
-    				tag += '<td><img alt="#" src="imageLoad.do?fno="'+r[i].img_no+'">'+r[i].product_name+'</td>';
-    				tag += '<td id="ea">'+r[i].cart_ea+'</td>';
-    				tag += '<td>'+r[i].product_price+'</td>';
-    				tag += '<td id="total_price">'+r[i].total_price+'</td>';
-                    tag += '<td rowspan='+r[i].cart_count+'>3,000원</td>';
-                    tag += '</tr>';
-    			}
-    			$(".cart_product").html(tag);
-    		}
-    	});
-    });
+  
+    $('#order_btn').click(function(){
+        var id = '${sessionScope.id}';
+        var product_no = ${requestScope.product.product_no };
+        var price = ${requestScope.product.product_price };
+        var ea = $('#ea').val();
+        $.ajax({
+           url:"insertPurchase.do",
+           data : "product_no="+product_no+"&id="+id+"&product_price="+product_price+"&order_ea="+order_ea,
+           dataType : "json",
+           success:function(r){
+              console.log(r);
+           }
+        });
+     });
  });
 </script>
 </head>
@@ -163,29 +164,29 @@ $(function() {
         </div>
         <table class="cart_list">
             <thead style="height:30px">
-                <th><input type="checkbox" name="check_all" value="check" id="check_all"></th>
                 <th>상품정보</th>
                 <th>수량</th>
                 <th>상품 금액</th>
                 <th>합계 금액</th>
+                <th>취소</th>
             </thead>
         	<tbody class="cart_product">
             	<c:forEach var="cart" items="${requestScope.cart }">
             	<tr style="height:70px">
-                	<td><input type="checkbox" name="check" class="check"></td>
              		<td><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
                 	<td id="ea">${cart.cart_ea }</td>
                 	<td>${cart.product_price }</td>
                 	<td id="total_price">${cart.cart_ea*cart.product_price }</td>
+                	<td><a href="cartDelete.do?cart_no=${cart.cart_no }" style="text-decoration:none;color:gray">삭제</a></td>
             	</tr>
             	</c:forEach>
             </tbody>
         </table>
         <form action="#" class="cart_total">
-            <div id="choose">
+            <!-- <div id="choose">
                 <button id="choose_all">전체 선택</button>
                 <button id="delete_choose">선택 상품 삭제</button>
-            </div>
+            </div> -->
                 <table class="total">
                     <tr>
                         <td></td>
@@ -204,7 +205,7 @@ $(function() {
                 </table>   
             <div id="continue">
                 <button><a href="productList.do?category_no=0">쇼핑 계속하기</a></button>
-                <button><a href="purchase.do">구매하기</a></button>
+                <button type="button" id="order_btn" style="color:white">구매하기</button>
             </div>
         </form>
     </div>

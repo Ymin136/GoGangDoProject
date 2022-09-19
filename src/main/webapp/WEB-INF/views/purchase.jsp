@@ -36,6 +36,9 @@
             margin: 10px auto;
             border-collapse: collapse;
         }
+        .order_list th{
+        	width: 20%;
+        }
         .order_list tr{
             text-align: center;
             border-bottom: solid 1px lightgray;
@@ -130,7 +133,7 @@
             </div>
         </div>
         <table class="order_list">
-            <p style="color:gray; height:10px;">주문상세내역</p>
+            <p style="color:gray; height:10px">주문상세내역</p>
             <thead style="height:30px">
                 <th>상품정보</th>
                 <th>수량</th>
@@ -138,14 +141,13 @@
                 <th>합계 금액</th>
                 <th>배송비</th>
             </thead>
+                <c:forEach var="order" items="${requestScope.order }">
             <tr style="height:70px">
-                <c:forEach var="cart" items="${requestScope.cart }">
-                	<td><input type="checkbox" name="check" class="check"></td>
-             		<td><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
-                	<td id="ea">${cart.order_ea }</td>
-                	<td>${cart.product_price }</td>
+             		<td><img alt="" src="imageLoad.do?fno=${order.img_no }">${order.product_name }</td>
+                	<td id="ea">${order.order_ea }</td>
+                	<td>${order.product_price }</td>
                 	<td id="total_price">${requestScope.total_price }</td>
-                	<td rowspan="${requestScope.cart_count }">3,000원</td>
+                	<td rowspan="${requestScope.order_count }">3,000원</td>
             	</c:forEach>
             </tr>
         </table>

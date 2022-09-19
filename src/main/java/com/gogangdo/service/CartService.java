@@ -24,8 +24,8 @@ public class CartService {
 		return mapper.selectCartCount();
 	}
 
-	public int cartDelete(int product_no) {
-		return mapper.cartDelete(product_no);
+	public int cartDelete(int cart_no) {
+		return mapper.cartDelete(cart_no);
 	}
 
 	public int selectCartNo() {
