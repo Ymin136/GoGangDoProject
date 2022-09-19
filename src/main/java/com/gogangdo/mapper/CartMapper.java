@@ -13,7 +13,7 @@ public interface CartMapper {
 
 	int selectCartCount();
 
-	int cartDelete(int product_no);
+	int cartDelete(int cart_no);
 
 	int selectCartNo();
 

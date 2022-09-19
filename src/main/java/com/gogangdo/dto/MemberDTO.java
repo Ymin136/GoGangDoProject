@@ -11,7 +11,9 @@ public class MemberDTO {
 	private String user_name;
 	private String tel;
 	private String email;
-	private String address;
+	private String address1;
+	private String address2;
+	private int post;
 	public MemberDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -58,14 +60,26 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getAddress() {
-		return address;
+	public String getAddress1() {
+		return address1;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+	public int getPost() {
+		return post;
+	}
+	public void setPost(int post) {
+		this.post = post;
 	}
 	public MemberDTO(int user_no, int user_grade, String id, String pw, String user_name, String tel, String email,
-			String address) {
+			String address1, String address2, int post) {
 		super();
 		this.user_no = user_no;
 		this.user_grade = user_grade;
@@ -74,12 +88,16 @@ public class MemberDTO {
 		this.user_name = user_name;
 		this.tel = tel;
 		this.email = email;
-		this.address = address;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.post = post;
 	}
 	@Override
 	public String toString() {
 		return "MemberDTO [user_no=" + user_no + ", user_grade=" + user_grade + ", id=" + id + ", pw=" + pw
-				+ ", user_name=" + user_name + ", tel=" + tel + ", email=" + email + ", address=" + address + "]";
+				+ ", user_name=" + user_name + ", tel=" + tel + ", email=" + email + ", address1=" + address1
+				+ ", address2=" + address2 + ", post=" + post + "]";
 	}
+	
 	
 }

@@ -93,7 +93,7 @@
                     	<div id="product">
                     	<a href="productDetail.do?product_no=${dto.product_no }">
                         	<img alt="" src="imageLoad.do?fno=${dto.img_no }">
-                        	<p>상품명 ${dto.product_name}</p>
+                        	<p>${dto.product_name}</p>
                         </a>
                         	<h4>${dto.product_price }원</h4>	
                     	</div>

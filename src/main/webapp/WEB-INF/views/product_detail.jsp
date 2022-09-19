@@ -78,6 +78,24 @@ $(function(){
            }
         });
      });
+	$('#order_btn').click(function(){
+        if(${sessionScope.login == null || sessionScope.login == false}){
+           alert("로그인을 하셔야 이용할수 있습니다.");
+           return false;
+     }
+        var id = '${sessionScope.id}';
+        var product_no = ${requestScope.product.product_no };
+        var price = ${requestScope.product.product_price };
+        var ea = $('#ea').val();
+        $.ajax({
+           url:"insertPurchase.do",
+           data : "product_no="+product_no+"&id="+id+"&product_price="+price+"&order_ea="+ea,
+           dataType : "json",
+           success:function(r){
+              console.log(r);
+           }
+        });
+     });
 });
 </script>
 </head>
@@ -104,7 +122,7 @@ $(function(){
 			<span id = "total">${requestScope.product.product_price } 원</span></td>
 		</tr>
 		<tr>
-			<td colspan="3"><button type="button" id="cart_btn">장바구니</button><a href="purchaseView.do"><button>구매하기</button></a></td>
+			<td colspan="3"><button type="button" id="cart_btn">장바구니</button><button type="button" id="order_btn">구매하기</button></td>
 		</tr>
 		<tr><td></td></tr>
 	</table>

@@ -13,7 +13,7 @@
 		select product_price * cart_ea from shop_cart
 	</select>
 	<delete id="cartDelete" parameterType="int">
-		delete from shop_cart where product_no = #{product_no} and id = #{id}
+		delete from shop_cart where cart_no = #{cart_no}
 	</delete>
 	<select id="selectCartNo" resultType="int">
 	    select Cart_no_ceq.nextval from dual
