@@ -13,10 +13,24 @@ public class MemberDTO {
 	private String email;
 	private String address1;
 	private String address2;
-	private int post;
+	private String post;
 	public MemberDTO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public MemberDTO(int user_no, int user_grade, String id, String pw, String user_name, String tel, String email,
+			String address1, String address2, String post) {
+		super();
+		this.user_no = user_no;
+		this.user_grade = user_grade;
+		this.id = id;
+		this.pw = pw;
+		this.user_name = user_name;
+		this.tel = tel;
+		this.email = email;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.post = post;
 	}
 	public int getUser_no() {
 		return user_no;
@@ -72,24 +86,10 @@ public class MemberDTO {
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
-	public int getPost() {
+	public String getPost() {
 		return post;
 	}
-	public void setPost(int post) {
-		this.post = post;
-	}
-	public MemberDTO(int user_no, int user_grade, String id, String pw, String user_name, String tel, String email,
-			String address1, String address2, int post) {
-		super();
-		this.user_no = user_no;
-		this.user_grade = user_grade;
-		this.id = id;
-		this.pw = pw;
-		this.user_name = user_name;
-		this.tel = tel;
-		this.email = email;
-		this.address1 = address1;
-		this.address2 = address2;
+	public void setPost(String post) {
 		this.post = post;
 	}
 	@Override

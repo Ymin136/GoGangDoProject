@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gogangdo.dto.CartDTO;
 import com.gogangdo.dto.FileDTO;
+import com.gogangdo.dto.ManagerDTO;
 import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.OrderDTO;
 import com.gogangdo.dto.ProductDTO;
@@ -77,12 +78,13 @@ public class MainController {
 	@RequestMapping("/loginView2.do")
 	public String loginView2(String id,String pw, HttpSession session) {
 		MemberDTO dto = memberService.login(id, pw);
+		System.out.println(dto.toString());
 		if(dto != null) {
 			session.setAttribute("login", true);
 			
 			session.setAttribute("id", dto.getId());
 			session.setAttribute("pw", dto.getPw());
-			session.setAttribute("user_no", dto.getUser_grade());
+			session.setAttribute("user_grade", dto.getUser_grade());
 			session.setAttribute("user_name", dto.getUser_name());
 			session.setAttribute("tel", dto.getTel());
 			session.setAttribute("address1", dto.getAddress1());
@@ -244,6 +246,13 @@ public class MainController {
 	@RequestMapping("/myPage.do")
 	public String myPage() {
 		return "mypage";
+	}
+	
+	@RequestMapping("/manager.do")
+	public String managerList(Model model) {
+		List<MemberDTO> memberList = memberService.selectMember();
+		model.addAttribute("memberList",memberList);		
+		return "manager2";
 	}
 	@RequestMapping("/insertCart.do")
 	public void insertCart(CartDTO dto, HttpServletResponse response, HttpServletRequest request) throws IOException {

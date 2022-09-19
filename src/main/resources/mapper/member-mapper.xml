@@ -21,4 +21,7 @@
 	<select id="selectid" parameterType="String" resultType="String">
 		select id from shop_user where id = #{id}
 	</select>
+	<select id="selectMember" resultType="member">
+		select * from shop_user
+	</select>
 </mapper>

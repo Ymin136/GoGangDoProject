@@ -56,7 +56,23 @@
 			alert("올바른 이메일 주소를 입력하세요")
 			return false;
 		}	
-	}			
+	}
+	//휴대폰번호 유효성검사	
+		$("#tel").val($("#tel1").val() + $("#ten2").val());
+		if($("#tel").val() = "" || $("#tel").val().length != 9 || isNAN($("#tel").val())){
+			return;
+		}
+		if(isNaN($("#tel").val())) {
+			alert("휴대혼번호를 숫자로만 입력해 주세요");
+			return;
+		}
+		for (var i=0; i<$("#ten").val().length;i++){
+			var chk = $("#tel").val().substring(i,i+1);
+			if(chk = ""){
+				alert("휴대폰번호를 정확히 입력해주세요");
+				return;
+			}
+		}			
 });
 </script>   
 <title>회원가입</title>
@@ -93,13 +109,13 @@
             <dd><input type="text" name="user_name"></dd>
           </dl>
           <dl>
-            <dt>휴대폰 인증받기</dt>
+            <dt>휴대폰</dt>
             <dd class="input-tel">
               <p class="flex-row">
             	<select id="tel" name="tel" style="width:70px" class="mgr8">
             		<option value="010">010</option>
             	</select> -  
-                <input name="input" id="tel2" maxlength="4" type="text" class="txt" style="width:150px"> <button class="btn type2" type="button">인증번호</button> <button class="btn type2" type="button">인증번호 확인</button>	        	
+                <input name="input" id="tel2" maxlength="9" type="text" class="txt" style="width:150px"> <button class="btn type2" type="button">인증번호</button> <button class="btn type2" type="button">인증번호 확인</button>	        	
 			</p>
             </dd>
           </dl>
@@ -116,13 +132,11 @@
             <dt>주소</dt>
             <dd class="input-addr">
               <p class="flex-row">
-                <input type="text" id="sample4_postcode" placeholder="우편번호">
+                <input type="text" id="sample4_postcode"  name="post" placeholder="우편번호">
                 <input type="button" class="btn type2" onclick="sample4_execDaumPostcode()" value="주소검색"><br>
-				<input type="text" id="sample4_roadAddress" name="address" placeholder="도로명주소">
-				<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+				<input type="text" id="sample4_roadAddress" name="address1" placeholder="도로명주소">
 				<span id="guide" style="color:#999;display:none"></span>
-				<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-				<input type="text" id="sample4_extraAddress" placeholder="참고항목">
+				<input type="text" id="sample4_detailAddress" name="address2" placeholder="상세주소">
 				<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
@@ -169,11 +183,7 @@
                     guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
                     guideTextBox.style.display = 'block';
 
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
+                }else {
                     guideTextBox.innerHTML = '';
                     guideTextBox.style.display = 'none';
                 }

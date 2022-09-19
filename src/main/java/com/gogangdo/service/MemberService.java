@@ -1,6 +1,7 @@
 package com.gogangdo.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -39,10 +40,12 @@ public class MemberService {
 	public String selectId(String id) {
 		return memberMapper.selectid(id);
 	}
-
+	
+	public List<MemberDTO> selectMember() {
+		return memberMapper.selectMember();
+	}
 	
 	
-
 	
 
 }
