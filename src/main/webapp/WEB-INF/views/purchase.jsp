@@ -139,15 +139,13 @@
                 <th>수량</th>
                 <th>상품 금액</th>
                 <th>합계 금액</th>
-                <th>배송비</th>
             </thead>
                 <c:forEach var="order" items="${requestScope.order }">
             <tr style="height:70px">
              		<td><img alt="" src="imageLoad.do?fno=${order.img_no }">${order.product_name }</td>
                 	<td id="ea">${order.order_ea }</td>
                 	<td>${order.product_price }</td>
-                	<td id="total_price">${requestScope.total_price }</td>
-                	<td rowspan="${requestScope.order_count }">3,000원</td>
+                	<td id="total_price">${order.order_ea*order.product_price }</td>
             	</c:forEach>
             </tr>
         </table>
@@ -165,7 +163,7 @@
                 <td></td>
                 <td>${requestScope.all_price }원</td>
                 <td>3,000원</td>
-                <td id="cart_price">${requestScope.cart_price }원</td>
+                <td id="cart_price">${requestScope.order_price }원</td>
             </tr>
         </table>
         <h3  id="buyer">주문자 정보</h3>

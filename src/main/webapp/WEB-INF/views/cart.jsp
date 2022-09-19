@@ -105,41 +105,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(function() {
-    $("#check_all").click(function() {
-    	if($("#check_all").is(":checked"))
-    		$(".check").prop("checked",true);
-    	else
-    		$(".check").prop("checked",false);
-    });
-    $(".check").click(function(){
-    	var total = $(".check").length;
-		var checked = $(".check:checked").length;
-		if(total != checked) 
-			$("#check_all").prop("checked", false);
-		else 
-			$("#check_all").prop("checked", true); 
-    });
-    $("#choose_all").click(function(){
-    	if($("#check_all").is(":checked"))
-    		$(".check").prop("checked",true);
-    	else
-    		$(".check").prop("checked",false);
-    });
-  
     $('#order_btn').click(function(){
         var id = '${sessionScope.id}';
-        var product_no = ${requestScope.product.product_no };
-        var price = ${requestScope.product.product_price };
-        var ea = $('#ea').val();
-        $.ajax({
-           url:"insertPurchase.do",
-           data : "product_no="+product_no+"&id="+id+"&product_price="+product_price+"&order_ea="+order_ea,
-           dataType : "json",
-           success:function(r){
-              console.log(r);
-           }
-        });
-     });
+       location.href= "orderCartProduct.do?id="+id;
+    });
  });
 </script>
 </head>

@@ -15,6 +15,7 @@ public class OrderDTO {
 	private int order_total;
 	private int product_price;
 	private String id;
+	
 	public OrderDTO() {
 		super();
 	}
@@ -42,6 +43,7 @@ public class OrderDTO {
 		this.product_price = product_price;
 		this.id = id;
 	}
+	
 	
 	public int getOrder_no() {
 		return order_no;

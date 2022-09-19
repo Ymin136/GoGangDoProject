@@ -93,4 +93,12 @@ public class ProductService {
 		return count;
 	}
 
+	public int selectProductImageNo(int product_no) {
+		return mapper.selectProductImageNo(product_no);
+	}
+
+	public String selectProductName(int product_no) {
+		return mapper.selectProductName(product_no);
+	}
+
 }

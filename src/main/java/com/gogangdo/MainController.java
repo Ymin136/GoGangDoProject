@@ -3,6 +3,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -177,7 +178,10 @@ public class MainController {
 //	}
 	@RequestMapping("/imageLoad.do")
 	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
+		System.out.println(fno);
 		String path = productService.selectImageFile(fno).getImg_path();
+		
+		System.out.println(path);
 		File file = new File(path);
 		
 		response.setHeader("Content-Disposition", "attachement;fileName="+file.getName());
@@ -258,8 +262,11 @@ public class MainController {
 	public void insertCart(CartDTO dto, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		//dto.setCart_no(cartService.selectCartNo());
 		int cno = cartService.selectCartNo();
-		System.out.println(dto.toString());
+		ProductDTO product = productService.selectproductDTO(dto.getProduct_no());
+		//System.out.println(product.toString());
+		dto.setImg_no(productService.selectProductImageNo(dto.getProduct_no()));
 		dto.setCart_no(cno);
+		System.out.println(dto.toString());
 		
 		cartService.insertCart(dto);
 	}
@@ -268,6 +275,7 @@ public class MainController {
 		String id = (String) session.getAttribute("id");
 		List<CartDTO> list = cartService.selectCartView(id);
 		model.addAttribute("cart", list);
+		System.out.println(list);
 		
 		int all_price = 0;
 		int total_price = 0;
@@ -295,45 +303,83 @@ public class MainController {
 	}
 	//상품을 구매 페이지에 넣는 매핑
 	@RequestMapping("/insertPurchase.do")
-	public String insertpurchase(OrderDTO dto, HttpServletResponse response, HttpServletRequest request) {
-		int ono = orderService.selectOrderNo();
+	public String insertpurchase(OrderDTO dto, Model model, HttpServletRequest request) {
 		System.out.println(dto.toString());
-		dto.setOrder_no(ono);
-		orderService.insertOrder(dto);
+		List<OrderDTO> list = new ArrayList<OrderDTO>();
+		ProductDTO product = productService.selectproductDTO(dto.getProduct_no());
+		System.out.println(product.toString());
+		dto.setImg_no(productService.selectProductImageNo(dto.getProduct_no()));
+		dto.setProduct_name(productService.selectProductName(dto.getProduct_no()));
+		list.add(dto);
+		
+		model.addAttribute("order", list);
+		
+		int all_price = 0;
+		int total_price = 0;
+		for(int i=0; i<list.size();i++) {
+			total_price = list.get(i).getProduct_price() * list.get(i).getOrder_ea();
+			all_price = all_price + total_price;
+		}
+		model.addAttribute("total_price", total_price);
+		model.addAttribute("all_price", all_price);
+		int deliv = 3000;
+		model.addAttribute("order_price", all_price + deliv);
+		int count = cartService.selectCartCount();
+		model.addAttribute("cart_count", count);
+		
 		return "purchase";
 	}
 	//SHOP_CART에 있는 데이터를 SHOP_ORDER에 넣는 매핑
 	@RequestMapping("/orderCartProduct.do")
-	public String orderCartProduct(OrderDTO dto, HttpServletResponse response, HttpServletRequest request) {
-		int ono = orderService.selectOrderNo();
-		System.out.println(dto.toString());
-		dto.setOrder_no(ono);
-		orderService.orderCartProduct(dto);
-		System.out.println(dto.toString());
+	public String orderCartProduct(String id, Model model, HttpSession session) {
+		List<OrderDTO> list = new ArrayList<OrderDTO>();
+		
+		List<CartDTO> clist = cartService.selectCartView(id);
+		for(int i=0; i<clist.size();i++) {
+			list.add(new OrderDTO(clist.get(i).getImg_no(), clist.get(i).getImg_path(), i, clist.get(i).getProduct_no(), null, clist.get(i).getCart_ea(), 0, clist.get(i).getProduct_price(), id, clist.get(i).getProduct_name()));
+		}
+		list.toString();
+		model.addAttribute("order", list);
+		
+		int all_price = 0;
+		int total_price = 0;
+		for(int i=0; i<list.size();i++) {
+			total_price = list.get(i).getProduct_price() * list.get(i).getOrder_ea();
+			all_price = all_price + total_price;
+		}
+		model.addAttribute("total_price", total_price);
+		model.addAttribute("all_price", all_price);
+		int deliv = 3000;
+		model.addAttribute("order_price", all_price + deliv);
+		int count = cartService.selectCartCount();
+		model.addAttribute("cart_count", count);
+		
+		System.out.println(list);
 		return "purchase";
 	}
 	@RequestMapping("/purchase.do")
 	public String purchase(Model model, HttpSession session) {
 		String id = (String) session.getAttribute("id");
 		List<OrderDTO> list = orderService.selectOrderView(id);
+		System.out.println(list);
 		model.addAttribute("order", list);
 		
-		int all_price = 0;
-		int total_price = 0;
-		for(int i=0; i<list.size();i++) {
-			OrderDTO dto = list.get(i);
-			total_price = dto.getProduct_price() * dto.getOrder_ea();
-			all_price = all_price + total_price;
-		}
-		//int total_price = cartService.selectTotalPrice();
-		model.addAttribute("total_price", total_price);
-		model.addAttribute("all_price", all_price);
-		int deliv = 3000;
-		model.addAttribute("order_price", all_price + deliv);
-		
-		int count = cartService.selectCartCount();
-		model.addAttribute("cart_count", count);
-		
+//		int all_price = 0;
+//		int total_price = 0;
+//		for(int i=0; i<list.size();i++) {
+//			OrderDTO dto = list.get(i);
+//			total_price = dto.getProduct_price() * dto.getOrder_ea();
+//			all_price = all_price + total_price;
+//		}
+//		//int total_price = cartService.selectTotalPrice();
+//		model.addAttribute("total_price", total_price);
+//		model.addAttribute("all_price", all_price);
+//		
+//		int deliv = 3000;
+//		model.addAttribute("order_price", all_price + deliv);
+//		
+//		int count = cartService.selectCartCount();
+//		model.addAttribute("cart_count", count);
 		return "purchase";
 	}
 	

@@ -87,14 +87,10 @@ $(function(){
         var product_no = ${requestScope.product.product_no };
         var price = ${requestScope.product.product_price };
         var ea = $('#ea').val();
-        $.ajax({
-           url:"insertPurchase.do",
-           data : "product_no="+product_no+"&id="+id+"&product_price="+price+"&order_ea="+ea,
-           dataType : "json",
-           success:function(r){
-              console.log(r);
-           }
-        });
+        
+       location.href= "insertPurchase.do?product_no="+product_no+"&id="+id+"&product_price="+price+"&order_ea="+ea;
+           
+        
      });
 });
 </script>

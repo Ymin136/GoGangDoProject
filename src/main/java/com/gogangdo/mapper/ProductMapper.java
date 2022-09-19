@@ -45,6 +45,11 @@ public interface ProductMapper {
 	int selectQnACount(int product_no);
 
 
+	int selectProductImageNo(int product_no);
+
+	String selectProductName(int product_no);
+
+
 
 
 
