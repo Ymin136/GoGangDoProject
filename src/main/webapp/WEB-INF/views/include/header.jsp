@@ -40,6 +40,7 @@ $(function(){
 <body>
 <div id="header_container"> 
 <div id = "header_login_container">
+
 <c:choose>
 	<c:when test="${!sessionScope.login }">
 	<div id = "header_non_login">	
@@ -49,7 +50,7 @@ $(function(){
 		</ul>
 	</div>
 	</c:when>
-	<c:when test="${sessionScope.user_no != 0 }">
+	<c:when test="${sessionScope.user_grade != 0 }">
 	<div id = "header_login">
 		 <ul>
 		 <li>${sessionScope.user_name }님</li>
@@ -58,15 +59,15 @@ $(function(){
 		 </ul>
 	</div>		 
 	</c:when>
-	<c:otherwise>
+	<c:when test="${sessionScope.user_grade == 0 }">
 	<div id = "header_admin">
 		 <ul>
 		 <li>${sessionScope.user_name }님</li>
-		 <li><a href="myPage.do">관리자페이지</a></li>	 	
+		 <li><a href="manager.do">관리자페이지</a></li>	 	
 		 <li><a href="loginoutView.do">로그아웃</a></li>
 		 </ul>
 	</div>	
-	</c:otherwise>
+	</c:when>
 </c:choose>	
 </div>
 <div id="header_main">
