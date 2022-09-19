@@ -43,8 +43,14 @@ public interface ProductMapper {
 	List<ProductDTO> selectProductSubList(Map<Object, Object> map);
 	int selectReviewCount(int product_no);
 	int selectQnACount(int product_no);
+	int selectQnaNo();
+	void insertQnA(QnADTO dto);
 
 
+	List<QnADTO> selectQnaAllList(Map<String, Integer> map);
+
+
+	int selectQnaAllCount(int answer_check);
 
 
 

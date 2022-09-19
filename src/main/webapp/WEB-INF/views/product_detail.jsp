@@ -72,9 +72,9 @@ $(function(){
         $.ajax({
            url:"insertCart.do",
            data : "product_no="+product_no+"&id="+id+"&product_price="+price+"&cart_ea="+ea,
-           dataType : "json",
+           dataType : "text",
            success:function(r){
-              console.log(r);
+        	   alert("장바구니에 등록됐습니다.");        	   
            }
         });
      });
@@ -90,12 +90,27 @@ $(function(){
         $.ajax({
            url:"insertPurchase.do",
            data : "product_no="+product_no+"&id="+id+"&product_price="+price+"&order_ea="+ea,
-           dataType : "json",
+           dataType : "text",
            success:function(r){
-              console.log(r);
+               location.href="/purchase.do";
            }
         });
      });
+	$('#qna_btn').click(function(){
+		 if(${sessionScope.login == null || sessionScope.login == false}){
+	           alert("로그인을 하셔야 이용할수 있습니다.");
+	           return false;
+	     }
+		$('body').css("overflow","hidden");
+		$('#qna_pop').css("display","block");
+		$(".shadow").show();
+	});
+	$('#btn_close').click(function(){
+		$('body').css("overflow","visible");
+		$('#qna_pop').css("display","none");
+		$('#qna_pop textarea').val("");
+		$('.shadow').hide();
+	});
 });
 </script>
 </head>
@@ -174,7 +189,7 @@ $(function(){
 	
 	<div id="QnA_container">
 		<p><h2>상품문의</h2></p>
-		<table>
+		<table id="qna_table">
 		<tbody id="qna_list">
 		<c:forEach var="qna" items="${requestScope.qnalist }">
 	           	<tr id="question">
@@ -203,8 +218,32 @@ $(function(){
 	        	</td>
     	    </tr>
         </table>
-        
-   			<button id="qna_btn">문의하기</button>
+        <div class="shadow"></div>
+        <button id="qna_btn">문의하기</button>
+        	<div id="qna_pop" style="display:none;">
+        	<div id="pop_inner">
+        		<h2 style="margin-left:10px;">문의하기</h2>
+        		<form action="insertQnA.do"> 
+        		<input type="hidden" name="product_no" value="${requestScope.product.product_no }">
+        		<table>
+        		<tr>
+        			<td id="title">상품정보</td>
+        			<td>${requestScope.product.product_name }</td>
+        		</tr>
+        		<tr>
+        			<td id="title">문의내용</td>
+        			<td><textarea name="qna_content"></textarea></td>
+        		</tr>
+        		<tr>
+        			<td colspan="2" id="btn_td"><button id="btn_send">문의하기</button>
+        			<button type="button" id="btn_close">취소</button></td>
+        		</tr>
+        		</table>
+        		</form>
+        	</div>
+   			
+   			
+   			</div>
 	</div>
 	<div id="introduce_container">
 		<ul>

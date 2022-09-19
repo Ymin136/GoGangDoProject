@@ -43,6 +43,12 @@ $(function(){
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.login == null || sessionScope.login == false || sessionScope.user_grade==1 }">
+		<script>
+			alert("관리자만 이용가능합니다.");
+			location.href="/main.do";
+		</script>
+	</c:if>
 <jsp:include page="include/header.jsp"></jsp:include>
 <div id="container">
 	<h1>상품등록</h1>

@@ -3,6 +3,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.http.HttpResponse;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -227,6 +228,25 @@ public class MainController {
 		}
 		return "product_detail";
 	}
+	@RequestMapping("qnaAllList.do")
+	public ResponseEntity<List<QnADTO>>  qnaAllList(int pageNo, int answer_check) {
+		List<QnADTO> list = productService.selectQnaAllList(pageNo,answer_check);
+		return ResponseEntity.ok(list);
+	}
+	@RequestMapping("qnaPagging.do")
+	public ResponseEntity<PaggingVO> qnaPaggingList(int pageNo, int answer_check) {
+		int qna_count = productService.selectQnaAllCount(answer_check);
+		PaggingVO qna_vo = new PaggingVO(qna_count, pageNo, 5, 10);
+		return ResponseEntity.ok(qna_vo);
+	}
+	@RequestMapping("/qnaManagerView.do")
+	public String qnaManagerView(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, 
+			@RequestParam(name = "answer_check", defaultValue = "0") int answer_check, Model model) {		
+		int qna_count = productService.selectQnaAllCount(answer_check);
+		PaggingVO qna_vo = new PaggingVO(qna_count, pageNo, 5, 10);
+		model.addAttribute("qna_pagging", qna_vo);
+		return "qna_manager";
+	}
 	@RequestMapping("/ReviewList.do")
 	public ResponseEntity<List<ReviewDTO>> 
 							ReviewList(int pageNo, int product_no){
@@ -260,8 +280,12 @@ public class MainController {
 		int cno = cartService.selectCartNo();
 		System.out.println(dto.toString());
 		dto.setCart_no(cno);
-		
 		cartService.insertCart(dto);
+		try {
+			response.getWriter().write(1);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	@RequestMapping("/cartView.do")
 	public String cartView(Model model, HttpSession session) {
@@ -295,12 +319,16 @@ public class MainController {
 	}
 	//상품을 구매 페이지에 넣는 매핑
 	@RequestMapping("/insertPurchase.do")
-	public String insertpurchase(OrderDTO dto, HttpServletResponse response, HttpServletRequest request) {
+	public void insertpurchase(OrderDTO dto, HttpServletResponse response, HttpServletRequest request) {
 		int ono = orderService.selectOrderNo();
 		System.out.println(dto.toString());
 		dto.setOrder_no(ono);
 		orderService.insertOrder(dto);
-		return "purchase";
+		try {
+			response.getWriter().write(1);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	//SHOP_CART에 있는 데이터를 SHOP_ORDER에 넣는 매핑
 	@RequestMapping("/orderCartProduct.do")
@@ -377,8 +405,29 @@ public class MainController {
 		response.setContentType("text/html;charset=utf-8");
 		response.getWriter().write("<script>alert('상품 등록 성공');location.href='productDetail.do?product_no="+pno+"';</script>");
 		} catch (IOException e) {			
-			response.getWriter().write("<script>alert('데이터입력이 잘못됐습니다.');history.bakc();</script>");
+			response.getWriter().write("<script>alert('데이터입력이 잘못됐습니다.');history.back();</script>");
 		}
+	}
+	
+	@RequestMapping("/insertQnA.do")
+	public void insertQnA(QnADTO dto, HttpSession session, HttpServletResponse response) {
+		int qno = productService.selectQnaNo();
+		String id = (String) session.getAttribute("id");
+		dto.setQna_no(qno);
+		dto.setId(id);
+		System.out.println(dto.toString());
+		productService.insertQnA(dto);
+		try {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("<script>alert('문의사항 등록완료');location.href='productDetail.do?product_no="+dto.getProduct_no()+"';</script>");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	@RequestMapping("/insertQnaAnswer.do")
+	public void insertQnaAnswer(int qna_no, String qna_content, String answer_content) {
+		System.out.println(qna_no+", "+qna_content+", "+answer_content);
+		
 	}
 	
 }
