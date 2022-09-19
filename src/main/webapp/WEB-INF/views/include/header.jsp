@@ -117,7 +117,7 @@ $(function(){
 	<tr><td id="top" rowspan="3" ><a href="productList.do">미용/목욕</a></td>
 	<td><a href="productList.do">샴푸/린스</a></td></tr>	
 	<tr><td><a href="productList.do">브러쉬</a></td></tr>
-	<tr><td id="top" rowspan="3" ><a href="productList.do">장난감</a></td>
+	<tr><td id="top" rowspan="3" ><a href="qnaManagerView.do">장난감</a></td>
 	<tr><td></td></tr><tr><td></td></tr>
 	<tr><td></td></tr><tr><td></td></tr>
 	<tr><td id="top" rowspan="3" ><a href="productList.do">고양이</a></td>

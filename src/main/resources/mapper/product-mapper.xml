@@ -85,4 +85,18 @@
 	<select id="selectQnACount" resultType="int" parameterType="int">
 		SELECT COUNT(*) FROM qna_VIEW WHERE PRODUCT_NO=#{pno} 
 	</select>
+	<select id="selectQnaNo" resultType="int">
+		select qna_no_seq.nextval from dual
+	</select>
+	<insert id="insertQnA" parameterType="qna">
+		insert into shop_qna values(#{qna_no},#{id},#{qna_content},sysdate,#{product_no},null,null,0)	
+	</insert>
+	<select id="selectQnaAllList" resultType="qna" parameterType="map">
+		select * from (select ceil(rownum / 5) as pageNo, qv.*
+		from qna_view qv where  answer_check = #{answer_check})
+        where pageNo=#{pageNo}
+	</select>
+	<select id="selectQnaAllCount" resultType="int">
+		SELECT COUNT(*) FROM qna_VIEW where answer_check = #{answer_check}
+	</select>
 </mapper>
