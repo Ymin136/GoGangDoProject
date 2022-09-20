@@ -12,7 +12,7 @@
 		select * from shop_user where id = #{id} and pw = #{pw}
 	</select>
 	<update id="userUpdate" parameterType="member">
-		update shop_user set pw = #{pw}, user_name=#{user_name}, tel=#{tel}, address=#{address}, email=#{email}
+		update shop_user set pw = #{pw}, user_name=#{user_name}, tel=#{tel}, address1=#{address1}, email=#{email}, address2=#{address2}, post=#{post} 
 		where id = #{id}
 	</update>
 	<delete id="userDelete" parameterType="String">
