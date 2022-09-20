@@ -46,8 +46,8 @@
             border: solid 1px lightgray;
         }*/
         .cart_list img{
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
         }
         .cart_total{
             width: 1200px;
@@ -142,11 +142,11 @@ $(function() {
         	<tbody class="cart_product">
             	<c:forEach var="cart" items="${requestScope.cart }">
             	<tr style="height:70px">
-             		<td><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
+             		<td style="font-size:14px;color:gray"><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
                 	<td id="ea">${cart.cart_ea }</td>
                 	<td>${cart.product_price }</td>
                 	<td id="total_price">${cart.cart_ea*cart.product_price }</td>
-                	<td><a href="cartDelete.do?cart_no=${cart.cart_no }" style="text-decoration:none;color:gray">삭제</a></td>
+                	<td><a href="cartDelete.do?cart_no=${cart.cart_no }" style="text-decoration:none;color:darkgray">삭제</a></td>
             	</tr>
             	</c:forEach>
             </tbody>
