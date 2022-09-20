@@ -21,4 +21,7 @@
 	<insert id="insertCart" parameterType="cart">
 		insert into shop_cart values (#{cart_no}, #{product_no}, #{id}, #{product_price}, #{cart_ea})
 	</insert>
+	<delete id="deleteAllCart" parameterType="cart">
+		delete shop_cart where id = #{id, jdbcType=VARCHAR}
+	</delete>
 </mapper>

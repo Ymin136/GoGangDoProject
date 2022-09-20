@@ -1,5 +1,6 @@
 package com.gogangdo;
 import java.io.BufferedOutputStream;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,7 +22,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.gogangdo.dto.CartDTO;
 import com.gogangdo.dto.FileDTO;
 import com.gogangdo.dto.MemberDTO;
-import com.gogangdo.dto.OrderDTO;
+import com.gogangdo.dto.OrderManageDTO;
+import com.gogangdo.dto.Order_DetailDTO;
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.dto.QnADTO;
 import com.gogangdo.dto.ReviewDTO;
@@ -30,6 +32,8 @@ import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
 import com.gogangdo.vo.PaggingVO;
+
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
 @Controller
 public class MainController {
@@ -328,11 +332,11 @@ public class MainController {
 	}
 	//상품을 구매 페이지에 넣는 매핑
 	@RequestMapping("/insertPurchase.do")
-	public String insertpurchase(OrderDTO dto, Model model, HttpServletRequest request) {
-		System.out.println(dto.toString());
-		List<OrderDTO> list = new ArrayList<OrderDTO>();
+	public String insertpurchase(Order_DetailDTO dto, Model model, HttpServletRequest request) {
+		//System.out.println(dto.toString());
+		List<Order_DetailDTO> list = new ArrayList<Order_DetailDTO>();
 		ProductDTO product = productService.selectproductDTO(dto.getProduct_no());
-		System.out.println(product.toString());
+		//System.out.println(product.toString());
 		dto.setImg_no(productService.selectProductImageNo(dto.getProduct_no()));
 		dto.setProduct_name(productService.selectProductName(dto.getProduct_no()));
 		list.add(dto);
@@ -352,17 +356,18 @@ public class MainController {
 		int count = cartService.selectCartCount();
 		model.addAttribute("cart_count", count);
 		
+		System.out.println(list.toString());
+//		insertCart()
 		return "purchase";
-
 	}
 	//SHOP_CART에 있는 데이터를 SHOP_ORDER에 넣는 매핑
 	@RequestMapping("/orderCartProduct.do")
 	public String orderCartProduct(String id, Model model, HttpSession session) {
-		List<OrderDTO> list = new ArrayList<OrderDTO>();
+		List<Order_DetailDTO> list = new ArrayList<Order_DetailDTO>();
 		
 		List<CartDTO> clist = cartService.selectCartView(id);
 		for(int i=0; i<clist.size();i++) {
-			list.add(new OrderDTO(clist.get(i).getImg_no(), clist.get(i).getImg_path(), i, clist.get(i).getProduct_no(), null, clist.get(i).getCart_ea(), 0, clist.get(i).getProduct_price(), id, clist.get(i).getProduct_name()));
+			list.add(new Order_DetailDTO(clist.get(i).getImg_no(), clist.get(i).getImg_path(), i, i, clist.get(i).getProduct_no(), clist.get(i).getCart_ea(), 0, clist.get(i).getProduct_price(), id, clist.get(i).getProduct_name()));
 		}
 		list.toString();
 		model.addAttribute("order", list);
@@ -384,29 +389,36 @@ public class MainController {
 		return "purchase";
 	}
 	@RequestMapping("/purchase.do")
-	public String purchase(Model model, HttpSession session) {
-		String id = (String) session.getAttribute("id");
-		List<OrderDTO> list = orderService.selectOrderView(id);
-		System.out.println(list);
-		model.addAttribute("order", list);
+	public void purchase(HttpSession session, HttpServletResponse response, OrderManageDTO manage){
+		//		String id = (String) session.getAttribute("id");
+//		List<Order_DetailDTO> list = orderService.selectOrderView(id);
+//		System.out.println(list);
+//		model.addAttribute("order", list);
 		
-//		int all_price = 0;
-//		int total_price = 0;
-//		for(int i=0; i<list.size();i++) {
-//			OrderDTO dto = list.get(i);
-//			total_price = dto.getProduct_price() * dto.getOrder_ea();
-//			all_price = all_price + total_price;
-//		}
-//		//int total_price = cartService.selectTotalPrice();
-//		model.addAttribute("total_price", total_price);
-//		model.addAttribute("all_price", all_price);
-//		
-//		int deliv = 3000;
-//		model.addAttribute("order_price", all_price + deliv);
-//		
-//		int count = cartService.selectCartCount();
-//		model.addAttribute("cart_count", count);
-		return "purchase";
+//		Calendar cal = Calendar.getInstance();
+//		 int year = cal.get(Calendar.YEAR);
+//		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+//		 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+//		 Date order_date = ymd;
+		int ono = orderService.selectOrderNo();
+		manage.setOrder_no(ono);
+		System.out.println(manage.toString());
+		orderService.insertOrderManage(manage);
+//		System.out.println(manage.toString());
+		
+		List<CartDTO>list = cartService.selectCartView(manage.getId());	
+		
+		for(int i=0; i<list.size(); i++) {
+			System.out.println(list.get(i).getProduct_price());
+			int odno = orderService.selectOrderDetailNo();
+			Order_DetailDTO dto = new Order_DetailDTO(ono, odno, list.get(i).getProduct_no(),list.get(i).getCart_ea(),
+					list.get(i).getProduct_price(),list.get(i).getProduct_name());
+			orderService.insertOrderDetail(dto);
+		}
+//		detail.setOrder_no(ono);
+//		System.out.println(detail.toString());
+		
+//		cartService.deleteAllCart(id);
 	}
 	
 	@RequestMapping("/productRegisterView.do")

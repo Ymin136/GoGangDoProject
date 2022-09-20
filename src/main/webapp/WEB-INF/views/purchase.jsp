@@ -36,20 +36,17 @@
             margin: 10px auto;
             border-collapse: collapse;
         }
-        .order_list th{
+        /*.order_list th{
         	width: 20%;
-        }
+        }*/
         .order_list tr{
             text-align: center;
             border-bottom: solid 1px lightgray;
         }
         .order_list img{
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
         }
-        /*thead{
-            background-color: bisque;
-        }*/
         #cart{
             width: 170px;
             height: 30px;
@@ -66,6 +63,11 @@
             width: 1200px;
             margin: 20px auto;
             background-color: #e9e9e9;
+        }
+        .total img{
+            width: 25px;
+            height: 25px;
+            margin-bottom: 15px;
         }
         .total td{
             width: 20%;
@@ -111,6 +113,9 @@
         }
 </style>
 <script type="text/javascript">
+	$(function(){
+		
+	});
 </script>
 </head>
 <body>
@@ -134,7 +139,7 @@
         </div>
         <table class="order_list">
             <p style="color:gray; height:10px">주문상세내역</p>
-            <thead style="height:30px">
+            <thead style="height:30px;border-top:1px solid black">
                 <th>상품정보</th>
                 <th>수량</th>
                 <th>상품 금액</th>
@@ -142,7 +147,7 @@
             </thead>
                 <c:forEach var="order" items="${requestScope.order }">
             <tr style="height:70px">
-             		<td><img alt="" src="imageLoad.do?fno=${order.img_no }">${order.product_name }</td>
+             		<td style="font-size:14px;color:gray"><img alt="" src="imageLoad.do?fno=${order.img_no }">${order.product_name }</td>
                 	<td id="ea">${order.order_ea }</td>
                 	<td>${order.product_price }</td>
                 	<td id="total_price">${order.order_ea*order.product_price }</td>
@@ -167,19 +172,21 @@
             </tr>
         </table>
         <h3  id="buyer">주문자 정보</h3>
-        <form action="" method="post">
+        <form action="purchase.do" method="get" class="order_info">
+        <input type="hidden" name="order_total" value="${requestScope.order_price}">
+        
             <table id="buyer_info">
                 <tr style="height:50px">
                     <td>주문하시는 분</td>
-                    <td><input type="text" name="buyer" value="${sessionScope.user_name }"></td>
+                    <td><input type="text" name="id" value="${sessionScope.id }"></td>
                 </tr>
                 <tr>
                     <td>전화번호</td>
-                    <td><input type="text" name="tel" value="${sessionScope.tel }"></td>
+                    <td><input type="text" value="${sessionScope.tel }"></td>
                 </tr>
                 <tr style="height:60px">
                     <td>이메일</td>
-                    <td><input type="text" name="e-mail" value="${sessionScope.email }">              
+                    <td><input type="text" value="${sessionScope.email }">              
                         <!-- <select name="mail" id="email">
                             <option value="naver.com">naver.com</option>
                             <option value="gmail.com">gmail.com</option>
@@ -193,8 +200,8 @@
                 <tr>
                     <td>배송지 확인</td>
                     <td>
-                        <input type="radio" name="address" checked>기본배송지
-                        <input type="radio" name="address">직접입력
+                        <input type="radio" checked>기본배송지
+                        <input type="radio">직접입력
                     </td>
                 </tr>
                 <tr style="height:120px">
@@ -205,7 +212,7 @@
                         <input type="button" id="search_address" onclick="sample4_execDaumPostcode()" value="주소 바꾸기" 
                         style="width:100px;height:27px;background-color:black;color:white"><br>
                         <!-- <button id="search_address" name="search_address">주소 수정</button><br> -->
-                        <input type="text" id="sample4_roadAddress" name="road_address" value="${sessionScope.address1 }" style="width:210px"><br>
+                        <input type="text" id="sample4_roadAddress" name="order_address" value="${sessionScope.address1 }" style="width:210px"><br>
                         <input type="text" id="sample4_detailcode" value="${sessionScope.address2 }" style="width:210px"><br>
                         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                         <script>
@@ -269,7 +276,7 @@
                 </tr>
                 <tr>
                     <td>남기실 말씀</td>
-                    <td><input type="text" name="deliver_comment"></td>
+                    <td><input type="text"></td>
                 </tr>
             </table>
             <table id="buy_way">
@@ -279,20 +286,20 @@
                     <td>
                         <tr>
                             <td>
-                                <input type="radio" name="pay_way">무통장 입금
-                                <input type="radio" name="pay_way">신용카드
-                                <input type="radio" name="pay_way">계좌이체
-                                <input type="radio" name="pay_way">가상계좌
+                                <input type="radio">무통장 입금
+                                <input type="radio">신용카드
+                                <input type="radio">계좌이체
+                                <input type="radio">가상계좌
                             </td>
                         </tr>
                         <tr>
                             <td style="height:20px">(무통장 입금의 경우 입금확인 후부터 배송단계가 진행됩니다)</td>
                         </tr>
                         <tr>
-                            <td>입금자명 <input type="text" name="pay_name"></td>
+                            <td>입금자명 <input type="text"></td>
                         </tr>
                         <tr style="height:20px">
-                            <td>입금은행 <select name="bank" id="bank" style="height:25px;font-size:15px">
+                            <td>입금은행 <select id="bank" style="height:25px;font-size:15px">
                                             <option value="kakao_bank">카카오뱅크</option>
                                             <option value="shinhan">신한</option>
                                             <option value="kb">KB</option>
@@ -304,12 +311,12 @@
                 <tr style="height:70px">
                     <td>현금영수증/계산서 발행</td>
                     <td>
-                        <input type="radio" name="receipt">신청안함
-                        <input type="radio" name="receipt">현금영수증
+                        <input type="radio">신청안함
+                        <input type="radio">현금영수증
                     </td>
                 </tr>
                 <tr style="height: 100px">
-                    <td id="final_price" name="final_price" style="font-weight:bold">최종결제 금액 ${requestScope.cart_price }원</td>
+                    <td id="final_price" style="font-weight:bold">최종결제 금액 ${requestScope.cart_price }원</td>
                 </tr>
             </table>
             <p id="agree"><input type="checkbox" checked>(필수)구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</p>

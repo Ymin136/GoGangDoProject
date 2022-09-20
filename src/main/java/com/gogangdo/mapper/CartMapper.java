@@ -18,6 +18,8 @@ public interface CartMapper {
 	int selectCartNo();
 
 	void insertCart(CartDTO dto);
+	
+	void deleteAllCart(String id);
 
 //	int selectCartPrice();
 

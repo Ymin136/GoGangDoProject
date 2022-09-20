@@ -36,6 +36,10 @@ public class CartService {
 		mapper.insertCart(dto);
 	}
 
+	public void deleteAllCart(String id) {
+		mapper.deleteAllCart(id);
+	}
+
 //	public int selectCartPrice() {
 //		return mapper.selectCartPrice();
 //	}
