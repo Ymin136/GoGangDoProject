@@ -1,0 +1,120 @@
+@charset "UTF-8";
+#qna_container{
+		width:1150px;
+		margin : 0 auto;
+		padding:25px;
+		border: 1px solid black;		
+	}
+	
+	#qna_container #qna_table{
+		width : 1100px;
+		margin-left:30px;
+		border-collapse: collapse;
+		table-layout: fixed;
+	}
+	#qna_container #qna_table td{
+		padding :5px 0px;
+		text-overflow:ellipsis; overflow:hidden
+	}
+	#qna_container #qna_table #title{
+		width:12%;
+		text-align: left;
+	}
+	#qna_container #qna_table #date{
+		width:18%;
+	} 
+	#qna_container #qna_table .content{
+		width : 55%;
+		text-align: left;
+	}
+	#qna_container #qna_table #under td{
+		border-bottom:1px solid lightgray;
+		padding-bottom:10px;
+	}
+	#qna_container #qna_table #question td{
+		padding-top:30px;
+	}
+	#qna_container #qna_table #product{
+		width:150px;
+		padding:0px 10px;
+	}
+	#qna_container #qna_tfoot {
+		text-align: center;
+		text-decoration: none;
+	}
+	#qna_container a{
+		font-family: sans-serif;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		text-decoration: none;
+	}
+	#page_bar a{
+		text-decoration:none; 
+		margin : 0px 10px;
+	}
+	#qna_btn{
+		width:100px;
+		height:50px;
+		border:none;
+		background-color : gray;
+		color : white;
+		border-radius:5px;
+		margin-left:1000px;
+	}
+	.qna_pop{
+		width:640px;
+		height:auto;
+		padding-bottom:20px; 
+		top:10%;
+		left:35%;
+		background-color:#fff;
+		position:fixed;
+		border:1px solid black;
+		vertical-align:middle; content:'';
+		overflow: hidden;
+	}
+	.qna_pop textarea{
+		width:100%;
+		height:200px;
+	}
+	.qna_pop table{
+		width:90%;
+		margin : 0 auto;
+		border-top : 3px solid gray;
+		border-collapse: collapse;
+	}
+	.qna_pop td:not(#btn_td){
+		text-align: left;
+		padding :20px;
+		border-bottom:1px solid lightgray;
+	}
+	#btn_td{
+		text-align: left;
+		padding:10px;
+		padding-top:20px;
+	}
+	.qna_pop #title{
+		vertical-align: top;
+		text-align: left;
+		width:30%;
+		border-right:1px solid lightgray;
+		border-bottom:1px solid lightgray;
+	}
+	.qna_pop button{
+		color: white;
+	    font-weight: bold;
+	    text-align: center;
+	    width: 45%;
+	    height: 40px;
+	    border: none;
+	    border-radius: 5px;
+	    margin-left: 20px;
+	}
+	.btn_close{
+		background: gray;
+	}
+	#btn_send{
+		background: #008cff;
+	}
+	.shadow{position: fixed;left: 0;top: 0;background: rgba(0, 0, 0, 0.52);width: 100%;height: 100vh;display: none}
+	
