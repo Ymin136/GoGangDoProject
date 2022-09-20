@@ -24,4 +24,16 @@
 	<select id="selectMember" resultType="member">
 		select * from shop_user
 	</select>
+	<select id="selectproduct" resultType="product">
+		select * from shop_product 
+	</select>
+	<update parameterType="member" id="updateMember">
+		update shop_userset user_grade = #{user_grade},id = #{id},user_name = #{user_name},tel = #{tel},address1 = #{address1},address2 = #{address2},email = #{email},post = #{post}where user_no = #{user_no} 
+	</update>
+	<update parameterType="map" id="updateMemberAccess">
+		update shop_user set user_grade = #{user_grade}where id = #{id} 
+	</update>
+	<delete parameterType="String" id="deleteMember">
+		delete from shop_userwhere user_no = #{user_no} 
+	</delete>
 </mapper>

@@ -45,6 +45,32 @@ public class MemberService {
 		return memberMapper.selectMember();
 	}
 	
+	public List<MemberDTO> selectMemberDetail(String type, String search) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("type", type);
+		map.put("search", search);
+		return memberMapper.selectMemberDetail(map);
+	}
+
+	public void updateMemberAccess(String id, String user_grade) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("user_grade", user_grade);
+		memberMapper.updateMemberAccess(map);
+		
+	}
+	public List<MemberDTO> selectproduct() {
+		return memberMapper.selectproduct();
+	}
+
+	public int updateMember(MemberDTO dto) {
+		return memberMapper.updateMember(dto);
+	}
+
+	public int deleteMember(String user_no) {
+		return memberMapper.deleteMember(user_no);
+	}
+	
 	
 	
 
