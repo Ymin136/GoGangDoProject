@@ -58,7 +58,7 @@
 			<table class="info_table">
 			<tr>
 				<td class="j">*아이디</td>
-				<td class="j"><input type="text" id="pname" name="id" value="dadd"></td>
+				<td class="j"><input type="text" id="pname" name="id" value="${sessionScope.id }"></td>
 				<td class="j">&nbsp</td>
 			</tr>
 			<tr>
@@ -71,15 +71,14 @@
 			<tr>
 				<td class="j">*이름</td>
 				<td class="j">
-					<input type="text" id="pname" name="user_name" value="이준택">
+					<input type="text" id="pname" name="user_name" value="${sessionScope.user_name }">
 				</td>
 				<td class="j"></td>
 			</tr>
 			<tr>
 				<td rowspan='2' class="j">*이메일</td>
 				<td >
-					<form>
-  						<input type="text" id="pname" class="mail" name="email" value="jun@">
+  					<input type="text" id="pname" class="mail" name="email" value="${sessionScope.email }">
 					<select id="pname" mutiple>
 					<option value="">직접입력</option>
 					<option value="naver.com">naver.com</option>
@@ -88,7 +87,6 @@
 					<option value="hanmail.com.com">hanmail.com</option>
 					<option value="outlook.com">outlook.com</option>
 					</select>
-					</form>
 				</td>
 				<td></td>
 			</tr>
@@ -100,7 +98,7 @@
 			<tr>
 				<td rowspan='2' class="j">*휴대폰 번호</td>
 				<td >
-  						<input type="text" id="pname" name="tel" value="01077479832">
+  						<input type="text" id="pname" name="tel" value="${sessionScope.tel }">
 
 					
 				</td>
@@ -113,17 +111,17 @@
 			</tr>
 			<tr class="adress">
 				<td rowspan='3' class="j">*주소</td>
-				<td><input type="text" id="pname" name="address"><button id="bu" style='cursor:pointer;'>우편번호검색</button></td>
+				<td><input type="text" id="pname" name="post" value="${sessionScope.post }"><button type="button" onclick="location.href='https://www.epost.go.kr/search.RetrieveIntegrationNewZipCdList.comm' " style='cursor:pointer;'>우편번호검색</button></td>
 				<td></td>
 			</tr>
 			<tr>
 				
-				<td><input type="text" id="pname" placeholder="도/시"><input type="text" id="pname" placeholder="도시"></td>
+				<td><input type="text" id="pname" name="address1" value="${sessionScope.address1 }">
 				<td></td>
 			</tr>
 			<tr class="adress2">
 				
-				<td><input type="text" id="pname" size="80px" placeholder="상세주소"></td>
+				<td><input type="text" id="pname" size="80px" name="address2" value="${sessionScope.address2 }"></td>
 				<td></td>
 			</tr>
 			
@@ -224,8 +222,7 @@
 		</div> -->
 		
 		<div id="infofix">
-		<a href="javascript:window.history.back();">
-		<button type="button" class="info" style='cursor:pointer;'>정보수정</button></a>
+		<button class="info" style='cursor:pointer;'>정보수정</button>
 		<a href="javascript:window.history.back();">
 		<button type="button" class="fix" style='cursor:pointer;'>취소</button></a>
 		</div>

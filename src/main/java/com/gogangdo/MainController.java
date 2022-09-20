@@ -441,6 +441,7 @@ public class MainController {
 		img_no = productService.selectImageNo();
 		productService.insertproduct_img(new FileDTO(uploadFile2, pno, img_no));		
 		try {
+		
 			thumbnail.transferTo(uploadFile1);
 			product_img.transferTo(uploadFile2);
 		} catch (IllegalStateException | IOException e) {
