@@ -63,7 +63,7 @@ $(function(){
 	<div id = "header_admin">
 		 <ul>
 		 <li>${sessionScope.user_name }님</li>
-		 <li><a href="manager.do">관리자페이지</a></li>	 	
+		 <li><a href="managerList.do">관리자페이지</a></li>	 	
 		 <li><a href="loginoutView.do">로그아웃</a></li>
 		 </ul>
 	</div>	

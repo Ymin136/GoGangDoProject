@@ -1,5 +1,6 @@
 package com.gogangdo.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,4 +23,13 @@ public interface MemberMapper {
 
 	List<MemberDTO> selectMember();
 
+	int updateMember(MemberDTO dto);
+
+	int deleteMember(String user_no);
+	
+	List<MemberDTO> selectMemberDetail(Map<String, Object> map);
+	
+	void updateMemberAccess(HashMap<String, Object> map);
+	
+	List<MemberDTO> selectproduct();
 }

@@ -1,6 +1,5 @@
 package com.gogangdo;
 import java.io.BufferedOutputStream;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,8 +32,6 @@ import com.gogangdo.service.MemberService;
 import com.gogangdo.service.OrderService;
 import com.gogangdo.service.ProductService;
 import com.gogangdo.vo.PaggingVO;
-
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
 @Controller
 public class MainController {
@@ -277,12 +275,6 @@ public class MainController {
 		return "mypage";
 	}
 	
-	@RequestMapping("/manager.do")
-	public String managerList(Model model) {
-		List<MemberDTO> memberList = memberService.selectMember();
-		model.addAttribute("memberList",memberList);		
-		return "manager2";
-	}
 	@RequestMapping("/insertCart.do")
 	public void insertCart(CartDTO dto, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		//dto.setCart_no(cartService.selectCartNo());
@@ -489,6 +481,72 @@ public class MainController {
 		} catch (IOException e) {
 			response.getWriter().write("<script>alert('답변 등록실패');location.href='qnaManagerView.do';</script>");
 		}
+	}
+	@RequestMapping("/managerList.do")
+	public String managerList(Model model) {
+		List<MemberDTO> memberList = memberService.selectMember();
+		List<MemberDTO> productreList = memberService.selectproduct();
+		model.addAttribute("memberList",memberList);
+		model.addAttribute("productreList",productreList);
+		return "manager2";
+	}
+	@RequestMapping("/searchMember.do")
+	public void searchMember(HttpServletResponse response, String type, String search) throws IOException {
+		response.setCharacterEncoding("utf-8");
+		List<MemberDTO> list = memberService.selectMemberDetail(type, search);
+		JSONObject json = new JSONObject();
+		
+		if(!list.isEmpty()) {
+			json.put("list", list);
+			response.getWriter().write(json.toString());
+		}else {
+			json.put("message", "검색 결과가 없습니다.");
+			response.getWriter().write(json.toString());
+		}
+	}
+	@RequestMapping("/updateMember.do")
+	public void updateMember(HttpServletResponse response,MemberDTO dto) throws IOException {
+		
+		//javascript로 undefined 값이 들어올 경우 빈 문자열로 대체
+		if(dto.getTel().equals("undefined")) {
+			dto.setTel("");
+		}
+		if(dto.getEmail().equals("undefined")) {
+			dto.setEmail("");
+		}
+		if(dto.getAddress1().equals("undefined")) {
+			dto.setAddress1("");
+		}
+		if(dto.getAddress2().equals("undefined")) {
+			dto.setAddress2("");
+		}
+		if(dto.getPost().equals("undefined")) {
+			dto.setPost("");
+		}
+		
+		int result = 0;
+		result = memberService.updateMember(dto);
+		
+		if(result == 1)
+			response.getWriter().write("1");
+		else
+			response.getWriter().write("0");
+		
+	}
+	@RequestMapping("/deleteMember.do")
+	public void deleteMember(HttpServletResponse response, String user_no) throws IOException {
+		int result = 0;
+		result = memberService.deleteMember(user_no);
+		
+		if(result == 1)
+			response.getWriter().write("1");
+		else
+			response.getWriter().write("0");
+	}
+	@RequestMapping("/updateMemberAccess.do")
+	public String updateMemberAccess(String id, String user_grade) {
+		memberService.updateMemberAccess(id, user_grade);
+		return "redirect:/managerList.do";
 	}
 	
 }
