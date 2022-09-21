@@ -34,6 +34,9 @@
             margin-right: 60px;
             margin-top: 15px;
         }
+        #sub_menu a{
+        	color: black;
+        }
         #product_list{
             width: 1200px;
             margin: 0 auto;
@@ -82,8 +85,9 @@
         <div class="sub_bar">
             <p id="product_count">전체 상품 ${requestScope.count }개</p>
             <div id="sub_menu">
-            	<a href="productSortList.do?sort=0">낮은가격순</a>
-            	<a href="productSortList.do?sort=1">높은가격순</a>
+            	<a href="productSortList.do?category_no=${requestScope.category }&sort=0">낮은가격순</a>
+            	<span>|</span>
+            	<a href="productSortList.do?category_no=${requestScope.category }&sort=1">높은가격순</a>
             </div>
         </div>
         <hr>
@@ -102,14 +106,14 @@
         </section>
         <div class="page_bar">
         	<c:if test="${pagging.previousPageGroup }">
-				<a href="main.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
+				<a href="productList.do?category_no=${requestScope.category }&pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
 			</c:if>
 			<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" end="${pagging.endPageOfPageGroup}">
-				<a href="main.do?pageNo=${i }">${ i}</a>
+				<a href="productList.do?category_no=${requestScope.category }&pageNo=${i }">${ i}</a>
 			</c:forEach>
 			<c:if test="${pagging.nextPageGroup }">
-				<a href="main.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
-			</c:if>            
+				<a href="productList.do?category_no=${requestScope.category }&pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
+			</c:if>  
         </div>
     </div>
 <jsp:include page="include/footer.jsp"></jsp:include>

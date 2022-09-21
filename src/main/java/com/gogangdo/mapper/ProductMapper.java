@@ -14,20 +14,18 @@ import com.gogangdo.dto.ReviewDTO;
 public interface ProductMapper {
 
 
+	//CHO
+	List<ProductDTO> selectProductList(Map<Object, Object> map);
+	int selectCategoryNo(int caregory_no);
+	int selectProductCount(int category_no);
+	int selectProductSubCount(int sub_category_no);
 
-	List<ProductDTO> selectProductList(int pageNo);
-
-	
-	int selectProductCount();
-
-
-	List<ProductDTO> selectProductLowPrice(int product_price);
-
-
+	List<ProductDTO> selectProductLowPrice(Map<Object, Object> map);
+	List<ProductDTO> selectProductHighPrice(Map<Object, Object> map);
 	FileDTO selectImageFile(int fno);
-
-
 	List<ProductDTO> selectProductList(int pageNo, int category_no);
+	int selectProductImageNo(int product_no);
+	String selectProductName(int product_no);
 
 	//JYM
 	int selectProductNo();
@@ -46,11 +44,6 @@ public interface ProductMapper {
 	int selectQnaNo();
 	void insertQnA(QnADTO dto);
 
-
-	int selectProductImageNo(int product_no);
-
-	String selectProductName(int product_no);
-
 	List<QnADTO> selectQnaAllList(Map<String, Integer> map);
 
 
@@ -61,4 +54,7 @@ public interface ProductMapper {
 
 
 	List<ProductDTO> productSearchList(Map<String, Object> map);
+	
+	int selectProductNameCount(String search);
+
 }
