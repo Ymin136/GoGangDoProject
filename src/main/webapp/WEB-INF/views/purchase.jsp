@@ -299,11 +299,13 @@
                             <td>입금자명 <input type="text"></td>
                         </tr>
                         <tr style="height:20px">
-                            <td>입금은행 <select id="bank" style="height:25px;font-size:15px">
-                                            <option value="kakao_bank">카카오뱅크</option>
-                                            <option value="shinhan">신한</option>
-                                            <option value="kb">KB</option>
-                                        </select>
+                            <td>입금은행 
+                                <a href="/kakaoPay"><img src="resources/img/kakaopay.png" style="width:50px"></a>
+                            <select id="bank" style="height:25px;font-size:15px">
+                            	<option value="kakao_bank">카카오페이</option>
+                            	<option value="shinhan">신한</option>
+                            	<option value="kb">KB</option>
+                            </select>
                             </td>
                         </tr>
                     </td>

@@ -3,8 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gogangdo.mapper.ProductMapper">
-
-	<select id="selectProductList" resultType="product" parameterType="int">
+	<!-- CHO -->
+	<select id="selectProductList" resultType="product" parameterType="Map">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
 			where pageNo = #{pageNo} and category_no = #{category_no}
@@ -15,19 +15,24 @@
 			where pageNo = #{pageNo} and sub_category_no = #{sub_category_no}
 	</select>
 	
-	<select id="selectProductLowPrice" resultType="product" parameterType="int">
+	<select id="selectProductLowPrice" resultType="product" parameterType="Map">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
-			where pageNo = #{pageNo} order by product_price
+			where pageNo = #{pageNo} and category_no = #{category_no} order by product_price
 	</select>
-	<select id="selectProductHighPrice" resultType="product" parameterType="int">
+	<select id="selectProductHighPrice" resultType="product" parameterType="Map">
 		select * from (select ceil(rownum / 20) as pageNo, pv.*
 			from productlist_view pv)
-			where pageNo = #{pageNo} order by product_price desc
+			where pageNo = #{pageNo} and category_no = #{category_no} order by product_price desc
 	</select>
-	
+	<select id="selectProductNameCount" resultType="int">
+		select count(*) from productlist_view where product_name like '%'||#{search}||'%'
+	</select>
 	<select id="selectProductCount" resultType="int">
-		select count(*) from shop_product 
+		select count(*) from productlist_view where category_no = #{category_no}
+	</select>
+	<select id="selectProductSubCount" resultType="int">
+		select count(*) from productlist_view where sub_category_no = #{sub_category_no}
 	</select>
 	<select id="selectProductImageNo" parameterType="int" resultType="int">
 		select img_no from shop_img where product_no = ${product_no} and thumbnail = 1
@@ -35,7 +40,9 @@
 	<select id="selectProductName" parameterType="int" resultType="String">
 		select product_name from shop_product where product_no = #{product_no}
 	</select>
-	
+	<select id="selectCategoryNo" resultType="int">
+		select category_no from shop_main_category where category_no = #{category_no}
+	</select>
 	
 	
 	<!-- JYM -->
