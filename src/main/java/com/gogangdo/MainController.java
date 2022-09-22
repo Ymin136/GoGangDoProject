@@ -228,25 +228,27 @@ public class MainController {
 			int product_no, Model model) {
 		try {
 		
-		List<ReviewDTO> review_list = productService.selectReviewList(pageNo,product_no);
-		List<QnADTO> qna_list = productService.selectQnAList(pageNo,product_no);
 		ProductDTO dto = productService.selectproductDTO(product_no);
-		int review_count = productService.selectReviewCount(product_no);
-		int qna_count = productService.selectQnaCount(product_no);
-		
-		PaggingVO review_vo = new PaggingVO(review_count, pageNo, 5, 10);
-		PaggingVO qna_vo = new PaggingVO(qna_count, pageNo, 5, 10);
-		
 		model.addAttribute("product", dto);
-		model.addAttribute("reviewlist", review_list);
-		model.addAttribute("qnalist", qna_list);
-		model.addAttribute("review_pagging", review_vo);
-		model.addAttribute("qna_pagging", qna_vo);
 		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
 		FileDTO image = productService.selectimageDTO(product_no);
-
 		model.addAttribute("thumbnail", thumbnail);			
 		model.addAttribute("image", image);
+		
+		List<ReviewDTO> review_list = productService.selectReviewList(pageNo,product_no);		
+		int review_count = productService.selectReviewCount(product_no);		
+		model.addAttribute("reviewlist", review_list);
+		PaggingVO review_vo = new PaggingVO(review_count, pageNo, 5, 10);
+		model.addAttribute("review_pagging", review_vo);
+		
+		List<QnADTO> qna_list = productService.selectQnAList(pageNo,product_no);
+		int qna_count = productService.selectQnaCount(product_no);
+		model.addAttribute("qnalist", qna_list);
+		PaggingVO qna_vo = new PaggingVO(qna_count, pageNo, 5, 10);
+		model.addAttribute("qna_pagging", qna_vo);
+		
+		
+	
 		
 		}catch (Exception e) {
 			
@@ -279,8 +281,7 @@ public class MainController {
 		return ResponseEntity.ok(list);
 	}
 	@RequestMapping("/qnaList.do")
-	public ResponseEntity<List<QnADTO>> 
-							QnAList(int pageNo, int product_no){
+	public ResponseEntity<List<QnADTO>> QnAList(int pageNo, int product_no){
 		List<QnADTO> list = productService.selectQnAList(pageNo,product_no);
 		return ResponseEntity.ok(list);
 	}
@@ -433,6 +434,7 @@ public class MainController {
 	@RequestMapping("/productRegister.do")
 	public void productRegister(ProductDTO dto, HttpServletResponse response, MultipartHttpServletRequest request) throws IOException {
 		try {
+		System.out.println(dto.toString());
 		int pno = productService.selectProductNo();
 		dto.setProduct_no(pno);
 		
@@ -457,7 +459,6 @@ public class MainController {
 		img_no = productService.selectImageNo();
 		productService.insertproduct_img(new FileDTO(uploadFile2, pno, img_no));		
 		try {
-		
 			thumbnail.transferTo(uploadFile1);
 			product_img.transferTo(uploadFile2);
 		} catch (IllegalStateException | IOException e) {
