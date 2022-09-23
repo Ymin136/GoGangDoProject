@@ -286,7 +286,10 @@ public class MainController {
 		return ResponseEntity.ok(list);
 	}
 	@RequestMapping("/myPage.do")
-	public String myPage() {
+	public String myPage(Model model, HttpSession session, HttpServletResponse response) {
+		String id = (String) session.getAttribute("id");
+		List<CartDTO> list = cartService.selectCartView(id);
+		model.addAttribute("cart", list);
 		return "mypage";
 	}
 	

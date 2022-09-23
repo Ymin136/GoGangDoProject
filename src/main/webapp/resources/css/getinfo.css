@@ -141,3 +141,20 @@ textarea {
     resize: none;
     border : 1px solid black
   }
+  
+#sample6_detailAddress {
+	padding : 5px 5px;
+	margin : 0px 3px;
+}
+#sample6_postcode{
+	padding : 5px 5px;
+	margin : 0px 3px;
+}
+#sample6_address{
+	padding : 5px 5px;
+	margin : 0px 3px;
+}
+#sample6_extraAddress{
+	padding : 5px 5px;
+	margin : 0px 1px;
+}
