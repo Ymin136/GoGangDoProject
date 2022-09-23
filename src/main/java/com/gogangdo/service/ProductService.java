@@ -148,5 +148,10 @@ public class ProductService {
 	public int selectProductNameCount(String search) {
 		return mapper.selectProductNameCount(search);
 	}
-
+	public List<ProductDTO> selectBestproductList(int pageNo) {
+		return mapper.selectBestproductList(pageNo);
+	}
+	public List<ProductDTO> selectNewproductList(int pageNo) {
+		return mapper.selectNewproductList(pageNo);
+	}
 }

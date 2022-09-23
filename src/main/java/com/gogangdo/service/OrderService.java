@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.gogangdo.dto.OrderManageDTO;
 import com.gogangdo.dto.Order_DetailDTO;
+import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.mapper.OrderMapper;
 
 @Service
@@ -51,6 +52,11 @@ public class OrderService {
 	public void insertOrderManage(OrderManageDTO manage) {
 		mapper.insertOrderManage(manage);
 	}
+
+
+	
+
+
 
 //	public void insertOrderManage(int ono, String id) {
 //		Map<String , Object> map = new HashMap<String, Object>();

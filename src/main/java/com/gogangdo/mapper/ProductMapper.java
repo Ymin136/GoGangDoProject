@@ -57,4 +57,7 @@ public interface ProductMapper {
 	
 	int selectProductNameCount(String search);
 
+	List<ProductDTO> selectBestproductList(int pageNo);
+	
+	List<ProductDTO> selectNewproductList(int pageNo);
 }

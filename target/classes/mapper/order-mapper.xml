@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gogangdo.mapper.OrderMapper">
+	<select id="selectOrderNo" resultType="int">
+		select ORDER_NO_SEQ.nextval from dual
+	</select>
+	<select id="selectOrderDetailNo" resultType="int">
+		select ORDER_DETAIL_NO_SEQ.nextval from dual
+	</select>
+	<!-- <insert id="insertOrder" parameterType="orderdetail">
+		insert into shop_order (order_no, product_no, id, product_price, order_ea) values (#{order_no}, #{product_no}, #{id}, #{product_price}, #{order_ea})
+	</insert>
+	<insert id="orderCartProduct" parameterType="orderdetail">
+		insert into shop_order (order_no, product_no, id, product_price, order_ea) select * from shop_cart
+	</insert> -->
+	<select id="selectOrderView" resultType="orderdetail" parameterType="String">
+		select * from order_view where id = #{id, jdbcType=VARCHAR}
+	</select>
+	<insert id="insertOrderManage" parameterType="ordermanage">
+		insert into shop_order values (#{order_no}, #{order_address}, sysdate, #{order_total}, #{id}) 
+	</insert>
+	<insert id="insertOrderDetail">
+		insert into order_detail_no values ( #{order_detail_no},#{order_no},#{product_no}, #{product_price},#{order_ea}, #{product_name})
+	</insert>
+</mapper>

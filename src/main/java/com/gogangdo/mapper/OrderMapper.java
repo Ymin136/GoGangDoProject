@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.gogangdo.dto.OrderManageDTO;
 import com.gogangdo.dto.Order_DetailDTO;
+import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.dto.Order_DetailDTO;
 
 @Mapper
@@ -24,5 +25,6 @@ public interface OrderMapper {
 	int selectOrderDetailNo();
 	
 	void insertOrderDetail(Order_DetailDTO detail);
+
 
 }
