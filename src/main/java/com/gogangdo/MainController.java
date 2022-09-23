@@ -300,11 +300,11 @@ public class MainController {
 		dto.setCart_no(cno);
 		System.out.println(dto.toString());
 		cartService.insertCart(dto);
-		try {
-			response.getWriter().write(1);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			response.getWriter().write(1);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	@RequestMapping("/cartView.do")
 	public String cartView(Model model, HttpSession session, HttpServletResponse response) {

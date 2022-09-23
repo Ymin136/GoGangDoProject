@@ -181,6 +181,8 @@ $(function() {
             </div>
         </form>
     </div>
+    ${requestScope.cart_count}
 <jsp:include page="include/footer.jsp"></jsp:include>
+
 </body>
 </html>

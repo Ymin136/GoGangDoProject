@@ -318,7 +318,7 @@
                     </td>
                 </tr>
                 <tr style="height: 100px">
-                    <td id="final_price" style="font-weight:bold">최종결제 금액 ${requestScope.cart_price }원</td>
+                    <td id="final_price" style="font-weight:bold">최종결제 금액 ${requestScope.order_price }원</td>
                 </tr>
             </table>
             <p id="agree"><input type="checkbox" checked>(필수)구매하실 상품의 결제정보를 확인하였으며, 구매진행에 동의합니다.</p>
