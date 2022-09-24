@@ -4,36 +4,63 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gogangdo.mapper.MemberMapper">
-	<insert id="insertmember" parameterType="member">
-		insert into SHOP_USER
-		values(USER_SEQ.nextval, 0, #{id}, #{pw}, #{user_name}, #{tel}, #{address}, #{email})
+	<insert parameterType="member" id="insertmember">
+	insert into SHOP_USER values(USER_SEQ.nextval, 0, #{id}, #{pw}, #{user_name}, #{tel}, #{address1}, #{email},#{address2},#{post}) 
 	</insert>
-	<select id="login" parameterType="map" resultType="member">
-		select * from shop_user where id = #{id} and pw = #{pw}
-	</select>
-	<update id="userUpdate" parameterType="member">
-		update shop_user set pw = #{pw}, user_name=#{user_name}, tel=#{tel}, address1=#{address1}, email=#{email}, address2=#{address2}, post=#{post} 
-		where id = #{id}
-	</update>
-	<delete id="userDelete" parameterType="String">
-		delete from shop_user where id = #{id}
-	</delete>
-	<select id="selectid" parameterType="String" resultType="String">
-		select id from shop_user where id = #{id}
-	</select>
-	<select id="selectMember" resultType="member">
-		select * from shop_user
-	</select>
-	<select id="selectproduct" resultType="product">
-		select * from shop_product 
-	</select>
-	<update parameterType="member" id="updateMember">
-		update shop_userset user_grade = #{user_grade},id = #{id},user_name = #{user_name},tel = #{tel},address1 = #{address1},address2 = #{address2},email = #{email},post = #{post}where user_no = #{user_no} 
-	</update>
-	<update parameterType="map" id="updateMemberAccess">
-		update shop_user set user_grade = #{user_grade}where id = #{id} 
-	</update>
-	<delete parameterType="String" id="deleteMember">
-		delete from shop_userwhere user_no = #{user_no} 
-	</delete>
+
+<select parameterType="map" id="login" resultType="member">
+select * from shop_user where id = #{id} and pw = #{pw} 
+</select>
+
+<update parameterType="member" id="userUpdate">
+update shop_user set pw = #{pw}, user_name=#{user_name}, tel=#{tel}, address=#{address}, email=#{email}where id = #{id}
+ </update>
+
+<delete parameterType="String" id="userDelete">
+delete from shop_user where id = #{id} 
+</delete>
+
+<select parameterType="String" id="selectid" resultType="String">
+select id from shop_user where id = #{id} 
+</select>
+
+<select id="selectMember" resultType="member">
+select * from shop_user
+ </select>
+
+<update parameterType="map" id="updateMemberAccess">
+update shop_user set user_grade = #{user_grade}where id = #{id} 
+</update>
+
+<select parameterType="map" id="selectMemberDetail" resultType="member">
+select * from shop_user where ${type} like '%' || #{search} || '%' 
+</select>
+
+<update parameterType="member" id="updateMember">
+update shop_user set user_grade = #{user_grade},id = #{id},user_name = #{user_name},tel = #{tel},address1 = #{address1},address2 = #{address2},email = #{email},post = #{post} where user_no = #{user_no} 
+</update>
+
+<delete parameterType="String" id="deleteMember">
+delete from shop_user where user_no = #{user_no} 
+</delete>
+<select  id="selectproduct" resultType="product">
+	select product_no,category_no,product_name,product_price,product_stock,product_sell,product_desc,sub_category_no from shop_product
+</select>
+<select id="selectReviewList" resultType="review">
+	select * from shop_review 
+</select>
+<select id="selectorder" resultType="orderdetail">
+	select product_name,order_ea,product_price,order_no from order_detail_no
+</select>
+<update id="updateOrder" parameterType="orderdetail">
+	update ORDER_DETAIL_NO
+	set product_name = #{product_name},
+	order_ea = #{order_ea},
+	product_price = #{product_price}
+	where order_no = #{order_no}
+</update>
+<delete id="deleteOrder" parameterType="int">
+	delete from order_detail_no
+	where order_no = #{order_no}
+</delete>
 </mapper>

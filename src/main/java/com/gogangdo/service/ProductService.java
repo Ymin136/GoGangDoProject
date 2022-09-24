@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.gogangdo.dto.FileDTO;
+import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.dto.QnADTO;
 import com.gogangdo.dto.ReviewDTO;
@@ -131,6 +132,13 @@ public class ProductService {
 		map.put("pageNo", pageNo);
 		map.put("search", search);
 		return mapper.productSearchList(map);
+	}
+
+	public List<ProductDTO> selectProductDetail(String type, String search) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("search", search);
+		return mapper.selectProductDetail(map);
 	}
 
 }

@@ -107,4 +107,7 @@
 			from productlist_view pv)
 			where pageNo = #{pageNo} and product_name like '%'||#{search}||'%'
 	</select>
+	<select id="selectProductDetail" resultType="product" parameterType="map">
+		select * from shop_product where ${type} like '%' || #{search} || '%'
+	</select>
 </mapper>

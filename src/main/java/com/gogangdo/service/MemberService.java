@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.gogangdo.dto.MemberDTO;
+import com.gogangdo.dto.Order_DetailDTO;
+import com.gogangdo.dto.ReviewDTO;
 import com.gogangdo.mapper.MemberMapper;
 
 @Service
@@ -69,6 +71,26 @@ public class MemberService {
 
 	public int deleteMember(String user_no) {
 		return memberMapper.deleteMember(user_no);
+	}
+
+	public List<ReviewDTO> selectReviewList() {
+		return memberMapper.selectReviewList();
+	}
+
+	public List<Order_DetailDTO> selectorder() {
+		return memberMapper.selectorder();
+	}
+
+	public List<Order_DetailDTO> selectOrderList(Order_DetailDTO dto) {
+		return memberMapper.selectOrderList(dto);
+	}
+
+	public int updateOrder(Order_DetailDTO dto) {
+		return memberMapper.updateOrder(dto);
+	}
+
+	public int deleteOrder(int order_no) {
+		return memberMapper.deleteOrder(order_no);
 	}
 	
 	
