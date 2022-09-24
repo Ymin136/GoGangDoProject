@@ -132,6 +132,11 @@ $(function() {
             </div>
         </div>
         <table class="cart_list">
+        <c:choose>
+        <c:when test="${requestScope.cart_count == 0 }">
+        <th style="padding:30px 0px;font-size:20px">장바구니가 비어있습니다</th>
+        </c:when>
+        <c:otherwise>
             <thead style="height:30px">
                 <th>상품정보</th>
                 <th>수량</th>
@@ -141,21 +146,19 @@ $(function() {
             </thead>
         	<tbody class="cart_product">
             	<c:forEach var="cart" items="${requestScope.cart }">
-            	<tr style="height:70px">
-             		<td style="font-size:14px;color:gray"><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
-                	<td id="ea">${cart.cart_ea }</td>
-                	<td>${cart.product_price }</td>
-                	<td id="total_price">${cart.cart_ea*cart.product_price }</td>
-                	<td><a href="cartDelete.do?cart_no=${cart.cart_no }" style="text-decoration:none;color:darkgray">삭제</a></td>
-            	</tr>
+            		<tr style="height:70px">
+             			<td style="font-size:14px;color:gray"><img alt="" src="imageLoad.do?fno=${cart.img_no }">${cart.product_name }</td>
+                		<td id="ea">${cart.cart_ea }</td>
+                		<td>${cart.product_price }</td>
+                		<td id="total_price">${cart.cart_ea*cart.product_price }</td>
+                		<td><a href="cartDelete.do?cart_no=${cart.cart_no }" style="text-decoration:none;color:darkgray">삭제</a></td>
+            		</tr>
             	</c:forEach>
             </tbody>
+        </c:otherwise>
+        </c:choose>
         </table>
         <form action="#" class="cart_total">
-            <!-- <div id="choose">
-                <button id="choose_all">전체 선택</button>
-                <button id="delete_choose">선택 상품 삭제</button>
-            </div> -->
                 <table class="total">
                     <tr>
                         <td></td>

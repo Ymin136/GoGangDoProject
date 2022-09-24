@@ -93,14 +93,11 @@ $(function(){
      });
      
 	$('#qna_btn').click(function(){
-		 if(${sessionScope.login == null || sessionScope.login == false}){
-	           alert("로그인을 하셔야 이용할수 있습니다.");
-	           location.href="loginView.do";
-	     }
 		$('body').css("overflow","hidden");
 		$('#qna_pop').css("display","block");
 		$(".shadow").show();
 	});
+	
 	$('#btn_close').click(function(){
 		$('body').css("overflow","visible");
 		$('#qna_pop').css("display","none");

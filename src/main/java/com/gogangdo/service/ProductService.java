@@ -20,12 +20,18 @@ public class ProductService {
 	public ProductService(ProductMapper mapper) {
 		this.mapper = mapper;
 	}
-	
+	//CHO
 	public List<ProductDTO> selectProductList(int pageNo, int category_no) {
-		return mapper.selectProductList(pageNo, category_no);
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("pageNo", pageNo);
+		map.put("category_no", category_no);
+		return mapper.selectProductList(map);
 	}
-	public int selectProductCount() {
-		return mapper.selectProductCount();
+	public int selectProductCount(int category_no) {
+		return mapper.selectProductCount(category_no);
+	}
+	public int selectProductSubCount(int sub_category_no) {
+		return mapper.selectProductSubCount(sub_category_no);
 	}
 	public List<ProductDTO> selectProductSubList(int pageNo, int sub_category_no) {
 		Map<Object, Object> map = new HashMap<Object, Object>();
@@ -33,17 +39,24 @@ public class ProductService {
 		map.put("sub_category_no", sub_category_no);
 		return mapper.selectProductSubList(map);
    }
-//	public List<ProductDTO> selectProductSortList(int pageNo, int product_price, int sort) {
-//	if(sort == 0)
-//		return mapper.selectProductLowPrice(pageNo, product_price);
-//	else
-//		return mapper.selectProductHighPrice(pageNo, product_price);
-//}
+   public int selectCategoryNo(int category_no) {
+		return mapper.selectCategoryNo(category_no);
+   }
+	public List<ProductDTO> selectProductSortList(int pageNo, int category_no, int sort) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("pageNo", pageNo);
+		map.put("category_no", category_no);
+		map.put("sort", sort);
+		if(sort == 0)
+			return mapper.selectProductLowPrice(map);
+		else
+			return mapper.selectProductHighPrice(map);
+	}
 	
 	//jym
-	public List<ProductDTO> selectProductLowPrice(int product_price) {
-		return mapper.selectProductLowPrice(product_price);
-	}
+//	public List<ProductDTO> selectProductLowPrice(int product_price) {
+//		return mapper.selectProductLowPrice(product_price);
+//	}
 	public int selectProductNo() {
 		return mapper.selectProductNo();
 	}
@@ -132,6 +145,9 @@ public class ProductService {
 		map.put("pageNo", pageNo);
 		map.put("search", search);
 		return mapper.productSearchList(map);
+	}
+	public int selectProductNameCount(String search) {
+		return mapper.selectProductNameCount(search);
 	}
 
 	public List<ProductDTO> selectProductDetail(String type, String search) {

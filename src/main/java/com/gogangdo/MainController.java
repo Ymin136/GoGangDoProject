@@ -141,10 +141,14 @@ public class MainController {
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int category_no) {
 		List<ProductDTO> list = productService.selectProductList(pageNo, category_no);
 		model.addAttribute("list", list);
-		int count = productService.selectProductCount();
+		
+		int categoryNo = productService.selectCategoryNo(category_no);
+		model.addAttribute("category", categoryNo);
+		
+		int count = productService.selectProductCount(category_no);
+		model.addAttribute("count",count);
 		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
 		model.addAttribute("pagging", vo);
-		model.addAttribute("count",count);
 		return "product_list";
 	}
 	@RequestMapping("/productSubList.do")
@@ -152,17 +156,33 @@ public class MainController {
 		List<ProductDTO> sub_list = productService.selectProductSubList(pageNo, sub_category_no);
 		model.addAttribute("list", sub_list);
 		
-		int count = productService.selectProductCount();
+		int count = productService.selectProductSubCount(sub_category_no);
+		model.addAttribute("count",count);
 		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
 		model.addAttribute("pagging", vo);
 		return "product_list";
     }
+	@RequestMapping("/productSortList.do")
+	public String productSortList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, int sort, int category_no, Model model) {
+		List<ProductDTO> sort_list = productService.selectProductSortList(pageNo, category_no, sort);
+		model.addAttribute("list", sort_list);
+		
+		int categoryNo = productService.selectCategoryNo(category_no);
+		model.addAttribute("category", categoryNo);
+		
+		int count = productService.selectProductCount(category_no);
+		model.addAttribute("count",count);
+		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
+		return "product_list";
+	}
 	@RequestMapping("/productSearchList.do")
 	public String productSearchList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, String search) {
 		List<ProductDTO> list = productService.productSearchList(pageNo, search);
 		model.addAttribute("list", list);
 		
-		int count = productService.selectProductCount();
+		int count = productService.selectProductNameCount(search);
+		model.addAttribute("count",count);
+
 		PaggingVO vo = new PaggingVO(count, pageNo, 20, 4);
 		return "product_list";
     }
@@ -178,12 +198,6 @@ public class MainController {
 		session.invalidate();
 		return "redirect:/main.do";
 	}
-//	@RequestMapping("/productSortList.do")
-//	public String productSortList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, int product_price, int sort, Model model) {
-//		List<ProductDTO> sort_list = productService.selectProductSortList(pageNo, product_price, sort);
-//		model.addAttribute("list", sort_list);
-//		return "product_list";
-//	}
 	@RequestMapping("/imageLoad.do")
 	public void imageLoad(int fno, HttpServletResponse response) throws IOException {
 		System.out.println(fno);
@@ -214,25 +228,27 @@ public class MainController {
 			int product_no, Model model) {
 		try {
 		
-		List<ReviewDTO> review_list = productService.selectReviewList(pageNo,product_no);
-		List<QnADTO> qna_list = productService.selectQnAList(pageNo,product_no);
 		ProductDTO dto = productService.selectproductDTO(product_no);
-		int review_count = productService.selectReviewCount(product_no);
-		int qna_count = productService.selectQnaCount(product_no);
-		
-		PaggingVO review_vo = new PaggingVO(review_count, pageNo, 5, 10);
-		PaggingVO qna_vo = new PaggingVO(qna_count, pageNo, 5, 10);
-		
 		model.addAttribute("product", dto);
-		model.addAttribute("reviewlist", review_list);
-		model.addAttribute("qnalist", qna_list);
-		model.addAttribute("review_pagging", review_vo);
-		model.addAttribute("qna_pagging", qna_vo);
 		FileDTO thumbnail = productService.selectThumbnailDTO(product_no);
 		FileDTO image = productService.selectimageDTO(product_no);
-
 		model.addAttribute("thumbnail", thumbnail);			
 		model.addAttribute("image", image);
+		
+		List<ReviewDTO> review_list = productService.selectReviewList(pageNo,product_no);		
+		int review_count = productService.selectReviewCount(product_no);		
+		model.addAttribute("reviewlist", review_list);
+		PaggingVO review_vo = new PaggingVO(review_count, pageNo, 5, 10);
+		model.addAttribute("review_pagging", review_vo);
+		
+		List<QnADTO> qna_list = productService.selectQnAList(pageNo,product_no);
+		int qna_count = productService.selectQnaCount(product_no);
+		model.addAttribute("qnalist", qna_list);
+		PaggingVO qna_vo = new PaggingVO(qna_count, pageNo, 5, 10);
+		model.addAttribute("qna_pagging", qna_vo);
+		
+		
+	
 		
 		}catch (Exception e) {
 			
@@ -265,8 +281,7 @@ public class MainController {
 		return ResponseEntity.ok(list);
 	}
 	@RequestMapping("/qnaList.do")
-	public ResponseEntity<List<QnADTO>> 
-							QnAList(int pageNo, int product_no){
+	public ResponseEntity<List<QnADTO>> QnAList(int pageNo, int product_no){
 		List<QnADTO> list = productService.selectQnAList(pageNo,product_no);
 		return ResponseEntity.ok(list);
 	}
@@ -292,7 +307,7 @@ public class MainController {
 		}
 	}
 	@RequestMapping("/cartView.do")
-	public String cartView(Model model, HttpSession session) {
+	public String cartView(Model model, HttpSession session, HttpServletResponse response) {
 		String id = (String) session.getAttribute("id");
 		List<CartDTO> list = cartService.selectCartView(id);
 		model.addAttribute("cart", list);
@@ -352,7 +367,7 @@ public class MainController {
 //		insertCart()
 		return "purchase";
 	}
-	//SHOP_CART에 있는 데이터를 SHOP_ORDER에 넣는 매핑
+	//SHOP_CART에 있는 데이터를 구매 페이지에 넣는 매핑
 	@RequestMapping("/orderCartProduct.do")
 	public String orderCartProduct(String id, Model model, HttpSession session) {
 		List<Order_DetailDTO> list = new ArrayList<Order_DetailDTO>();
@@ -381,17 +396,9 @@ public class MainController {
 		return "purchase";
 	}
 	@RequestMapping("/purchase.do")
-	public void purchase(HttpSession session, HttpServletResponse response, OrderManageDTO manage){
-		//		String id = (String) session.getAttribute("id");
-//		List<Order_DetailDTO> list = orderService.selectOrderView(id);
-//		System.out.println(list);
-//		model.addAttribute("order", list);
+	public void purchase(HttpSession session, HttpServletResponse response, OrderManageDTO manage) throws IOException{
+//		String id = (String) session.getAttribute("id");
 		
-//		Calendar cal = Calendar.getInstance();
-//		 int year = cal.get(Calendar.YEAR);
-//		 String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
-//		 String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
-//		 Date order_date = ymd;
 		int ono = orderService.selectOrderNo();
 		manage.setOrder_no(ono);
 		System.out.println(manage.toString());
@@ -410,7 +417,13 @@ public class MainController {
 //		detail.setOrder_no(ono);
 //		System.out.println(detail.toString());
 		
-//		cartService.deleteAllCart(id);
+		cartService.deleteAllCart(manage.getId());
+		try {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("<script>alert('결제 완료되었습니다. 메인페이지로 돌아갑니다.');location.href='main.do';</script>");
+		} catch (IOException e1) {
+			response.getWriter().write("<script>alert('결제 실패하였습니다.');history.back();</script>");
+		}
 	}
 	
 	@RequestMapping("/productRegisterView.do")
@@ -421,6 +434,7 @@ public class MainController {
 	@RequestMapping("/productRegister.do")
 	public void productRegister(ProductDTO dto, HttpServletResponse response, MultipartHttpServletRequest request) throws IOException {
 		try {
+		System.out.println(dto.toString());
 		int pno = productService.selectProductNo();
 		dto.setProduct_no(pno);
 		
@@ -445,7 +459,6 @@ public class MainController {
 		img_no = productService.selectImageNo();
 		productService.insertproduct_img(new FileDTO(uploadFile2, pno, img_no));		
 		try {
-		
 			thumbnail.transferTo(uploadFile1);
 			product_img.transferTo(uploadFile2);
 		} catch (IllegalStateException | IOException e) {
