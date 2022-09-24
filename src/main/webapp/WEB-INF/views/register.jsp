@@ -14,8 +14,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link href="resources/css/register.css" rel="stylesheet"/> 	
 	<link href="resources/css/register2.css" rel="stylesheet"/> 	
+	<link href="resources/css/register.css" rel="stylesheet"/> 	
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
     <script>
       $(document).ready(function () {
@@ -29,6 +29,7 @@
   <body>
   <jsp:include page="include/header.jsp"></jsp:include>
     <section class="sub-contents">
+    	<div class=container>
       <div class="inner memberjoin">
         <h3>이용 약관 동의</h3>
         <div class="agreement">
@@ -87,6 +88,7 @@
           <button type="button">  취소</button>
           <button type="button" onclick = "location.href ='registerView2.do'">회원가입</button>
         </div>
+      </div>
       </div>
     </section>
     <footer>
