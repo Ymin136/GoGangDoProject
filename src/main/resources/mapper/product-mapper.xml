@@ -132,3 +132,7 @@
 			where pageNo = 1
 	</select>
 </mapper>
+	<select id="selectProductDetail" resultType="product" parameterType="map">
+		select * from shop_product where ${type} like '%' || #{search} || '%'
+	</select>
+</mapper>

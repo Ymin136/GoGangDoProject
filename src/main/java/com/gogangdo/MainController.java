@@ -514,9 +514,31 @@ public class MainController {
 	public String managerList(Model model) {
 		List<MemberDTO> memberList = memberService.selectMember();
 		List<MemberDTO> productreList = memberService.selectproduct();
+		List<ReviewDTO> reviewList = memberService.selectReviewList();
+		List<Order_DetailDTO> orderList = memberService.selectorder();
+		System.out.println(orderList);
+		
 		model.addAttribute("memberList",memberList);
 		model.addAttribute("productreList",productreList);
+		model.addAttribute("reviewList",reviewList);
+		model.addAttribute("orderList",orderList);
 		return "manager2";
+	}	
+	@RequestMapping("/productreList.do")
+	public void searchMembe(HttpServletResponse response, String type, String search) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		List<ProductDTO> list = productService.selectProductDetail(type, search);
+		JSONObject json = new JSONObject();
+		System.out.println("###list### : " + list);
+		
+		if(!list.isEmpty()) {
+			json.put("list", list);
+			response.getWriter().write(json.toString());
+		}else {
+			json.put("message", "검색 결과가 없습니다.");
+			response.getWriter().write(json.toString());
+		}
+		
 	}
 	@RequestMapping("/searchMember.do")
 	public void searchMember(HttpServletResponse response, String type, String search) throws IOException {
@@ -563,6 +585,8 @@ public class MainController {
 	}
 	@RequestMapping("/deleteMember.do")
 	public void deleteMember(HttpServletResponse response, String user_no) throws IOException {
+		response.setCharacterEncoding("utf-8");
+		
 		int result = 0;
 		result = memberService.deleteMember(user_no);
 		
@@ -576,5 +600,28 @@ public class MainController {
 		memberService.updateMemberAccess(id, user_grade);
 		return "redirect:/managerList.do";
 	}
-	
+	@RequestMapping("/updateOrder.do")
+	public void updateOrder(HttpServletResponse response,Order_DetailDTO dto) throws IOException {
+		int result = 0;
+		result = memberService.updateOrder(dto);
+		
+		if(result == 1) {
+			response.getWriter().write("1");
+		} else {
+			response.getWriter().write("0");
+		}
+	}
+	@RequestMapping("/deleteOrder.do")
+	public void deleteOrder(HttpServletResponse response, int order_no) throws IOException {
+		int result = 0;
+		result = memberService.deleteOrder(order_no);
+		
+		if(result == 1) {
+			response.getWriter().write("1");
+		}else {
+			response.getWriter().write("0");
+		}
+		
+		
+	}
 }

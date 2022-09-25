@@ -7,6 +7,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gogangdo.dto.MemberDTO;
+import com.gogangdo.dto.Order_DetailDTO;
+import com.gogangdo.dto.ReviewDTO;
 
 @Mapper
 public interface MemberMapper {
@@ -32,4 +34,14 @@ public interface MemberMapper {
 	void updateMemberAccess(HashMap<String, Object> map);
 	
 	List<MemberDTO> selectproduct();
+
+	List<ReviewDTO> selectReviewList();
+
+	List<Order_DetailDTO> selectorder();
+
+	List<Order_DetailDTO> selectOrderList(Order_DetailDTO dto);
+
+	int updateOrder(Order_DetailDTO dto);
+
+	int deleteOrder(int order_no);
 }

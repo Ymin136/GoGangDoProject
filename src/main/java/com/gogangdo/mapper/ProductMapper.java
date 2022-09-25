@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.gogangdo.dto.FileDTO;
+import com.gogangdo.dto.MemberDTO;
 import com.gogangdo.dto.ProductDTO;
 import com.gogangdo.dto.QnADTO;
 import com.gogangdo.dto.ReviewDTO;
@@ -54,7 +55,7 @@ public interface ProductMapper {
 
 
 	List<ProductDTO> productSearchList(Map<String, Object> map);
-	
+	List<ProductDTO> selectProductDetail(Map<String, Object> map);
 	int selectProductNameCount(String search);
 
 	List<ProductDTO> selectBestproductList(int pageNo);
