@@ -49,12 +49,25 @@ public class MainController {
 	}
 
 	@RequestMapping("/")
-	public String startPage() {
+	public String startPage(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model) {
+		List<ProductDTO> list = productService.selectBestproductList(pageNo);
+		System.out.println(list.size());
+		model.addAttribute("list", list);
+		for(int i=0;i<list.size();i++) {
+			list.get(i).setImg_no(productService.selectProductImageNo(list.get(i).getProduct_no()));
+		}
+		List<ProductDTO> list2 = productService.selectNewproductList(pageNo);
+		System.out.println(list2.size());
+		model.addAttribute("list2", list2);
+		for(int i=0;i<list2.size();i++) {
+			list2.get(i).setImg_no(productService.selectProductImageNo(list2.get(i).getProduct_no()));
+		}
 		return "main";
 	}
 	
 	@RequestMapping("/main.do")
-	public String main() {
+	public String main(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model) {
+
 		return "redirect:/";
 	}
 	@RequestMapping("/loginView.do")
@@ -137,6 +150,8 @@ public class MainController {
 			response.getWriter().write(String.valueOf(1));
 		}
 	}
+	
+	
 	@RequestMapping("/productList.do")
 	public String productList(@RequestParam(name = "pageNo", defaultValue = "1") int pageNo, Model model, int category_no) {
 		List<ProductDTO> list = productService.selectProductList(pageNo, category_no);

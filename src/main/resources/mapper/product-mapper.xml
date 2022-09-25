@@ -119,6 +119,19 @@
 			from productlist_view pv)
 			where pageNo = #{pageNo} and product_name like '%'||#{search}||'%'
 	</select>
+	
+	<select id="selectBestproductList" parameterType="int" resultType="product">
+		select * from (select ceil(rownum / 4) as pageNo, pv.*
+			from shop_product pv order by pv.product_sell desc)
+			where pageNo = 1
+	</select>
+	
+		<select id="selectNewproductList" parameterType="int" resultType="product">
+		select * from (select ceil(rownum / 4) as pageNo, pv.*
+			from shop_product pv order by pv.product_no desc)
+			where pageNo = 1
+	</select>
+</mapper>
 	<select id="selectProductDetail" resultType="product" parameterType="map">
 		select * from shop_product where ${type} like '%' || #{search} || '%'
 	</select>

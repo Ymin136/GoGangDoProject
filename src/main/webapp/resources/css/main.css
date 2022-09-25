@@ -22,3 +22,12 @@ a{
 	text-decoration: none;
 	color: black;
 }
+body {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
+}
+#productName{
+	text-align: left;	
+}

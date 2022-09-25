@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>고강도</title>
+<style>
+.main_product img{
+	width: 300px;
+	height: 300px;
+}
+
+
+</style>
 <link href="resources/css/main.css" rel="stylesheet">
 </head>
 <body>
@@ -13,29 +21,26 @@
 
 <div id="main_container">
 	<img alt="main_dog" src="/resources/img/main_dog.PNG" width="1200px" height="400px">
-	<h1>WEEKLY BEST</h1>
-	<h3>후회없는 베스트 상품</h3>
-</div>
+	<p style="font-weight: bold; font-size: 25px;"><br><br>WEEKLY BEST</p>
+	<p style="font-size: 18px;">이번 달 베스트 상품을 만나보세요
+
     <table class="main_product">
    		<tr>
-            <div class="container">
-                <td class="product"><a href="productDetail.do?product_no=88"><img src="resources/img/mainimg1.png" alt="#" style="width: 280px; height: 388px;"><br>요거바이트<br>블루베리맛 동결건조 요거트<br><span style="font-weight: bold;">5,900원</font></td>
-                <td class="product"><img src="resources/img/mainimg2.png" alt="#" style="width: 280px; height: 388px;"><br>상품명<br>상품간략설명<br><span style="font-weight: bold;">가격</font></td>
-                <td class="product"><img src="resources/img/mpi3.png" alt="#"><br>상품명<br>상품간략설명<br><span style="font-weight: bold;">가격</font></td>
-                <td><img src="resources/img/mpi4.png" alt="#"><br>상품명<br>상품간략설명<br><span style="font-weight: bold;">가격</font></td>
-            </div>
+            <c:forEach var="dto" items="${requestScope.list }">
+             			<td style="font-size:14px;color:gray">
+             			<a href="productDetail.do?product_no=${dto.product_no }"><img alt="" src="imageLoad.do?fno=${dto.img_no }"><span id="productName"> ${dto.product_name }</span></a> 
+             			<br>${dto.product_price }</a></td>
+            </c:forEach>
         </tr>
         </table>  
     <table class="main_product">
         <tr>
-            <div class="container">
-                <td class="product"><img src="resources/img/mpi1.png" alt="#"><br>개껌<br>3개가 들어있습니다<br><span style="font-weight: bold;">4,500원</font></td>
-                <td class="product"><img src="resources/img/mpi2.png" alt="#"><br>상품명<br>상품간략설명<br><span style="font-weight: bold;">가격</font></td>
-                <td class="product"><img src="resources/img/mpi3.png" alt="#"><br>상품명<br>상품간략설명<br><span style="font-weight: bold;">가격</font></td>
-                <td><img src="resources/img/mpi4.png" alt="#"><br>상품명<br>상품간략설명<br><span style="font-weight: bold;">가격</font></td>
-            </div>
+        <c:forEach var="dto" items="${requestScope.list2 }">
+             			<td style="font-size:14px;color:gray"><a href="productDetail.do?product_no=${dto.product_no }"><img alt="" src="imageLoad.do?fno=${dto.img_no }"></a></td>
+            	</c:forEach>
         </tr>
-    </table>        
+    </table>
+    </div>        
 <jsp:include page="include/footer.jsp"></jsp:include>
 </script>
 </div>

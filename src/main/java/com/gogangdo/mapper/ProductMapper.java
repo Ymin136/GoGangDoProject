@@ -58,4 +58,7 @@ public interface ProductMapper {
 	List<ProductDTO> selectProductDetail(Map<String, Object> map);
 	int selectProductNameCount(String search);
 
+	List<ProductDTO> selectBestproductList(int pageNo);
+	
+	List<ProductDTO> selectNewproductList(int pageNo);
 }
